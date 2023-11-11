@@ -20,8 +20,10 @@
   </head>
 
   <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-dark navbar-expand-lg customNav nav-bg-primary">
+    <!-- Top navigation Bar -->
+    <nav
+      class="navbar navbar-dark navbar-expand-lg customNav nav-bg-primary bg-md-primary navbar-top"
+    >
       <div class="container-fluid">
         <!-- Nav burger bar -->
         <button
@@ -32,13 +34,16 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- Nav burger bar end -->
         <!-- Nav user icon -->
         <a href="https://www.google.com" class="navbar-brand fs-3 fw-bold"
           ><i class="fa-solid fa-circle-user text-dark"></i
         ></a>
         <!-- Nav user icon end -->
 
-        <form class="d-flex w-25" role="search">
+        <!--Search Bar-->
+        <form class="d-flex w-25" role="search" id="search">
           <input
             class="form-control me-2 fw-semibold"
             type="search"
@@ -49,8 +54,10 @@
         </form>
       </div>
 
+      <!--End of search bar-->
+
       <div class="collapse navbar-collapse" id="collapsingNavbar4">
-        <ul class="navbar-nav ps-3">
+        <ul class="navbar-nav ps-3 d-lg-none d-md-block">
           <li class="nav-item">
             <a class="nav-link fw-semibold active" aria-current="page" href="#"
               >Home</a
@@ -67,10 +74,27 @@
           </li>
         </ul>
       </div>
-
-      <!-- Nav burger bar end -->
     </nav>
-    <!-- End of Navigation Bar -->
+    <!-- End of top navigation Bar -->
+
+    <!-- Bottom navigation Bar -->
+    <nav class="d-none d-lg-block nav-bg-secondary navbar-bottom">
+      <ul class="row list-inline text-center pt-2">
+        <li class="nav-item col-lg-3 text-light">
+          <a class="nav-link" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item col-lg-3 text-light">
+          <a class="nav-link" href="#">Bookmarks</a>
+        </li>
+        <li class="nav-item col-lg-3 text-light">
+          <a class="nav-link" href="#">Comics</a>
+        </li>
+        <li class="nav-item col-lg-3 text-light">
+          <a class="nav-link" href="#">Recruitment</a>
+        </li>
+      </ul>
+    </nav>
+    <!-- End of bottom navigation Bar -->
 
     <script src="./script.js"></script>
     <script

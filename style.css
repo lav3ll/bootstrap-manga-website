@@ -7,8 +7,17 @@
   --white: #fff;
 }
 
+body {
+  background-color: var(--primary-color) !important;
+  font-family: "Roboto", sans-serif !important;
+}
+
 .nav-bg-primary {
-  background-color: #913fe2;
+  background-color: #0b0a0d;
+}
+
+.nav-bg-secondary {
+  background-color: var(--secondary-color);
 }
 
 .custom-toggler .navbar-toggler-icon {
@@ -17,4 +26,25 @@
 
 .custom-toggler.navbar-toggler {
   border-color: var(--secondary-color);
+}
+
+.navbar-top {
+  height: 60px;
+}
+
+.navbar-bottom {
+  height: 42px;
+}
+
+/*Media Queries*/
+@media (max-width: 768px) {
+  #search {
+    width: 50% !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar-top {
+    background-color: var(--secondary-color);
+  }
 }
