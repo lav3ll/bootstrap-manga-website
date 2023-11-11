@@ -11,10 +11,67 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    />
 
     <title>Elite Scans</title>
   </head>
+
   <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-dark navbar-expand-lg customNav nav-bg-primary">
+      <div class="container-fluid">
+        <!-- Nav burger bar -->
+        <button
+          class="navbar-toggler custom-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsingNavbar4"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Nav user icon -->
+        <a href="https://www.google.com" class="navbar-brand fs-3 fw-bold"
+          ><i class="fa-solid fa-circle-user text-dark"></i
+        ></a>
+        <!-- Nav user icon end -->
+
+        <form class="d-flex w-25" role="search">
+          <input
+            class="form-control me-2 fw-semibold"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <i class="fa-solid fa-magnifying-glass my-auto"></i>
+        </form>
+      </div>
+
+      <div class="collapse navbar-collapse" id="collapsingNavbar4">
+        <ul class="navbar-nav ps-3">
+          <li class="nav-item">
+            <a class="nav-link fw-semibold active" aria-current="page" href="#"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-semibold" href="#">Bookmarks</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-semibold" href="#">Comics</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-semibold" href="#">Recruitment</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Nav burger bar end -->
+    </nav>
+    <!-- End of Navigation Bar -->
+
     <script src="./script.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
