@@ -52,6 +52,32 @@ body {
   background-color: rgba(0, 0, 0, 0.9) !important;
 }
 
+/*Trending image*/
+.trending {
+  position: inherit;
+  margin-left: 630px;
+  width: 196px !important;
+  height: 280px;
+  overflow: visible;
+  background-image: url("https://images.unsplash.com/photo-1508830524289-0adcbe822b40?q=80&w=825&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-color: var(--black);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+  opacity: 0.9;
+  border-radius: 5px;
+}
+
+.trending-title {
+  margin-top: -100px !important;
+  color: red;
+}
+
+.trending a {
+  margin-left: -24px !important;
+}
+
 /*Media Queries*/
 @media (max-width: 768px) {
   #search {
