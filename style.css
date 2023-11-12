@@ -36,6 +36,22 @@ body {
   height: 42px;
 }
 
+/*Carousel*/
+
+.custom-carousel {
+  width: max-content !important;
+}
+
+.custom-carousel img {
+  height: 280px !important;
+  width: 100vh !important;
+  filter: blur(8px) !important;
+  -webkit-filter: blur(8px) !important;
+  overflow: hidden !important;
+  opacity: 0.5 !important;
+  background-color: rgba(0, 0, 0, 0.9) !important;
+}
+
 /*Media Queries*/
 @media (max-width: 768px) {
   #search {
