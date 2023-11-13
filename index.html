@@ -19,7 +19,7 @@
     <title>Elite Scans</title>
   </head>
 
-  <body>
+  <body class="row">
     <!-- Top navigation Bar -->
     <nav
       class="navbar navbar-dark navbar-expand-lg customNav nav-bg-primary bg-md-primary navbar-top"
@@ -113,14 +113,14 @@
     </nav>
     <h1 class="header-title fw-bold ms-3 pt-2 text-light">Elite Scans</h1>
     <!-- End of bottom navigation Bar -->
-    <main class="row w-75 mx-5">
+    <main class="row mx-5 col-lg-8 bg-warning">
       <!--Carousel-->
       <section
-        class="carousel d-flex justify-content-center col-md-12 col-lg-8"
+        class="carousel d-flex px-0 me-auto col-sm-12 col-md-12 col-lg-8 ms-1"
       >
         <div
           id="carouselExampleDark"
-          class="carousel carousel-dark slide custom-carousel"
+          class="carousel carousel-dark slide custom-carousel px-auto"
         >
           <div class="carousel-indicators">
             <button
@@ -205,7 +205,9 @@
           </button>
         </div>
       </section>
-      <figure class="col-md-12 col-lg-8 row bg-warning trending ms-3">
+      <figure
+        class="d-md-none d-lg-block d-md-none d-sm-none row trending me-4 "
+      >
         <a href="trending" class="ms-0"> </a>
         <p class="trending-title text-center px-3 mt-5">
           ELITE SCANS <br />Trending This Week
@@ -213,13 +215,80 @@
       </figure>
 
       <!--Popular-->
-      <div class="container-popular container-fluid">
+      <div class="container-popular container-fluid ms-0">
         <h3 class="popH3 text-light">Popular Today</h3>
         <div class="popGrid"></div>
         <!--popGrid-->
       </div>
+      <!--Recommendations bottom-->
+      <div class="rec-container-top d-md-block d-lg-none">
+        <div class="btns-container-1">
+          <div class="btns-container-2">
+            <button class="btn" id="weekly">weekly</button>
+            <button class="btn" id="monthly">Monthly</button>
+            <button class="btn" id="all">All</button>
+          </div>
+        </div>
+        
+        </div>
+      </div>
+      <!--Recommendations bottom-->
     </main>
-
+    <!--Recommendations-->
+    <aside>
+      <div class="rec-container d-sm-none d-md-none d-lg-block me-auto">
+        <div class="btns-container-1">
+          <div class="btns-container-2">
+            <button class="btn" id="weekly">weekly</button>
+            <button class="btn" id="monthly">Monthly</button>
+            <button class="btn" id="all">All</button>
+          </div>
+        </div>
+        <div class="rec">
+          <img src="https://images.unsplash.com/photo-1508830524289-0adcbe822b40?q=80&w=825&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rec-img" width="58px" height="78px" alt="">
+          <div class="rec-title">TEST</div>
+          <p class="genres"><span class="gSpan">Genres: </span>Adventure, Comedy, Fantasy, Martial Arts, Rebirth<br><i class="fa-solid fa-star"></i>10</p>
+      </div>
+      <div class="rec">
+        <img src="https://images.unsplash.com/photo-1508830524289-0adcbe822b40?q=80&w=825&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rec-img" width="58px" height="78px" alt="">
+        <div class="rec-title">TEST</div>
+        <p class="genres"><span class="gSpan">Genres: </span>Adventure, Comedy, Fantasy, Martial Arts, Rebirth<br><i class="fa-solid fa-star"></i>10</p>
+    </div>
+;
+<div class="rec">
+  <img src="https://images.unsplash.com/photo-1508830524289-0adcbe822b40?q=80&w=825&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rec-img" width="58px" height="78px" alt="">
+  <div class="rec-title">TEST</div>
+  <p class="genres"><span class="gSpan">Genres: </span>Adventure, Comedy, Fantasy, Martial Arts, Rebirth<br><i class="fa-solid fa-star"></i>10</p>
+</div>
+;
+<div class="rec">
+  <img src="https://images.unsplash.com/photo-1508830524289-0adcbe822b40?q=80&w=825&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rec-img" width="58px" height="78px" alt="">
+  <div class="rec-title">TEST</div>
+  <p class="genres"><span class="gSpan">Genres: </span>Adventure, Comedy, Fantasy, Martial Arts, Rebirth<br><i class="fa-solid fa-star"></i>10</p>
+</div>
+;
+<div class="rec">
+  <img src="https://images.unsplash.com/photo-1508830524289-0adcbe822b40?q=80&w=825&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rec-img" width="58px" height="78px" alt="">
+  <div class="rec-title">TEST</div>
+  <p class="genres"><span class="gSpan">Genres: </span>Adventure, Comedy, Fantasy, Martial Arts, Rebirth<br><i class="fa-solid fa-star"></i>10</p>
+</div>
+;
+<div class="rec">
+  <img src="https://images.unsplash.com/photo-1508830524289-0adcbe822b40?q=80&w=825&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rec-img" width="58px" height="78px" alt="">
+  <div class="rec-title">TEST</div>
+  <p class="genres"><span class="gSpan">Genres: </span>Adventure, Comedy, Fantasy, Martial Arts, Rebirth<br><i class="fa-solid fa-star"></i>10</p>
+</div>
+;
+<div class="rec">
+  <img src="https://images.unsplash.com/photo-1508830524289-0adcbe822b40?q=80&w=825&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rec-img" width="58px" height="78px" alt="">
+  <div class="rec-title">TEST</div>
+  <p class="genres"><span class="gSpan">Genres: </span>Adventure, Comedy, Fantasy, Martial Arts, Rebirth<br><i class="fa-solid fa-star"></i>10</p>
+</div>
+;
+;
+      </div>
+    </aside>
+    <!--Recommendations-->
     <script src="./script.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
