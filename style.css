@@ -119,47 +119,32 @@ main {
 
 /* //////////////////////RECOMMENDATIONS //////////////////////////////// */
 .rec-container {
-  position: absolute;
-  /* width: 339px; */
-  /* display: flex; */
-  /* flex-direction: column; */
+  /* position: absolute;
+  
+  border-radius: 5px; */
   background-color: #312f40;
-  z-index: 200;
-  max-height: max-content;
-  top: 165px;
-  right: 400px;
-  overflow: none;
-  border-radius: 5px;
+  width: max-content !important;
+}
+
+.rec-img {
+  width: 58px !important;
+  height: 91.28px !important;
 }
 
 .btns-container-1 {
-  margin-top: 10px;
+  /* margin-top: 10px;
   display: flex;
   justify-content: center;
-  height: 34px;
+  height: 34px; */
 }
 
 .btns-container-2 {
-  display: flex;
-  justify-content: space-around;
-  position: relative;
-  width: 90%;
-  background-color: gray;
-  border-radius: 3px;
-  vertical-align: middle;
-  padding: 5px 5px;
+  background-color: #808080;
 }
 
 .btn {
-  width: 102px;
-  height: 22px;
-  border: none;
-  border-radius: 5px;
-  background-color: var(--secondary-color);
-  color: white;
-  display: block !important;
-  position: relative;
-  font-weight: 600;
+  padding: 0 0 !important;
+  font-size: 0.8rem !important;
 }
 
 .btn:hover {
@@ -177,7 +162,6 @@ main {
   width: 297px;
   /* height: 78px; */
   display: flex;
-  border-bottom: 1px solid #b8b8b8;
   padding-top: 15px;
   padding-bottom: 15px;
   padding-left: 12px;
@@ -187,23 +171,15 @@ main {
   margin: 2px auto;
 }
 
+.custom-btm-border {
+  border-bottom: 1px solid #b8b8b8;
+}
 .noBorder {
   border-bottom: none;
 }
 
-.rec-inner {
-  margin-right: 20px;
-  display: flex;
-  width: 204px;
-}
-
 .genres {
-  position: absolute;
-  left: 7rem;
-  margin-top: 1.4rem;
-  width: 50%;
-  font-size: 12px;
-  height: 36px;
+  font-size: 12px !important;
 }
 
 .fa-star {
@@ -212,12 +188,8 @@ main {
 }
 
 .rec-title {
-  flex: none;
-  margin-left: 20px;
   font-size: 0.8rem;
   font-weight: 600;
-  width: fit-content;
-  padding-right: 2rem;
 }
 
 a {
@@ -249,5 +221,7 @@ a {
 @media (max-width: 992px) {
   .navbar-top {
     background-color: var(--secondary-color);
+  }
+  .rec-container {
   }
 }
