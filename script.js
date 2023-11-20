@@ -348,11 +348,53 @@ const recommendationData2 = [
 ];
 
 const recommendations = document.querySelector(".rec");
+const recContainer = document.querySelector(".rec-container");
+const weeklyEl = document.getElementById("weekly");
+const monthlyEl = document.getElementById("monthly");
+const allEl = document.getElementById("all");
 
+// const options = {
+//   method: "GET",
+//   headers: {
+//     "X-RapidAPI-Key": "93ed9305c7msh8bee1838f559b6bp1e62efjsnaa270facb818",
+//     "X-RapidAPI-Host": "manga-scrapper.p.rapidapi.com",
+//   },
+// };
+// const title = "Kanojyo to Himitsu to Koimoyou";
+// const baseUrl = "https://api.mangadex.org";
+// const queryParams = new URLSearchParams({ title: title });
+// const url = `${baseUrl}/manga?${queryParams}`;
+
+// fetch(url)
+//   .then((response) => response.json())
+//   .then((data) => console.log(data.data.map((manga) => manga.id)))
+//   .catch((error) => console.error("Error:", error));
+
+const url =
+  "https://mangadex.p.rapidapi.com/manga?includedTagsMode=AND&publicationDemographic%5B0%5D=shonen&order=%7B%0A%20%20%22createdAt%22%3A%20%22asc%22%2C%0A%20%20%22updatedAt%22%3A%20%22asc%22%0A%7D&excludedTagsMode=OR&status%5B0%5D=ongoing&contentRating%5B0%5D=safe&limit=10";
+const options = {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": "93ed9305c7msh8bee1838f559b6bp1e62efjsnaa270facb818",
+    "X-RapidAPI-Host": "mangadex.p.rapidapi.com",
+  },
+};
+
+test = async function () {
+  try {
+    const response = await fetch(url, options);
+    const result = await response.text();
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+test();
 ///////////////Recommendation Buttons
 
 ///////////////Show Recommendations
-showRecommendations(recommendationData);
+// showRecommendations(recommendationData);
 function showRecommendations(recommendations) {
   recommendations.map((rec) => {
     const { title, coverURL, shortURL, MangaUrl, synopsis, slug, _type } = rec;
@@ -381,15 +423,60 @@ function showRecommendations(recommendations) {
 
 weeklyEl.addEventListener("click", () => {
   recContainer.innerHTML = "";
-  showRecommendations(recommendationData);
+  // showRecommendations(recommendationData);
 });
 
 monthlyEl.addEventListener("click", () => {
   recContainer.innerHTML = "";
-  showRecommendations(recommendationData2);
+  // showRecommendations(recommendationData2);
 });
 
 allEl.addEventListener("click", () => {
   recContainer.innerHTML = "";
-  showRecommendations(recommendationData);
+  // showRecommendations(recommendationData);
 });
+
+const containerPopular = document.querySelector(".container-popular");
+
+//Get the Data for the popular section
+function showPopular(popular) {
+  let newArr = popular.splice(0, 5);
+
+  newArr.forEach((pop, i) => {
+    const popGrid = document.querySelector(".popGrid");
+    const { coverURL, title, slug } = pop;
+
+    const popEl = document.createElement("div");
+    popEl.classList.add("popular");
+    popEl.innerHTML = `
+        <img src="${coverURL}" width="147px" height="201px" alt="random image">
+        <h3 class="pop-title">${title}</h3>
+        `;
+
+    for (let j = 0; j < 5; j++) {
+      popEl.innerHTML += '<i class="fa-solid fa-star ratings"></i>';
+    }
+    popEl.innerHTML += ` ${Ratings[i].rate}`;
+
+    popGrid.appendChild(popEl);
+
+    popEl.addEventListener("click", () => {
+      // removeElements();
+      // getMangaInfo(pop, slug);
+    });
+  });
+}
+
+// getSlider();
+async function getSlider() {
+  const response = await fetch(
+    `https://manga-scrapper.p.rapidapi.com/search?q=fantasy&size=10&provider=asura`,
+    options
+  );
+
+  const data = await response.json();
+  console.log(data);
+
+  // showSlider(data);
+  // showPopular(data);
+}

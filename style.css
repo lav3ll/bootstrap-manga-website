@@ -10,6 +10,7 @@
 body {
   background-color: var(--primary-color) !important;
   font-family: "Roboto", sans-serif !important;
+  overflow-x: hidden;
 }
 
 .nav-bg-primary {
@@ -38,8 +39,15 @@ body {
 
 /*Carousel*/
 
+.carousel {
+  width: fit-content;
+  height: fit-content;
+  overflow: hidden !important;
+}
+
 .custom-carousel {
   width: 619px !important;
+  height: fit-content;
   margin: 0 !important;
 }
 
@@ -55,6 +63,7 @@ body {
 
 main {
   width: 900px !important;
+  margin-left: 500px !important;
 }
 
 /*Trending image*/
@@ -87,7 +96,12 @@ main {
 .container-popular {
   width: 1024px !important;
   /* overflow-y: hidden; */
-  padding-left: 5px !important;
+  /* padding-left: 5px !important; */
+  background-color: var(--background-color);
+}
+
+.popH3 {
+  width: 100%;
 }
 
 .popGrid {
@@ -100,20 +114,13 @@ main {
   border-radius: 5px;
 }
 
-.popH3 {
-  position: relative;
-  width: 100%;
-  border-bottom: 1px solid gray;
-  margin-bottom: -30px;
-}
-
 .popular {
   margin: 50px 5px;
   line-height: 0.5em;
 }
 
 .popular img:hover {
-  /* filter: blur(1px); */
+  filter: blur(1px);
   opacity: 0.7;
 }
 
@@ -222,6 +229,15 @@ a {
   .navbar-top {
     background-color: var(--secondary-color);
   }
+  .carousel-item img {
+    height: 280px !important;
+    width: 500px !important;
+    background-color: rgba(0, 0, 0, 0.9) !important;
+  }
+}
+
+@media (max-width: 1279px) {
   .rec-container {
+    display: none;
   }
 }
