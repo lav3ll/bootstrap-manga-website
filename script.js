@@ -372,22 +372,20 @@ const allEl = document.getElementById("all");
 
 const title = "Kanojyo to Himitsu to Koimoyou";
 
-test = async function () {
-  const axios = require("axios");
+async function fetchData() {
+  const baseUrl = "https://api.mangadex.org/manga";
+  const queryParams = `?title=${title}`;
 
-  const baseUrl = "https://api.mangadex.org";
+  try {
+    const response = await fetch(baseUrl + queryParams);
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
 
-  const resp = await axios({
-    method: "GET",
-    url: `${baseUrl}/manga`,
-    params: {
-      title: title,
-    },
-  });
-};
-
-test();
-
+fetchData();
 console.log(resp.data.data.map((manga) => manga.id));
 ///////////////Recommendation Buttons
 
