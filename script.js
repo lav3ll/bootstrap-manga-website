@@ -370,27 +370,25 @@ const allEl = document.getElementById("all");
 //   .then((data) => console.log(data.data.map((manga) => manga.id)))
 //   .catch((error) => console.error("Error:", error));
 
-const url =
-  "https://mangadex.p.rapidapi.com/manga?includedTagsMode=AND&publicationDemographic%5B0%5D=shonen&order=%7B%0A%20%20%22createdAt%22%3A%20%22asc%22%2C%0A%20%20%22updatedAt%22%3A%20%22asc%22%0A%7D&excludedTagsMode=OR&status%5B0%5D=ongoing&contentRating%5B0%5D=safe&limit=10";
-const options = {
-  method: "GET",
-  headers: {
-    "X-RapidAPI-Key": "93ed9305c7msh8bee1838f559b6bp1e62efjsnaa270facb818",
-    "X-RapidAPI-Host": "mangadex.p.rapidapi.com",
-  },
-};
+const title = "Kanojyo to Himitsu to Koimoyou";
 
 test = async function () {
-  try {
-    const response = await fetch(url, options);
-    const result = await response.text();
-    console.log(result);
-  } catch (error) {
-    console.error(error);
-  }
+  const axios = require("axios");
+
+  const baseUrl = "https://api.mangadex.org";
+
+  const resp = await axios({
+    method: "GET",
+    url: `${baseUrl}/manga`,
+    params: {
+      title: title,
+    },
+  });
 };
 
 test();
+
+console.log(resp.data.data.map((manga) => manga.id));
 ///////////////Recommendation Buttons
 
 ///////////////Show Recommendations
