@@ -33,11 +33,11 @@ const Navigation = () => {
             type='checkbox'
             role='switch'
             id='flexSwitchCheckDefault'
-            onclick=''
+            onClick={() => console.log('test')}
           />
           <label
             className='form-check-label fs-5'
-            for='flexSwitchCheckDefault'
+            htmlFor='flexSwitchCheckDefault'
           ></label>
         </div>
         {/* <!--Day/Night mode btn--> */}
