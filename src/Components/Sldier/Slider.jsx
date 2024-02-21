@@ -1,4 +1,5 @@
 import React from 'react';
+import Trending from './Trending';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -18,7 +19,7 @@ const Slider = () => {
   return (
     <>
       {/* Container for the slider */}
-      <div className='row'>
+      <div className='row mt-4'>
         {/* Column to control the width and position of the slider */}
         <div className='col-md-5 offset-md-2'>
           {/* Swiper component with configuration */}
@@ -47,6 +48,9 @@ const Slider = () => {
               <img src={latestTestData.data[3].thumb} alt='test' />
             </SwiperSlide>
           </Swiper>
+        </div>
+        <div className='trending col-md-2'>
+          <Trending />
         </div>
       </div>
     </>
