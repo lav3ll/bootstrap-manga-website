@@ -1,0 +1,8 @@
+.popularImg-overlay {
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.custom-text-purple {
+  color: var(--secondary-color) !important;
+}
