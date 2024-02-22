@@ -4,7 +4,7 @@ import API_KEY from '../../Data/config.json';
 import trendingTestData from '../../Data/getMangaTest.json';
 const Trending = () => {
   const searchTerm = 'legendary';
-  console.log(trendingTestData.data.thumb);
+  // console.log(trendingTestData.data.thumb);
 
   //   useEffect(() => {
   //     const fetchData = async () => {
