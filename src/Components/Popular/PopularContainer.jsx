@@ -7,7 +7,7 @@ const PopularContainer = () => {
   // console.log(reducedPopularData);
   console.log('testing');
   return (
-    <div className='row col-md-7 offset-md-2 my-4 bg-secondary rounded'>
+    <div className='row col-lg-7 offset-lg-2 col-sm-12 my-4 bg-secondary rounded'>
       <p className='fw-semibold ms-2 my-3 text-white'>Popular</p>
       <div className='row justify-content-center'>
         {reducedPopularData.map((popularManga) => (

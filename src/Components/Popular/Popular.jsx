@@ -26,7 +26,7 @@ const Popular = ({ popularManga }) => {
       <img
         src={popularManga.thumbnail_url}
         alt={`thumbnail image of ${popularManga.title}`}
-        className={`popularImg ${overlay}`}
+        className={`popularImg rounded ${overlay}`}
         style={{ height: '200px', objectFit: 'cover' }}
         onMouseOver={handleHoverOver}
         onMouseOut={handleHoverOut}
