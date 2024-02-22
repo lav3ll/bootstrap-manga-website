@@ -40,7 +40,7 @@ const Trending = () => {
   return (
     <div className='text-center trending d-none d-sm-block'>
       <div
-        className='mx-4 rounded'
+        className='mx-2 rounded'
         style={{
           backgroundImage: `url(${trendingTestData.data.thumb})`,
           backgroundSize: 'cover',
