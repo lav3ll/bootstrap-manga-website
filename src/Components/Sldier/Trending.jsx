@@ -38,7 +38,7 @@ const Trending = () => {
     alert('click'); // testing
   };
   return (
-    <div className='text-center trending d-none d-sm-block'>
+    <div className='text-center trending d-none d-sm-none md-d-none d-lg-block'>
       <div
         className='mx-2 rounded'
         style={{
