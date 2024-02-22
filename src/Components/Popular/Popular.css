@@ -6,3 +6,7 @@
 .custom-text-purple {
   color: var(--secondary-color) !important;
 }
+
+.popular-card-container {
+  cursor: pointer;
+}

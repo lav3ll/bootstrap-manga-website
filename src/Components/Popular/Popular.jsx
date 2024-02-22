@@ -18,10 +18,17 @@ const Popular = ({ popularManga }) => {
     setHoverColour('text-white');
     setOverlay(false);
   };
+
+  const handleClick = () => {
+    // take clicked element data and make api call for manga summary page
+    alert('test');
+  };
+
   return (
     <div
       className='card col-2 mx-2 px-0 bg-transparent border-0 popular-card-container'
       key={popularManga.id}
+      onClick={handleClick}
     >
       <img
         src={popularManga.thumbnail_url}
