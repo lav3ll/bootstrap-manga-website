@@ -36,10 +36,23 @@ const Slider = () => {
           >
             {/* Slides inside the Swiper */}
             <SwiperSlide>
-              <img
-                src={latestTestData.data[5].thumbnail_url}
-                alt={`${latestTestData.data[5].title} thumbnail image`}
-              />
+              <div className='slide-container w-100 position-relative'>
+                <div className='mangaSlideInfo'>
+                  <p className=''></p>
+                </div>
+                <img
+                  src={latestTestData.data[5].thumbnail_url}
+                  alt={`${latestTestData.data[5].title} thumbnail image`}
+                  className='w-100 slide-img'
+                />
+                <div className='position-absolute top-50 end-0 translate-middle-y'>
+                  <img
+                    className='w-50 rounded'
+                    src={latestTestData.data[5].thumbnail_url}
+                    alt=''
+                  />
+                </div>
+              </div>
             </SwiperSlide>
             <SwiperSlide>
               <img
