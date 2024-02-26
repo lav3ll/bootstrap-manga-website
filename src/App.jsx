@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from './Components/Navigation';
 import Slider from './Components/Sldier/Slider';
 import PopularContainer from './Components/Popular/PopularContainer';
+import LatestContainer from './Components/Latest/LatestContainer';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Navigation />
       <Slider />
       <PopularContainer />
+      <LatestContainer />
     </>
   );
 }
