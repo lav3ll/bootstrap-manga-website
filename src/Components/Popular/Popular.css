@@ -10,3 +10,12 @@
 .popular-card-container {
   cursor: pointer;
 }
+
+@media (max-width: 576px) {
+  .custom-sm {
+    width: 50% !important;
+  }
+  .custom-hidden {
+    display: none !important;
+  }
+}

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './Popular.css';
 
-const Popular = ({ popularManga }) => {
+const Popular = ({ popularManga, idx }) => {
   console.log(popularManga);
+  console.log(idx);
   // set hover color
   const [hoverColour, setHoverColour] = useState('text-white');
 
@@ -26,7 +27,9 @@ const Popular = ({ popularManga }) => {
 
   return (
     <div
-      className='card col-2 mx-2 px-0 bg-transparent border-0 popular-card-container'
+      className={`card ${
+        idx === 4 ? 'custom-hidden' : ''
+      } custom-sm mx-lg-2 px-lg-0 mx-md-2 px-md-0 mx-sm-0 px-sm-0 bg-transparent border-0 popular-card-container col-md-2  col-lg-2`}
       key={popularManga.id}
       onClick={handleClick}
     >
