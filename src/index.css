@@ -6,3 +6,7 @@
   --secondary-color: #9b51e0;
   --white: #fff;
 }
+
+.custom-bg-secondary {
+  background-color: var(--secondary-color) !important;
+}

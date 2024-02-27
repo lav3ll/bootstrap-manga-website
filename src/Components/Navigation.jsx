@@ -4,7 +4,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const Navigation = () => {
   return (
-    <nav className='navbar navbar-dark navbar-expand-lg  nav-bg-primary bg-md-primary navbar-top'>
+    <nav className='navbar navbar-dark navbar-expand-lg  nav-bg-primary bg-md-primary navbar-top custom-bg-secondary'>
       <div className='container-fluid'>
         {/* <!-- Nav burger bar --> */}
         <button
