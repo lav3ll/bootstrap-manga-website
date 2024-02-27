@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { NavLink } from 'react-router-dom';
 
 const Navigation = () => {
   return (
@@ -17,14 +18,29 @@ const Navigation = () => {
         </button>
 
         {/* <!-- Nav burger bar end --> */}
-        {<FontAwesomeIcon icon={faUser} />}
-        <a
-          href='https://www.google.com'
-          className='navbar-brand ps-3 fs-3 fw-bold'
+
+        <NavLink
+          to='/Login'
+          activeClassName='active'
+          className='btn btn-outline-dark btn-lg rounded-5'
         >
-          <i className='fa-solid fa-circle-user text-dark'></i>
-        </a>
+          {<FontAwesomeIcon icon={faUser} />}
+        </NavLink>
         {/* <!-- Nav user icon end --> */}
+        <NavLink
+          to='/Home'
+          activeClassName='active'
+          className='btn border-0 text-white fs-5 bold py-0'
+        >
+          <h1>EliteScans</h1>
+        </NavLink>
+        <NavLink
+          to='/Bookmarks'
+          activeClassName='active'
+          className='btn border-0 text-white fw-semibold'
+        >
+          Bookmarks
+        </NavLink>
 
         {/* <!--Day/Night mode btn--> */}
         <div className='form-check form-switch me-auto fs-5'>
