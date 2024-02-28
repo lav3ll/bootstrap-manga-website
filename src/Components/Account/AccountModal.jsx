@@ -1,9 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
 const AccountModal = ({ ModalType }) => {
   const form = useRef();
   const [errorTxt, setErrorTxt] = useState('');
+  const [hidePass, setHidePass] = useState('d-none');
+  const [hideUsername, setUsername] = useState('d-none');
+
+  useEffect(() => {
+    setHidePass(ModalType === 'Register' ? '' : 'd-none');
+    setUsername(ModalType === 'Register' ? '' : 'd-none');
+  }, [ModalType]);
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
@@ -37,6 +44,13 @@ const AccountModal = ({ ModalType }) => {
         <h1 className='mb-0 text-white fst-italic'>EliteScans</h1>
         <h2 className='mt-0 text-white fw-semibold'>{ModalType}</h2>
         <input
+          className={`form-control rounded-5 ${hideUsername}`}
+          text='username'
+          name='username'
+          placeholder='Create a username'
+          required
+        />
+        <input
           className='form-control rounded-5'
           type='email'
           name='email'
@@ -51,7 +65,7 @@ const AccountModal = ({ ModalType }) => {
           required
         />
         <input
-          className='form-control rounded-5'
+          className={`form-control rounded-5 ${hidePass}`}
           name='password2'
           type='password'
           placeholder='Confirm Password'
