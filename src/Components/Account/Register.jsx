@@ -1,7 +1,13 @@
 import React from 'react';
 
+import AccountModal from './AccountModal';
+
 const Register = () => {
-  return <div>Register</div>;
+  return (
+    <>
+      <AccountModal ModalType={'Register'} />
+    </>
+  );
 };
 
 export default Register;

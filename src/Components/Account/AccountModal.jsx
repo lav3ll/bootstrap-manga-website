@@ -1,14 +1,37 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useRef } from 'react';
 
 const AccountModal = ({ ModalType }) => {
   const form = useRef();
+  const [errorTxt, setErrorTxt] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
+    const password1 = form.current.elements.password1.value;
+    const password2 = form.current.elements.password2.value;
+
+    if (password1 !== password2) {
+      setErrorTxt('* Password confirmation does not match password');
+    } else if (
+      password1.length < 8 ||
+      !/[!@#$%^&*(),.?":{}|<>]/.test(password1)
+    ) {
+      setErrorTxt(
+        '* Password must be at least 8 characters long and contain at least one special character'
+      );
+    } else {
+      // Handle form submission
+      setErrorTxt('');
+      alert('Form submitted successfully');
+    }
+  };
+
   return (
     <div className='row'>
       <form
         ref={form}
-        onSubmit=''
+        onSubmit={handleSubmit} // Call handleSubmit on form submission
         className='d-flex flex-column gap-3 justify-content-center align-items-center bg-dark p-2 mt-5 rounded-1 col-4 offset-4'
       >
         <h1 className='mb-0 text-white fst-italic'>EliteScans</h1>
@@ -22,20 +45,28 @@ const AccountModal = ({ ModalType }) => {
         />
         <input
           className='form-control rounded-5'
+          name='password1'
           type='password'
-          name='password'
           placeholder='Password'
           required
-        ></input>
+        />
+        <input
+          className='form-control rounded-5'
+          name='password2'
+          type='password'
+          placeholder='Confirm Password'
+          required
+        />
+        <p className='text-warning'>{errorTxt}</p>
         <button type='submit' className='btn btn-primary'>
-          Login
+          {ModalType}
         </button>
         {ModalType === 'Login' ? (
           <div className='text-white fw-semibold'>
             Don't have an account?{' '}
             <NavLink
-              to={`/Register`}
-              activeclassname='active'
+              to='/Register'
+              activeClassName='active'
               className='text-white'
             >
               Sign Up
@@ -45,11 +76,11 @@ const AccountModal = ({ ModalType }) => {
           <div className='text-white fw-semibold'>
             Already have an account?{' '}
             <NavLink
-              to={`/Login`}
-              activeclassname='active'
+              to='/Login'
+              activeClassName='active'
               className='text-white'
             >
-              Sign Up
+              Sign In
             </NavLink>
           </div>
         )}
