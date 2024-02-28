@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import reactLogo from './assets/react.svg';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Outlet,
+} from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from './Components/Navigation';
@@ -16,7 +21,9 @@ function App() {
         <div>
           <Navigation />
           <Routes>
-            <Route path='/Home' element={<Home />} />
+            <Route path='/' element={<Outlet />} />
+            <Route index element={<Home />} />
+            <Route path='Home' element={<Home />} />
             <Route path='/Login' element={<Login />} />
             <Route path='/Register' element={<Register />} />
             <Route path='/Bookmarks' element={<Bookmarks />} />
