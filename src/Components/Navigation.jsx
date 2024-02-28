@@ -32,7 +32,7 @@ const Navigation = () => {
           activeClassName='active'
           className='btn border-0 text-white fs-5 bold py-0'
         >
-          <h1>EliteScans</h1>
+          <h1 className='fst-italic'>EliteScans</h1>
         </NavLink>
         <NavLink
           to='/Bookmarks'
