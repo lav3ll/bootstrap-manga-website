@@ -58,8 +58,8 @@ const AccountModal = ({ ModalType }) => {
     <div className='row'>
       <form
         ref={form}
-        onSubmit={handleSubmit} // Call handleSubmit on form submission
-        className='d-flex flex-column gap-3 justify-content-center align-items-center bg-dark p-2 mt-5 rounded-1 col-4 offset-4'
+        onSubmit={handleSubmit}
+        className='d-flex flex-column gap-3 justify-content-center align-items-center bg-dark p-2 mt-5 rounded-1 col-lg-4 offset-lg-4 col-md-8 offset-md-2 col-10 offset-1'
       >
         <h1 className='mb-0 text-white fst-italic'>EliteScans</h1>
         <h2 className='mt-0 text-white fw-semibold'>{ModalType}</h2>
