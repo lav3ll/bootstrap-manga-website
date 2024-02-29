@@ -25,6 +25,7 @@ body {
   text-align: center;
   font-size: 18px;
   background: #fff;
+  padding-right: 0;
 
   /* Center slide text vertically */
   display: flex;
@@ -44,4 +45,18 @@ body {
 .swiper {
   margin-left: auto;
   margin-right: auto;
+}
+
+@media screen and (max-width: 576px) {
+  .custom-sm-width {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .custom-sm-width {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 }
