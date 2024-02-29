@@ -1,14 +1,11 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+
+import AccountModal from './AccountModal';
 
 const Login = () => {
   return (
     <>
-      <h1>Login</h1>
-
-      <NavLink to='/Register' activeclassname='active' className=''>
-        Register
-      </NavLink>
+      <AccountModal ModalType={'Login'} />
     </>
   );
 };

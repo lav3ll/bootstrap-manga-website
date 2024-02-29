@@ -21,22 +21,16 @@ const Navigation = () => {
 
         <NavLink
           to='/Login'
-          activeClassName='active'
-          className='btn btn-outline-dark btn-lg rounded-5'
+          className='btn btn-outline-dark btn-lg rounded-5 active'
         >
           {<FontAwesomeIcon icon={faUser} />}
         </NavLink>
         {/* <!-- Nav user icon end --> */}
-        <NavLink
-          to='/Home'
-          activeClassName='active'
-          className='btn border-0 text-white fs-5 bold py-0'
-        >
-          <h1>EliteScans</h1>
+        <NavLink to='/Home' className='btn border-0 text-white fs-5 bold py-0'>
+          <h1 className='fst-italic'>EliteScans</h1>
         </NavLink>
         <NavLink
           to='/Bookmarks'
-          activeClassName='active'
           className='btn border-0 text-white fw-semibold'
         >
           Bookmarks
