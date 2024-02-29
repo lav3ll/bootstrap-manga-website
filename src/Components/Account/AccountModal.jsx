@@ -12,7 +12,7 @@ const AccountModal = ({ ModalType }) => {
     setUsername(ModalType === 'Register' ? '' : 'd-none');
   }, [ModalType]);
 
-  const handleSubmit = (e) => {
+  const handleRegisterSubmit = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
 
     const password1 = form.current.elements.password1.value;
@@ -34,6 +34,26 @@ const AccountModal = ({ ModalType }) => {
     }
   };
 
+  const handleLoginSubmit = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
+    const password = form.current.elements.password1.value;
+    const email = form.current.elements.email.value;
+    const databasePass = ''; // Replace with your database password
+    const databaseUser = ''; // Replace with your database username
+
+    if (password !== databasePass || email !== databaseUser) {
+      setErrorTxt('* Incorrect email or password');
+    } else {
+      // Handle form submission
+      setErrorTxt('');
+      alert('You have logged in successfully');
+    }
+  };
+
+  const handleSubmit =
+    ModalType === 'Login' ? handleLoginSubmit : handleRegisterSubmit;
+
   return (
     <div className='row'>
       <form
@@ -43,17 +63,20 @@ const AccountModal = ({ ModalType }) => {
       >
         <h1 className='mb-0 text-white fst-italic'>EliteScans</h1>
         <h2 className='mt-0 text-white fw-semibold'>{ModalType}</h2>
-        <input
-          className={`form-control rounded-5 ${hideUsername}`}
-          text='username'
-          name='username'
-          placeholder='Create a username'
-          required
-        />
+        {ModalType === 'Register' && (
+          <input
+            className={`form-control rounded-5 ${hideUsername}`}
+            text='username'
+            name='username'
+            placeholder='Create a username'
+            required
+          />
+        )}
         <input
           className='form-control rounded-5'
           type='email'
           name='email'
+          id='email'
           placeholder='Your Email'
           required
         />
@@ -64,13 +87,15 @@ const AccountModal = ({ ModalType }) => {
           placeholder='Password'
           required
         />
-        <input
-          className={`form-control rounded-5 ${hidePass}`}
-          name='password2'
-          type='password'
-          placeholder='Confirm Password'
-          required
-        />
+        {ModalType === 'Register' && (
+          <input
+            className={`form-control rounded-5 ${hidePass}`}
+            name='password2'
+            type='password'
+            placeholder='Confirm Password'
+            required
+          />
+        )}
         <p className='text-warning'>{errorTxt}</p>
         <button type='submit' className='btn btn-primary'>
           {ModalType}
@@ -78,22 +103,14 @@ const AccountModal = ({ ModalType }) => {
         {ModalType === 'Login' ? (
           <div className='text-white fw-semibold'>
             Don't have an account?{' '}
-            <NavLink
-              to='/Register'
-              activeClassName='active'
-              className='text-white'
-            >
+            <NavLink to='/Register' className='text-white'>
               Sign Up
             </NavLink>
           </div>
         ) : (
           <div className='text-white fw-semibold'>
             Already have an account?{' '}
-            <NavLink
-              to='/Login'
-              activeClassName='active'
-              className='text-white'
-            >
+            <NavLink to='/Login' className='text-white'>
               Sign In
             </NavLink>
           </div>
