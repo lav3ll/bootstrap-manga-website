@@ -2,6 +2,7 @@ import React from 'react';
 import Trending from './Trending';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
+import SliderItem from './SliderItem';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -36,80 +37,16 @@ const Slider = () => {
           >
             {/* Slides inside the Swiper */}
             <SwiperSlide>
-              <div className='slide-container w-100'>
-                <div className='mangaSlideInfo'>
-                  <p className=''></p>
-                </div>
-                <img
-                  src={latestTestData.data[5].thumbnail_url}
-                  alt={`${latestTestData.data[5].title} thumbnail image`}
-                  className='w-100 slide-img'
-                />
-                <div className='position-absolute top-50 end-0 translate-middle-y'>
-                  <img
-                    className='w-50 rounded'
-                    src={latestTestData.data[5].thumbnail_url}
-                    alt=''
-                  />
-                </div>
-              </div>
+              <SliderItem imageData={latestTestData.data[5]} />
             </SwiperSlide>
             <SwiperSlide>
-              <div className='slide-container w-100'>
-                <div className='mangaSlideInfo'>
-                  <p className=''></p>
-                </div>
-                <img
-                  src={latestTestData.data[16].thumbnail_url}
-                  alt={`${latestTestData.data[16].title} thumbnail image`}
-                  className='w-100 slide-img'
-                />
-                <div className='position-absolute top-50 end-0 translate-middle-y'>
-                  <img
-                    className='w-50 rounded'
-                    src={latestTestData.data[16].thumbnail_url}
-                    alt=''
-                  />
-                </div>
-              </div>
+              <SliderItem imageData={latestTestData.data[16]} />
             </SwiperSlide>
             <SwiperSlide>
-              <div className='slide-container w-100'>
-                <div className='mangaSlideInfo'>
-                  <p className=''></p>
-                </div>
-                <img
-                  src={latestTestData.data[10].thumbnail_url}
-                  alt={`${latestTestData.data[10].title} thumbnail image`}
-                  className='w-100 slide-img'
-                />
-                <div className='position-absolute top-50 end-0 translate-middle-y'>
-                  <img
-                    className='w-50 rounded'
-                    src={latestTestData.data[10].thumbnail_url}
-                    alt=''
-                  />
-                </div>
-              </div>
+              <SliderItem imageData={latestTestData.data[10]} />
             </SwiperSlide>
             <SwiperSlide>
-              <div className='slide-container w-100'>
-                <div className='mangaSlideInfo'>
-                  <p className=''></p>
-                </div>
-                <img
-                  src={latestTestData.data[12].thumbnail_url}
-                  alt={`${latestTestData.data[12].title} thumbnail image`}
-                  className='w-100 slide-img'
-                />
-                <div className='position-absolute top-50 end-0 translate-middle-y'>
-                  <img
-                    className='w-50 rounded'
-                    src={latestTestData.data[12].thumbnail_url}
-                    alt=''
-                  />
-                </div>
-              </div>
+              <SliderItem imageData={latestTestData.data[12]} />
             </SwiperSlide>
           </Swiper>
         </div>
