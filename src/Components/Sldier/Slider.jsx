@@ -19,9 +19,9 @@ const Slider = () => {
   return (
     <>
       {/* Container for the slider */}
-      <div className='row mt-4'>
+      <div className='row mt-4 w-100'>
         {/* Column to control the width and position of the slider */}
-        <div className='col-md-12 col-lg-5 offset-lg-2'>
+        <div className='col-md-12 col-lg-5 offset-lg-2 custom-sm-width ms-lg-6'>
           {/* Swiper component with configuration */}
           <Swiper
             slidesPerView={1}
@@ -36,7 +36,7 @@ const Slider = () => {
           >
             {/* Slides inside the Swiper */}
             <SwiperSlide>
-              <div className='slide-container w-100 position-relative'>
+              <div className='slide-container w-100'>
                 <div className='mangaSlideInfo'>
                   <p className=''></p>
                 </div>
