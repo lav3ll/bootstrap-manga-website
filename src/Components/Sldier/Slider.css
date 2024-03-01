@@ -52,11 +52,24 @@ body {
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
+
+  .swiper-slide {
+    margin-left: 0px !important;
+  }
+
+  /* .swiper-button-prev {
+    margin-left: 30px !important;
+  } */
 }
 
 @media screen and (max-width: 768px) {
   .custom-sm-width {
     padding-left: 0 !important;
     padding-right: 0 !important;
+  }
+
+  .swiper-con {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
   }
 }
