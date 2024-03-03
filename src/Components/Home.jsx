@@ -1,5 +1,5 @@
 import React from 'react';
-import Slider from './Sldier/Slider';
+import Slider from './Slider/Slider';
 import PopularContainer from './Popular/PopularContainer';
 import LatestContainer from './Latest/LatestContainer';
 
