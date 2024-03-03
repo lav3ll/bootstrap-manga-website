@@ -13,6 +13,7 @@ import Home from './Components/Home';
 import Login from './Components/Account/Login';
 import Register from './Components/Account/Register';
 import Bookmarks from './Components/Bookmarks/Bookmarks';
+import MangaInfo from './Components/MangaInfo/MangaInfo';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path='/Login' element={<Login />} />
             <Route path='/Register' element={<Register />} />
             <Route path='/Bookmarks' element={<Bookmarks />} />
+            <Route path='/MangaInfo' element={<MangaInfo />} />
           </Routes>
         </div>
       </Router>
