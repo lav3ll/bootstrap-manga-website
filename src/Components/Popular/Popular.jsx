@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Popular.css';
 
 const Popular = ({ popularManga, idx }) => {
-  // console.log(popularManga);
+  console.log(popularManga);
   // console.log(idx);
   // set hover color
   const [hoverColour, setHoverColour] = useState('text-white');
@@ -34,7 +34,7 @@ const Popular = ({ popularManga, idx }) => {
       onClick={handleClick}
     >
       <img
-        src={popularManga.thumbnail_url}
+        src={`https://uploads.mangadex.org/covers/${popularManga.id}/${popularManga.relationships[2].attributes.fileName}.256.jpg`}
         alt={`thumbnail image of ${popularManga.title}`}
         className={`popularImg rounded ${overlay}`}
         style={{ height: '200px', objectFit: 'cover' }}
@@ -50,11 +50,11 @@ const Popular = ({ popularManga, idx }) => {
           className='popular-title'
           style={{ height: '60px', overflow: 'hidden' }}
         >
-          {popularManga.title.slice(0, 40)}
+          {popularManga.attributes.title.en}
         </p>
-        <p className='popularChapNum text-gray pt-0 '>
-          Chapter {popularManga.latest_chapter}
-        </p>
+        {/* <p className='popularChapNum text-gray pt-0 '>
+          Chapter {popularManga.lastChapter}
+        </p> */}
       </div>
     </div>
   );

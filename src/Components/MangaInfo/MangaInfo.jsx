@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MdOutlineArrowRight } from 'react-icons/md';
 import './MangaInfo.css';
 import MangaInf from '../../Data/getMangaTest.json';
+
 const Info = MangaInf.data;
-const MangaInfo = ({}) => {
+
+const MangaInfo = () => {
   const saveBookmark = () => {
     alert('saved to local storage');
   };
@@ -12,6 +14,7 @@ const MangaInfo = ({}) => {
   const genreSearch = () => {
     alert('search for genre');
   };
+
   return (
     <>
       <div className='manga-info-wrapper'>
@@ -66,6 +69,7 @@ const MangaInfo = ({}) => {
             </div>
           </div>
         </div>
+        <img src='' alt='TEST' />
       </div>
     </>
   );

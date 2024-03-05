@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 config.json
+mangadex.jsx
 
 # Editor directories and files
 .vscode/*
