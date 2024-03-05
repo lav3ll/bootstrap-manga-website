@@ -13,7 +13,8 @@ const PopularContainer = () => {
         const resp = await axios.get(`${baseUrl}/manga`, {
           params: {
             includes: ['cover_art', 'artist', 'author'],
-            order: { followedCount: 'desc' },
+            includedTags: ['action', 'fantasy'],
+            order: 'followedCount_desc',
             'contentRating[]': ['safe', 'suggestive'],
             hasAvailableChapters: true,
             createdAtSince: '2023-07-08T11:44:57',

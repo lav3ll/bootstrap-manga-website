@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Popular.css';
 
 const Popular = ({ popularManga, idx }) => {
-  console.log(popularManga);
+  // console.log(popularManga);
   // console.log(idx);
   // set hover color
   const [hoverColour, setHoverColour] = useState('text-white');
