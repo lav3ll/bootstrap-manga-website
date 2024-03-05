@@ -7,7 +7,7 @@ const Trending = () => {
     trendingTestData.data[
       Math.trunc(Math.random() * trendingTestData.data.length)
     ];
-  console.log(randomTrending);
+  // console.log(randomTrending);
   const handleClick = () => {
     // Function Needed to get clicked variable to then generate the landing page for said manga
     alert('click'); // testing
