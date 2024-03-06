@@ -7,7 +7,7 @@ const Trending = () => {
   const [trendingManga, setTrendingManga] = useState(null);
 
   useEffect(() => {
-    const fetchPopular = async () => {
+    const fetchTrending = async () => {
       const baseUrl = 'https://api.mangadex.org';
 
       try {
@@ -26,7 +26,7 @@ const Trending = () => {
       }
     };
 
-    fetchPopular();
+    fetchTrending();
   }, []);
 
   const handleClick = () => {
