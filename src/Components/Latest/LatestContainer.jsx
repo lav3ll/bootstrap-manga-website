@@ -12,12 +12,13 @@ const LatestContainer = () => {
 
       try {
         const resp = await axios.get(
-          `https://api.mangadex.org/manga?includes[]=cover_art&includes[]=artist&includes[]=author&order[followedCount]=desc&contentRating[]=safe&contentRating[]=suggestive&hasAvailableChapters=true&createdAtSince=2024-02-05T00%3A00%3A00`
+          `https://api.mangadex.org/chapter?includes[]=scanlation_group&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&order[readableAt]=desc&limit=20`
         );
 
         // Store the fetched data in component state
         // setLatestData(resp.data.data);
-        console.log(resp);
+        // console.log(resp.data.data);
+        setLatestData(resp.data.data);
       } catch (error) {
         console.error('Error fetching manga data:', error);
       }
@@ -30,7 +31,7 @@ const LatestContainer = () => {
       <p className='fw-semibold ms-2 my-3 text-white'>Latest</p>
       <div className='row'>
         {latestData &&
-          latestData.data.map((latestManga, idx) => (
+          latestData.map((latestManga, idx) => (
             <Latest key={latestManga.id} latestManga={latestManga} idx={idx} />
           ))}
       </div>
