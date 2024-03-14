@@ -19,6 +19,7 @@ const Popular = ({ popularManga, idx }) => {
       const fileName = popularManga.relationships[2].attributes.fileName;
       const src = `https://uploads.mangadex.org/covers/${popularManga.id}/${fileName}.256.jpg`;
       setImageSrc(src);
+      // console.log(src);
     }
   }, [popularManga]);
 

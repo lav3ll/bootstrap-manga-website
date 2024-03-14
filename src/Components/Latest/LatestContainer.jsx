@@ -5,6 +5,8 @@ import axios from 'axios';
 const LatestContainer = () => {
   const [latestData, setLatestData] = useState(null);
   const [coverImages, setCoverImages] = useState([]);
+  const [resp2test, setResp2test] = useState([]);
+  const [imageId, setImageId] = useState([]);
 
   useEffect(() => {
     const fetchLatest = async () => {
@@ -29,6 +31,7 @@ const LatestContainer = () => {
           if (resp2 && resp2.data && resp2.data.data) {
             setLatestData(resp.data.data);
             setCoverImages(resp2.data.data);
+            setImageId(resp2.data.data);
           }
         }
       } catch (error) {
@@ -44,16 +47,31 @@ const LatestContainer = () => {
       <div className='row'>
         {latestData &&
           coverImages &&
-          latestData.map((latestManga, idx) => (
-            <Latest
-              key={latestManga.id}
-              latestManga={latestManga}
-              idx={idx}
-              coverImage={coverImages[idx]} // Access corresponding cover image
-              resp={latestData}
-              resp2={coverImages}
-            />
-          ))}
+          latestData.map((latestManga, idx) => {
+            // Find the correct manga ID from resp2test
+            let mangaId = null;
+            if (resp2test[idx] && resp2test[idx].relationships) {
+              for (let i = 0; i < resp2test[idx].relationships.length; i++) {
+                const relationship = resp2test[idx].relationships[i];
+                if (relationship.type === 'manga') {
+                  mangaId = relationship.id;
+                  break;
+                }
+              }
+            }
+
+            return (
+              <Latest
+                key={latestManga.id}
+                latestManga={latestManga}
+                idx={idx}
+                coverImg={coverImages[idx]} // Access corresponding cover image
+                resp={latestData}
+                resp2={mangaId}
+                imageId={imageId}
+              />
+            );
+          })}
       </div>
     </div>
   );
