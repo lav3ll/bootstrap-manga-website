@@ -1,10 +1,10 @@
-import { React, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Latest from './Latest';
 import axios from 'axios';
 
 const LatestContainer = () => {
   const [latestData, setLatestData] = useState(null);
-  // console.log(latestData);
+  const [coverImages, setCoverImages] = useState([]);
 
   useEffect(() => {
     const fetchLatest = async () => {
@@ -12,13 +12,25 @@ const LatestContainer = () => {
 
       try {
         const resp = await axios.get(
-          `https://api.mangadex.org/chapter?includes[]=scanlation_group&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&order[readableAt]=desc&limit=20`
+          `${baseUrl}/chapter?includes[]=scanlation_group&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&order[readableAt]=desc&limit=20`
         );
 
-        // Store the fetched data in component state
-        // setLatestData(resp.data.data);
-        // console.log(resp.data.data);
-        setLatestData(resp.data.data);
+        if (resp && resp.data && resp.data.data) {
+          const mangaIds = resp.data.data.map(
+            (chapter) => chapter.relationships[1].id
+          );
+          const mangaIdParams = mangaIds
+            .map((id) => `manga%5B%5D=${id}`)
+            .join('&');
+          const resp2 = await axios.get(
+            `${baseUrl}/cover?limit=20&${mangaIdParams}&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5Bvolume%5D=asc&includes%5B%5D=manga`
+          );
+
+          if (resp2 && resp2.data && resp2.data.data) {
+            setLatestData(resp.data.data);
+            setCoverImages(resp2.data.data);
+          }
+        }
       } catch (error) {
         console.error('Error fetching manga data:', error);
       }
@@ -31,8 +43,16 @@ const LatestContainer = () => {
       <p className='fw-semibold ms-2 my-3 text-white'>Latest</p>
       <div className='row'>
         {latestData &&
+          coverImages &&
           latestData.map((latestManga, idx) => (
-            <Latest key={latestManga.id} latestManga={latestManga} idx={idx} />
+            <Latest
+              key={latestManga.id}
+              latestManga={latestManga}
+              idx={idx}
+              coverImage={coverImages[idx]} // Access corresponding cover image
+              resp={latestData}
+              resp2={coverImages}
+            />
           ))}
       </div>
     </div>

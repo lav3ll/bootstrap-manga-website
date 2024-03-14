@@ -2,31 +2,50 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const Latest = ({ latestManga, idx }) => {
+const Latest = ({ latestManga, idx, resp, resp2, coverImgs }) => {
   const mangaInfo = latestManga;
   const [hoverColour, setHoverColour] = useState('text-white');
-  const [coverImg, setCoverImg] = useState('');
+  const [coverImages, setCoverImages] = useState([]);
+
+  // console.log(coverImgs);
 
   useEffect(() => {
     const fetchLatest = async () => {
       try {
         const resp = await axios.get(
-          `https://api.mangadex.org/cover?limit=10&manga[]=${latestManga.relationships[0].id}`
+          `https://api.mangadex.org/cover?limit=20&manga[]=${latestManga.relationships[0].id}`
         );
+        // console.log(resp1, resp2);
 
-        setCoverImg(
-          `https://uploads.mangadex.org/covers/${latestManga.relationships[0].id}/${resp.data.data[0].attributes.fileName}.256.jpg`
-        );
+        // const newCoverImg = `https://uploads.mangadex.org/covers/${latestManga.relationships[0].id}/${resp.data.data[0].attributes.fileName}.256.jpg`;
 
-        // console.log(resp.data.data[0].id);
-        // console.log(resp.data.data[0].attributes.fileName);
-        console.log(resp.data.data);
+        // // Add the new cover image to the array of cover images
+        // setCoverImages((prevImages) => [...prevImages, newCoverImg]);
+        // console.log(resp.data.data);
+        // resp.data && resp.data.data && resp.data.data[0]
+        //   ? console.log(resp.data.data[0])
+        //   : null;
+        // const tfileName = resp.data.data[0];
+        // const tsrc = `https://uploads.mangadex.org/covers/${latestManga.relationships[0].id}/${tfileName}.256.jpg`;
+        // console.log(tfileName);
+
+        if (
+          latestManga &&
+          latestManga.relationships &&
+          latestManga.relationships[0] &&
+          resp.data.data[0]
+        ) {
+          const fileName = resp.data.data[0].attributes.fileName;
+          const src = `https://uploads.mangadex.org/covers/${latestManga.relationships[0].id}/${fileName}.256.jpg`;
+          setCoverImages(src);
+        }
       } catch (error) {
         console.error('Error fetching manga data:', error);
       }
     };
+
     fetchLatest();
-  }, []);
+  }, [latestManga]);
 
   // set overlay
   const [overlay, setOverlay] = useState(false);
@@ -58,8 +77,8 @@ const Latest = ({ latestManga, idx }) => {
     >
       <div className='row w-100'>
         <img
-          src={coverImg}
-          alt={`thumbnail image of ${latestManga.title}`}
+          src={coverImages}
+          alt={`thumbnail image of ${latestManga.attributes.title}`}
           className={`latestImg ${overlay} ms-3 col-5 rounded`}
           style={{ height: '150px', objectFit: 'cover' }}
           onMouseOver={handleHoverOver}
@@ -74,17 +93,11 @@ const Latest = ({ latestManga, idx }) => {
             className='latest-title me-1'
             style={{ height: '60px', overflow: 'hidden' }}
           >
-            {latestManga.title}
+            {latestManga.attributes.title}
           </p>
           <ul>
             <li className='popularChapNum text-gray pt-0'>
-              Chapter {latestManga.latest_chapter}
-            </li>
-            <li className='popularChapNum text-gray pt-0'>
-              Chapter {latestManga.latest_chapter}
-            </li>
-            <li className='popularChapNum text-gray pt-0'>
-              Chapter {latestManga.latest_chapter}
+              Chapter {latestManga.attributes.chapter}
             </li>
           </ul>
         </div>
