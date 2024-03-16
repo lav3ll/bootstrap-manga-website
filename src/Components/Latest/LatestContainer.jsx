@@ -18,14 +18,16 @@ const LatestContainer = () => {
         );
 
         if (resp && resp.data && resp.data.data) {
-          const mangaIds = resp.data.data.map(
-            (chapter) => chapter.relationships[1].id
-          );
+          const mangaIds = resp.data.data.map((chapter) => {
+            console.log(chapter);
+            return chapter.relationships[1].id;
+          });
           const mangaIdParams = mangaIds
-            .map((id) => `manga%5B%5D=${id}`)
+            .map((id) => `ids%5B%5D=${id}`)
             .join('&');
+          // New request
           const resp2 = await axios.get(
-            `${baseUrl}/cover?limit=20&${mangaIdParams}&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5Bvolume%5D=asc&includes%5B%5D=manga`
+            `${baseUrl}/manga?limit=20&includedTagsMode=AND&excludedTagsMode=OR&${mangaIdParams}&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
           );
 
           if (resp2 && resp2.data && resp2.data.data) {
