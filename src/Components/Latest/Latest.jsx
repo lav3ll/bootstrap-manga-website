@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
-const Latest = ({ latestManga, idx, resp, resp2, coverImg, imageId }) => {
+const Latest = ({ latestManga, idx, coverImg }) => {
   const mangaInfo = latestManga;
   const [hoverColour, setHoverColour] = useState('text-white');
-  const [coverImages, setCoverImages] = useState([]);
-  // console.log(resp2);
+  const [coverImages, setCoverImages] = useState('');
 
   useEffect(() => {
     const fetchLatest = async () => {
       try {
-        const fileName = coverImg.attributes.fileName;
+        const mangaId = latestManga.relationships.find(
+          (relationship) => relationship.type === 'manga'
+        ).id;
 
-        if (latestManga.relationships.type !== 'manga') {
-        }
-        const src = `https://uploads.mangadex.org/covers/${imageId[idx].relationships[0].id}/${fileName}`;
+        const fileName = coverImg.relationships.find(
+          (relationship) => relationship.type === 'cover_art'
+        ).attributes.fileName;
+
+        console.log(idx, mangaId, coverImg);
+        const src = `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`;
+        console.log(src);
         setCoverImages(src);
       } catch (error) {
         console.error('Error fetching manga data:', error);
@@ -23,28 +27,14 @@ const Latest = ({ latestManga, idx, resp, resp2, coverImg, imageId }) => {
     };
 
     fetchLatest();
-  }, [latestManga]);
-
-  // set overlay
-  const [overlay, setOverlay] = useState(false);
+  }, [latestManga, coverImg]);
 
   const handleHoverOver = () => {
     setHoverColour('custom-text-purple');
-    setOverlay('popularImg-overlay');
   };
 
   const handleHoverOut = () => {
     setHoverColour('text-white');
-    setOverlay(false);
-  };
-
-  const handleClick = () => {
-    // take clicked element data and make api call for manga summary page
-
-    <NavLink
-      to='/Login'
-      className='btn btn-outline-dark btn-lg rounded-5 active'
-    ></NavLink>;
   };
 
   return (
@@ -57,7 +47,7 @@ const Latest = ({ latestManga, idx, resp, resp2, coverImg, imageId }) => {
         <img
           src={coverImages}
           alt={`thumbnail image of ${latestManga.attributes.title}`}
-          className={`latestImg ${overlay} ms-3 col-5 rounded`}
+          className={`latestImg ms-3 col-5 rounded`}
           style={{ height: '150px', objectFit: 'cover' }}
           onMouseOver={handleHoverOver}
           onMouseOut={handleHoverOut}

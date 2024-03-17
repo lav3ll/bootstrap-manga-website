@@ -14,12 +14,12 @@ const LatestContainer = () => {
 
       try {
         const resp = await axios.get(
-          `${baseUrl}/chapter?includes[]=scanlation_group&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&order[readableAt]=desc&limit=20`
+          `${baseUrl}/chapter?includes[]=scanlation_group&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&order[readableAt]=desc&limit=14`
         );
 
         if (resp && resp.data && resp.data.data) {
           const mangaIds = resp.data.data.map((chapter) => {
-            console.log(chapter);
+            // console.log(chapter);
             return chapter.relationships[1].id;
           });
           const mangaIdParams = mangaIds
@@ -27,8 +27,9 @@ const LatestContainer = () => {
             .join('&');
           // New request
           const resp2 = await axios.get(
-            `${baseUrl}/manga?limit=20&includedTagsMode=AND&excludedTagsMode=OR&${mangaIdParams}&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
+            `${baseUrl}/manga?limit=14&includedTagsMode=AND&excludedTagsMode=OR&${mangaIdParams}&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
           );
+          // console.log(resp2.data.data);
 
           if (resp2 && resp2.data && resp2.data.data) {
             setLatestData(resp.data.data);
@@ -70,7 +71,7 @@ const LatestContainer = () => {
                 coverImg={coverImages[idx]} // Access corresponding cover image
                 resp={latestData}
                 resp2={mangaId}
-                imageId={imageId}
+                imageId={imageId[idx]}
               />
             );
           })}
