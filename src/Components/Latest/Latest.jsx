@@ -12,20 +12,25 @@ const Latest = ({ latestManga, idx, coverImg }) => {
     const fetchLatest = async () => {
       try {
         // Find manga ID
+
         const mangaId = latestManga.relationships.find(
           (relationship) => relationship.type === 'manga'
         ).id;
 
         // Find file name of cover image
-        const fileName = coverImg.relationships.find(
-          (relationship) => relationship.type === 'cover_art'
-        ).attributes.fileName;
+        if (coverImg && coverImg.relationships) {
+          const fileName = coverImg.relationships.find(
+            (relationship) => relationship.type === 'cover_art'
+          ).attributes.fileName;
+
+          const src = `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`;
+          // console.log(latestManga, coverImg);
+
+          // Set cover image state
+          setCoverImages(src);
+        }
 
         // Construct image source URL
-        const src = `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`;
-
-        // Set cover image state
-        setCoverImages(src);
       } catch (error) {
         // Log error if fetching fails
         console.error('Error fetching manga data:', error);

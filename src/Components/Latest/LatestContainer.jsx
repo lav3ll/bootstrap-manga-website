@@ -14,27 +14,33 @@ const LatestContainer = () => {
 
       try {
         const resp = await axios.get(
-          `${baseUrl}/chapter?includes[]=scanlation_group&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&order[readableAt]=desc&limit=14`
+          `${baseUrl}/chapter?includes[]=scanlation_group&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&order[readableAt]=desc&limit=64`
         );
 
         if (resp && resp.data && resp.data.data) {
-          const mangaIds = resp.data.data.map((chapter) => {
-            // console.log(chapter);
-            return chapter.relationships[1].id;
-          });
-          const mangaIdParams = mangaIds
+          // Deduplicate manga IDs
+          const uniqueMangaIds = Array.from(
+            new Set(
+              resp.data.data.map((chapter) => {
+                return chapter.relationships.find(
+                  (relationship) => relationship.type === 'manga'
+                ).id;
+              })
+            )
+          );
+          const mangaIdParams = uniqueMangaIds
             .map((id) => `ids%5B%5D=${id}`)
             .join('&');
           // New request
           const resp2 = await axios.get(
-            `${baseUrl}/manga?limit=14&includedTagsMode=AND&excludedTagsMode=OR&${mangaIdParams}&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
+            `${baseUrl}/manga?limit=64&includedTagsMode=AND&excludedTagsMode=OR&${mangaIdParams}&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
           );
-          // console.log(resp2.data.data);
 
           if (resp2 && resp2.data && resp2.data.data) {
             setLatestData(resp.data.data);
             setCoverImages(resp2.data.data);
             setImageId(resp2.data.data);
+            console.log(resp.data.data, resp2.data.data);
           }
         }
       } catch (error) {
