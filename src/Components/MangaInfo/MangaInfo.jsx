@@ -3,8 +3,6 @@ import { Link, useLocation } from 'react-router-dom'; // Update import
 import { MdOutlineArrowRight } from 'react-icons/md';
 import './MangaInfo.css';
 
-const Info = MangaInf.data;
-
 const MangaInfo = () => {
   const location = useLocation();
   const { manga } = location.state;
@@ -29,10 +27,10 @@ const MangaInfo = () => {
           </Link>{' '}
           <MdOutlineArrowRight />
           <Link
-            to={{ pathname: `/${Info}` }}
+            to={{ pathname: `/manga-${manga.info.id}` }}
             style={{ color: 'white', textDecoration: 'none' }}
           >
-            EliteScans
+            {manga.info.attributes.title.en}
           </Link>
         </div>
         <div className='row manga-info-container row col-7 offset-1'>
