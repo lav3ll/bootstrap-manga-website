@@ -2,6 +2,16 @@ import React, { useEffect, useState } from 'react';
 import Popular from './Popular';
 import axios from 'axios';
 
+function getMidnightTimestampOneMonthAgo() {
+  const now = new Date();
+  const oneMonthAgo = new Date(now);
+  oneMonthAgo.setMonth(now.getMonth() - 1); // Get date one month ago
+  oneMonthAgo.setDate(now.getDate() - 1); // Subtract one day to get yesterday's date
+  const year = oneMonthAgo.getFullYear();
+  const month = (oneMonthAgo.getMonth() + 1).toString().padStart(2, '0');
+  const day = oneMonthAgo.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}T00:00:00`;
+}
 const PopularContainer = () => {
   const [reducedPopularData, setReducedPopularData] = useState([]);
 
@@ -16,7 +26,7 @@ const PopularContainer = () => {
             order: { followedCount: 'desc' },
             'contentRating[]': ['safe', 'suggestive'],
             hasAvailableChapters: true,
-            createdAtSince: '2023-07-08T11:44:57',
+            createdAtSince: getMidnightTimestampOneMonthAgo(),
           },
         });
 

@@ -20,7 +20,7 @@ const Trending = () => {
 
         // Store the fetched data in component state
         setTrendingManga(resp.data.data);
-        console.log(resp.data.data);
+        resp.data.data;
       } catch (error) {
         console.error('Error fetching manga data:', error);
       }
