@@ -40,7 +40,7 @@ const LatestContainer = () => {
             setLatestData(resp.data.data);
             setCoverImages(resp2.data.data);
             setImageId(resp2.data.data);
-            console.log(resp.data.data, resp2.data.data);
+            // console.log(resp.data.data, resp2.data.data);
           }
         }
       } catch (error) {

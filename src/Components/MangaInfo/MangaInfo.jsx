@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom'; // Update import
 import { MdOutlineArrowRight } from 'react-icons/md';
 import './MangaInfo.css';
 import MangaInf from '../../Data/getMangaTest.json';
@@ -7,6 +7,12 @@ import MangaInf from '../../Data/getMangaTest.json';
 const Info = MangaInf.data;
 
 const MangaInfo = () => {
+  // const location = useLocation();
+  // const { latestManga } = location.state;
+  // console.log('State in MangaInfo:', latestManga);
+  const location = useLocation();
+  const { manga } = location.state;
+  console.log(manga);
   const saveBookmark = () => {
     alert('saved to local storage');
   };
