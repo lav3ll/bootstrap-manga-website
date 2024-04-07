@@ -5,7 +5,6 @@ import axios from 'axios';
 const LatestContainer = () => {
   const [latestData, setLatestData] = useState(null);
   const [coverImages, setCoverImages] = useState([]);
-  const [resp2test, setResp2test] = useState([]);
   const [imageId, setImageId] = useState([]);
 
   useEffect(() => {
@@ -14,35 +13,45 @@ const LatestContainer = () => {
 
       try {
         const resp = await axios.get(
-          `${baseUrl}/chapter?includes[]=scanlation_group&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&order[readableAt]=desc&limit=10`
+          `${baseUrl}/chapter?includes[]=scanlation_group&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&order[readableAt]=desc&limit=20`
         );
 
         if (resp && resp.data && resp.data.data) {
-          // Deduplicate manga IDs
-          const uniqueMangaIds = Array.from(
-            new Set(
-              resp.data.data.map((chapter) => {
-                return chapter.relationships.find(
-                  (relationship) => relationship.type === 'manga'
-                ).id;
-              })
-            )
-          );
+          const uniqueMangaIds = [];
+          const filteredLatestData = [];
+          const filteredCoverImages = [];
+          const filteredImageId = [];
+
+          resp.data.data.forEach((chapter) => {
+            const mangaId = chapter.relationships.find(
+              (relationship) => relationship.type === 'manga'
+            ).id;
+            if (!uniqueMangaIds.includes(mangaId)) {
+              uniqueMangaIds.push(mangaId);
+              filteredLatestData.push(chapter);
+            }
+          });
 
           const mangaIdParams = uniqueMangaIds
             .map((id) => `ids%5B%5D=${id}`)
             .join('&');
-          // New request
+
           const resp2 = await axios.get(
             `${baseUrl}/manga?limit=64&includedTagsMode=AND&excludedTagsMode=OR&${mangaIdParams}&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
           );
 
           if (resp2 && resp2.data && resp2.data.data) {
-            setLatestData(resp.data.data);
+            resp2.data.data.forEach((manga) => {
+              const mangaId = manga.id;
+              if (uniqueMangaIds.includes(mangaId)) {
+                filteredCoverImages.push(manga);
+                filteredImageId.push(manga);
+              }
+            });
 
-            setCoverImages(resp2.data.data);
-            setImageId(resp2.data.data);
-            // console.log(resp.data.data, resp2.data.data);
+            setLatestData(filteredLatestData);
+            setCoverImages(filteredCoverImages);
+            setImageId(filteredImageId);
           }
         }
       } catch (error) {
@@ -58,31 +67,17 @@ const LatestContainer = () => {
       <div className='row'>
         {latestData &&
           coverImages &&
-          latestData.map((latestManga, idx) => {
-            // Find the correct manga ID from resp2test
-            let mangaId = null;
-            if (resp2test[idx] && resp2test[idx].relationships) {
-              for (let i = 0; i < resp2test[idx].relationships.length; i++) {
-                const relationship = resp2test[idx].relationships[i];
-                if (relationship.type === 'manga') {
-                  mangaId = relationship.id;
-                  break;
-                }
-              }
-            }
-
-            return (
-              <Latest
-                key={latestManga.id}
-                latestManga={latestManga}
-                idx={idx}
-                coverImg={coverImages[idx]} // Access corresponding cover image
-                resp={latestData}
-                resp2={mangaId}
-                imageId={imageId[idx]}
-              />
-            );
-          })}
+          latestData.map((latestManga, idx) => (
+            <Latest
+              key={latestManga.id}
+              latestManga={latestManga}
+              idx={idx}
+              coverImg={coverImages[idx]} // Access corresponding cover image
+              resp={latestData}
+              resp2={null} // No need to use resp2
+              imageId={imageId[idx]}
+            />
+          ))}
       </div>
     </div>
   );
