@@ -1,9 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom'; // Update import
 import { MdOutlineArrowRight } from 'react-icons/md';
 import './MangaInfo.css';
+import axios from 'axios';
 
 const MangaInfo = () => {
+  const [hoverColour, setHoverColour] = useState('text-white');
+
+  // Handle mouse hover over image
+  const handleHoverOver = () => {
+    setHoverColour('custom-text-purple');
+  };
+
+  // Handle mouse hover out from image
+  const handleHoverOut = () => {
+    setHoverColour('text-white');
+  };
   const location = useLocation();
   const { manga } = location.state;
   console.log(manga);
@@ -14,6 +26,16 @@ const MangaInfo = () => {
   const genreSearch = () => {
     alert('search for genre');
   };
+
+  useEffect(() => {
+    const fetchChapter = async () => {
+      const resp = await axios.get(
+        `https://api.mangadex.org/chapter?limit=100&manga=${manga.info.id}&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&includeFutureUpdates=1&order%5BcreatedAt%5D=asc&order%5BupdatedAt%5D=asc&order%5BpublishAt%5D=asc&order%5BreadableAt%5D=asc&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc`
+      );
+      console.log(resp.data);
+    };
+    fetchChapter();
+  });
 
   return (
     <>
@@ -80,7 +102,43 @@ const MangaInfo = () => {
             </div>
           </div>
         </div>
-        <img src='' alt='TEST' />
+        <div className='chapter-list-container bg-secondary rounded col-7 offset-1 mt-4'>
+          <div className='chapter-list-btns d-flex justify-content-around'>
+            <div className='first-chapter col-5 btn custom-bg-secondary py-2 text-white mx-3 my-3'>
+              <p className='my-0'>First Chapter</p>
+              <p>Chapter</p>
+            </div>
+            <div className='last-chapter col-5 btn custom-bg-secondary py-2 text-white mx-3 my-3'>
+              <p className='my-0'>Newest Chapter</p>
+              <p>Chapter</p>
+            </div>
+          </div>
+          <div className='chapter-list bg-secondary rounded mt-2 mx-5'>
+            <div className='row'>
+              <div
+                className={`chapter btn w-100  text-center py-2 rounded bg-primary px-4 my-2 ${hoverColour}`}
+                onMouseOver={handleHoverOver}
+                onMouseOut={handleHoverOut}
+              >
+                TESTing
+              </div>
+              <div
+                className={`chapter btn w-100  text-center py-2 rounded bg-primary px-4 my-2 ${hoverColour}`}
+                onMouseOver={handleHoverOver}
+                onMouseOut={handleHoverOut}
+              >
+                TESTing
+              </div>
+              <div
+                className={`chapter btn w-100  text-center py-2 rounded bg-primary px-4 my-2 ${hoverColour}`}
+                onMouseOver={handleHoverOver}
+                onMouseOut={handleHoverOut}
+              >
+                TESTing
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
