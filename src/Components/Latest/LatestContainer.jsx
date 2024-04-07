@@ -14,7 +14,7 @@ const LatestContainer = () => {
 
       try {
         const resp = await axios.get(
-          `${baseUrl}/chapter?includes[]=scanlation_group&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&order[readableAt]=desc&limit=64`
+          `${baseUrl}/chapter?includes[]=scanlation_group&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&order[readableAt]=desc&limit=10`
         );
 
         if (resp && resp.data && resp.data.data) {
@@ -28,6 +28,7 @@ const LatestContainer = () => {
               })
             )
           );
+
           const mangaIdParams = uniqueMangaIds
             .map((id) => `ids%5B%5D=${id}`)
             .join('&');
@@ -38,6 +39,7 @@ const LatestContainer = () => {
 
           if (resp2 && resp2.data && resp2.data.data) {
             setLatestData(resp.data.data);
+
             setCoverImages(resp2.data.data);
             setImageId(resp2.data.data);
             // console.log(resp.data.data, resp2.data.data);

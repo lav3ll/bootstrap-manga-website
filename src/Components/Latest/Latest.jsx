@@ -49,7 +49,6 @@ const Latest = ({ latestManga, coverImg, imageId, info }) => {
       className={`card row mx-lg-2 px-lg-0 mx-md-2 px-md-0 mx-sm-0 px-sm-0 bg-transparent border-0 popular-card-container col-md-5 col-lg-5 justify-content-cente text-decoration-none`}
       key={latestManga.id}
     >
-      Next Step
       <div className='row w-100 py-3'>
         <img
           src={coverImages}
@@ -68,7 +67,7 @@ const Latest = ({ latestManga, coverImg, imageId, info }) => {
             className='latest-title me-1'
             style={{ height: '60px', overflow: 'hidden' }}
           >
-            {latestManga.attributes.title}
+            {title}
           </p>
           <ul>
             <li className='popularChapNum text-gray pt-0'>
