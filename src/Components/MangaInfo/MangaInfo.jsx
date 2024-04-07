@@ -113,11 +113,19 @@ const MangaInfo = () => {
         <div className='chapter-list-btns d-flex justify-content-around'>
           <div className='first-chapter col-5 btn custom-bg-secondary py-2 text-white mx-3 my-3'>
             <p className='my-0'>First Chapter</p>
-            <p>Chapter</p>
+            <p className='fw-semibold'>
+              Chapter{' '}
+              {chapters && chapters[0] ? chapters[0].attributes.chapter : null}
+            </p>
           </div>
           <div className='last-chapter col-5 btn custom-bg-secondary py-2 text-white mx-3 my-3'>
             <p className='my-0'>Newest Chapter</p>
-            <p>Chapter</p>
+            <p className='fw-semibold'>
+              Chapter{' '}
+              {chapters && chapters[chapters.length - 1]
+                ? chapters[chapters.length - 1].attributes.chapter
+                : null}
+            </p>
           </div>
         </div>
         <div className='chapter-list bg-secondary rounded mt-2 mx-5'>
