@@ -21,7 +21,6 @@ const MangaInfo = () => {
 
   useEffect(() => {
     const fetchChapter = async () => {
-      console.log(manga);
       const mangaID = manga.info.id;
       const languages = ['en'];
       const contentRatings = ['safe', 'suggestive', 'erotica'];
@@ -59,7 +58,7 @@ const MangaInfo = () => {
           `https://api.mangadex.org/at-home/server/${chapters[indexToFetch].id}`
         )
         .then((resp) => {
-          console.log(resp.data);
+          // console.log(resp.data);
           // https://cmdxd98sb0x3yprd.mangadex.network/
           // data OR data-saver /
           // hash /
@@ -72,7 +71,7 @@ const MangaInfo = () => {
   };
   return (
     <div className='manga-info-wrapper'>
-      <div className='col-7 offset-1 manga-info-toplinks mt-4 mb-3 bg-secondary rounded px-2'>
+      <div className='col-lg-7 offset-lg-1 col-md-12 offset-md-0  manga-info-toplinks mt-4 mb-3 bg-secondary rounded px-2'>
         <Link
           to={{ pathname: '/' }}
           style={{ color: 'white', textDecoration: 'none' }}
@@ -87,8 +86,8 @@ const MangaInfo = () => {
           {manga.info.attributes.title.en}
         </Link>
       </div>
-      <div className='row manga-info-container row col-7 offset-1'>
-        <div className='col-5 bg-light rounded row text-center'>
+      <div className='row manga-info-container row col-lg-7 offset-lg-1 col-md-12 offset-md-0 col-sm-12'>
+        <div className='col-lg-5 col-md-5 col-6 mx-auto mx-sm-0 mx-md-0 mx-lg-0 bg-light rounded row text-center'>
           <img src={manga.coverImg} alt='test' />
           <button
             className='btn custom-bg-secondary mt-2 text-white fw-semibold'
@@ -108,7 +107,7 @@ const MangaInfo = () => {
               : 'Unknown'}
           </p>
         </div>
-        <div className='bg-dark rounded ms-4 col-7'>
+        <div className='bg-dark rounded ms-4 col-lg-7 col-md-7 col-sm-6 ms-auto'>
           <div className='info-mid-topcol'>
             <h2 className='text-white mx-2 my-3'>
               {manga.info.attributes.title.en}
@@ -134,7 +133,7 @@ const MangaInfo = () => {
           </div>
         </div>
       </div>
-      <div className='chapter-list-container bg-secondary rounded col-7 offset-1 mt-4 '>
+      <div className='chapter-list-container bg-secondary rounded col-lg-7 offset-lg-1 col-md-12 offset-md-0 mt-4 '>
         <div className='chapter-list-btns d-flex justify-content-around '>
           <div
             className='first-chapter col-5 btn custom-bg-secondary py-2 text-white mx-3 my-3'
