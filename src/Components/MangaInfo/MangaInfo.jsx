@@ -7,6 +7,7 @@ import Chapters from './Chapters';
 
 const MangaInfo = () => {
   const [chapters, setChapters] = useState([]);
+  const [firstLast, setFirstLast] = useState('');
   const location = useLocation();
   const { manga } = location.state;
 
@@ -20,6 +21,7 @@ const MangaInfo = () => {
 
   useEffect(() => {
     const fetchChapter = async () => {
+      console.log(manga);
       const mangaID = manga.info.id;
       const languages = ['en'];
       const contentRatings = ['safe', 'suggestive', 'erotica'];
@@ -42,9 +44,32 @@ const MangaInfo = () => {
       });
       setChapters(resp.data.data);
     };
+
     fetchChapter();
   }, []);
 
+  const handleClick = (e) => {
+    if (chapters.length > 0) {
+      const lastIndex = chapters.length - 1;
+      const isFirstChap = e.target.getAttribute('datatype') === 'firstChap';
+      const indexToFetch = isFirstChap ? 0 : lastIndex;
+
+      axios
+        .get(
+          `https://api.mangadex.org/at-home/server/${chapters[indexToFetch].id}`
+        )
+        .then((resp) => {
+          console.log(resp.data);
+          // https://cmdxd98sb0x3yprd.mangadex.network/
+          // data OR data-saver /
+          // hash /
+          // 1-a7a414491dfd94d5031e1cbce0b11eb992f0df59ce111f1799f1024af460984c.jpg
+        })
+        .catch((error) => {
+          console.error('Error fetching chapter:', error);
+        });
+    }
+  };
   return (
     <div className='manga-info-wrapper'>
       <div className='col-7 offset-1 manga-info-toplinks mt-4 mb-3 bg-secondary rounded px-2'>
@@ -109,16 +134,25 @@ const MangaInfo = () => {
           </div>
         </div>
       </div>
-      <div className='chapter-list-container bg-secondary rounded col-7 offset-1 mt-4'>
-        <div className='chapter-list-btns d-flex justify-content-around'>
-          <div className='first-chapter col-5 btn custom-bg-secondary py-2 text-white mx-3 my-3'>
+      <div className='chapter-list-container bg-secondary rounded col-7 offset-1 mt-4 '>
+        <div className='chapter-list-btns d-flex justify-content-around '>
+          <div
+            className='first-chapter col-5 btn custom-bg-secondary py-2 text-white mx-3 my-3'
+            onClick={handleClick}
+            datatype={'firstChap'}
+            // datatype={firstChap}
+          >
             <p className='my-0'>First Chapter</p>
             <p className='fw-semibold'>
               Chapter{' '}
               {chapters && chapters[0] ? chapters[0].attributes.chapter : null}
             </p>
           </div>
-          <div className='last-chapter col-5 btn custom-bg-secondary py-2 text-white mx-3 my-3'>
+          <div
+            className='last-chapter col-5 btn custom-bg-secondary py-2 text-white mx-3 my-3'
+            onClick={handleClick}
+            datatype={'lastChap'}
+          >
             <p className='my-0'>Newest Chapter</p>
             <p className='fw-semibold'>
               Chapter{' '}
