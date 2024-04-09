@@ -2,3 +2,7 @@
 .manga-info-toplinks:visited {
   color: #fff !important;
 }
+
+.custom-outline {
+  border: 1px solid #fff !important;
+}

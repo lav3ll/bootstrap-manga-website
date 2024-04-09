@@ -38,7 +38,7 @@ const Chapters = ({ chapter }) => {
   };
   return (
     <div
-      className={`chapter btn w-100  text-center py-2 rounded bg-primary px-4 my-2 ${hoverColour}`}
+      className={`chapter btn w-100  text-center py-2 rounded custom-outline px-4 my-2 ${hoverColour}`}
       onMouseOver={handleHoverOver}
       onMouseOut={handleHoverOut}
       onClick={handleClick}

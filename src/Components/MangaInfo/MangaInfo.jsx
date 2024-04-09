@@ -107,7 +107,7 @@ const MangaInfo = () => {
               : 'Unknown'}
           </p>
         </div>
-        <div className='bg-dark rounded ms-4 col-lg-7 col-md-7 col-sm-6 ms-auto'>
+        <div className='bg-secondary rounded ms-4 col-lg-7 col-md-7 col-sm-6 ms-auto'>
           <div className='info-mid-topcol'>
             <h2 className='text-white mx-2 my-3'>
               {manga.info.attributes.title.en}
@@ -134,6 +134,9 @@ const MangaInfo = () => {
         </div>
       </div>
       <div className='chapter-list-container bg-secondary rounded col-lg-7 offset-lg-1 col-md-12 offset-md-0 mt-4 '>
+        <h6 className='text-white fs-5 ms-2 pt-2 mb-0'>
+          Chapter {manga.info.attributes.title.en}{' '}
+        </h6>
         <div className='chapter-list-btns d-flex justify-content-around '>
           <div
             className='first-chapter col-5 btn custom-bg-secondary py-2 text-white mx-3 my-3'
@@ -141,7 +144,7 @@ const MangaInfo = () => {
             datatype={'firstChap'}
             // datatype={firstChap}
           >
-            <p className='my-0'>First Chapter</p>
+            <p className='my-0 pt'>First Chapter</p>
             <p className='fw-semibold'>
               Chapter{' '}
               {chapters && chapters[0] ? chapters[0].attributes.chapter : null}
@@ -152,7 +155,7 @@ const MangaInfo = () => {
             onClick={handleClick}
             datatype={'lastChap'}
           >
-            <p className='my-0'>Newest Chapter</p>
+            <p className='my-0'>New Chapter</p>
             <p className='fw-semibold'>
               Chapter{' '}
               {chapters && chapters[chapters.length - 1]
