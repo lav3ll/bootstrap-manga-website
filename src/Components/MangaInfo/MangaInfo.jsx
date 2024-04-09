@@ -124,7 +124,7 @@ const MangaInfo = () => {
             {manga.info.attributes.tags.map((genre, index) => (
               <button
                 key={index}
-                className='btn text-white fs-6 px-1 bg-secondary mx-1 my-1 border-0'
+                className='btn text-white fs-6 px-1 bg-dark mx-1 my-1 border-0'
                 onClick={genreSearch}
               >
                 {genre.attributes.name.en}
