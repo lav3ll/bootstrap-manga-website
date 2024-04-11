@@ -168,7 +168,12 @@ const MangaInfo = () => {
           <div className='row'>
             {Array.isArray(chapters) &&
               chapters.map((chapter, index) => (
-                <Chapters key={index} chapter={chapter} />
+                <Chapters
+                  key={index}
+                  chapter={chapter}
+                  chapters={chapters}
+                  idx={index}
+                />
               ))}
           </div>
         </div>

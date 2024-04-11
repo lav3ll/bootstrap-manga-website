@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Chapters = ({ chapter }) => {
+const Chapters = ({ chapter, chapters, idx }) => {
   const [hoverColour, setHoverColour] = useState('text-white');
   const [chapterImages, setChapterImages] = useState(null);
   const options = { month: 'long', day: 'numeric', year: 'numeric' };
@@ -19,16 +19,20 @@ const Chapters = ({ chapter }) => {
   const handleHoverOut = () => {
     setHoverColour('text-white');
   };
-
   const handleClick = () => {
     axios
       .get(`https://api.mangadex.org/at-home/server/${chapter.id}`)
       .then((resp) => {
         setChapterImages((prevState) => resp.data);
         navigate(`/chapter/${chapter.id}`, {
-          state: { chapterImg: resp.data },
+          state: {
+            chapterImages: resp.data,
+            chapters: chapters,
+            index: idx,
+          },
         });
       })
+
       .catch((error) => {
         console.error('Error fetching chapter:', error);
       });
@@ -37,7 +41,11 @@ const Chapters = ({ chapter }) => {
   return (
     <Link
       to={`/chapter/${chapter.id}`}
-      state={{ chapterImg: chapterImages }}
+      state={{
+        chapterImages: chapterImages,
+        chapters: chapters,
+        index: idx,
+      }}
       onClick={handleClick}
     >
       <div
