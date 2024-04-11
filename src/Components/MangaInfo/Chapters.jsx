@@ -25,7 +25,6 @@ const Chapters = ({ chapter }) => {
       .get(`https://api.mangadex.org/at-home/server/${chapter.id}`)
       .then((resp) => {
         setChapterImages((prevState) => resp.data);
-
         navigate(`/chapter/${chapter.id}`, {
           state: { chapterImg: resp.data },
         });
