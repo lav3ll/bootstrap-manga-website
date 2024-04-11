@@ -77,7 +77,7 @@ const MangaInfo = () => {
           style={{ color: 'white', textDecoration: 'none' }}
         >
           EliteScans
-        </Link>{' '}
+        </Link>
         <MdOutlineArrowRight />
         <Link
           to={{ pathname: `/manga-${manga.info.id}` }}

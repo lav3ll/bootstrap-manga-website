@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
 import {
   BrowserRouter as Router,
   Route,
@@ -14,6 +12,7 @@ import Login from './Components/Account/Login';
 import Register from './Components/Account/Register';
 import Bookmarks from './Components/Bookmarks/Bookmarks';
 import MangaInfo from './Components/MangaInfo/MangaInfo';
+import Chapter from './Components/Chapter/Chapter';
 
 function App() {
   return (
@@ -29,6 +28,7 @@ function App() {
             <Route path='/Register' element={<Register />} />
             <Route path='/Bookmarks' element={<Bookmarks />} />
             <Route path='/MangaInfo' element={<MangaInfo />} />
+            <Route path='/chapter/:id' element={<Chapter />} />
           </Routes>
         </div>
       </Router>
