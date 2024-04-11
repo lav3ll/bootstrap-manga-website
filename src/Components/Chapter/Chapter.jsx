@@ -21,7 +21,7 @@ const Chapter = () => {
     <>
       <div>Chapter {id}</div>
       <div className='chapter-img-container bg-secondary'>
-        <div className='chapter-images row col-8 mx-auto'>
+        <div className='chapter-images row col-sm-12 col-md-8 col-lg-8 mx-auto'>
           {chapterImg &&
             chapterImg.chapter.data.map((image, idx) => (
               <img
