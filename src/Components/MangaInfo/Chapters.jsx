@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Chapters = ({ chapter, chapters, idx }) => {
+const Chapters = ({ chapter, chapters, idx, manga }) => {
   const [hoverColour, setHoverColour] = useState('text-white');
   const [chapterImages, setChapterImages] = useState(null);
   const options = { month: 'long', day: 'numeric', year: 'numeric' };
@@ -28,6 +28,7 @@ const Chapters = ({ chapter, chapters, idx }) => {
           state: {
             chapterImages: resp.data,
             chapters: chapters,
+            manga: manga,
             index: idx,
           },
         });
@@ -44,6 +45,7 @@ const Chapters = ({ chapter, chapters, idx }) => {
       state={{
         chapterImages: chapterImages,
         chapters: chapters,
+        manga: manga,
         index: idx,
       }}
       onClick={handleClick}

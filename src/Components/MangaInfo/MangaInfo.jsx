@@ -172,6 +172,7 @@ const MangaInfo = () => {
                   key={index}
                   chapter={chapter}
                   chapters={chapters}
+                  manga={manga}
                   idx={index}
                 />
               ))}
