@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import './Chapter.css';
 const Chapter = () => {
   const [chapterImagesNew, setChapterImagesNew] = useState(null);
 
@@ -81,15 +81,15 @@ const Chapter = () => {
         ))}
       </select>
 
-      <div className='chapter-next-prev row col-5 ms-auto'>
+      <div className='chapter-next-prev row col-5 ms-lg-auto ms-auto ms-md-auto'>
         <div
-          className='btn btn-primary chapter-prev col-5 rounded-5 custom-bg-secondary text-centre'
+          className='btn btn-primary chapter-prev col-lg-5 col-md-5 col-6 rounded-5 custom-bg-secondary text-centre'
           onClick={handlePrevClick}
         >
           Prev
         </div>
         <div
-          className='btn btn-primary chapter-next col-5 text-centre rounded-5 custom-bg-secondary'
+          className='btn btn-primary chapter-next col-lg-5 col-md-5 col-6  text-centre rounded-5 custom-bg-secondary'
           onClick={handleNextClick}
         >
           Next
@@ -109,7 +109,7 @@ const Chapter = () => {
               manga: manga,
             }}
           >
-            <span className='fw-semibold custom-text-secondary'>
+            <span className='fw-semibold custom-text-secondary text-decoration-underline'>
               {manga.info.attributes.title.en}
             </span>
           </Link>
