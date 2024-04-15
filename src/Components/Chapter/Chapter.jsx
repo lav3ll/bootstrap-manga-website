@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -10,8 +10,6 @@ const Chapter = () => {
   const { state } = useLocation();
   const { chapters, index, manga } = state || {};
   const navigate = useNavigate();
-
-  console.log(manga);
 
   useEffect(() => {
     getChapter();
@@ -59,7 +57,17 @@ const Chapter = () => {
   return (
     <div className='bg-dark row'>
       <h6 className='text-white col-9 mx-auto text-center mt-2'>
-        All chapters in {manga.info.attributes.title.en}
+        All chapters in{' '}
+        <Link
+          to={`/MangaInfo`}
+          state={{
+            manga: manga,
+          }}
+        >
+          <span className='fw-semibold custom-text-secondary'>
+            {manga.info.attributes.title.en}
+          </span>
+        </Link>
       </h6>
       <div className='chapter-links row col-8 bg-dark mx-auto my-3'>
         <select

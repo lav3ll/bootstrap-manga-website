@@ -10,3 +10,7 @@
 .custom-bg-secondary {
   background-color: var(--secondary-color) !important;
 }
+
+.custom-text-secondary {
+  color: var(--secondary-color) !important;
+}
