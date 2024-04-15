@@ -77,7 +77,7 @@ const MangaInfo = () => {
           style={{ color: 'white', textDecoration: 'none' }}
         >
           EliteScans
-        </Link>{' '}
+        </Link>
         <MdOutlineArrowRight />
         <Link
           to={{ pathname: `/manga-${manga.info.id}` }}
@@ -168,7 +168,13 @@ const MangaInfo = () => {
           <div className='row'>
             {Array.isArray(chapters) &&
               chapters.map((chapter, index) => (
-                <Chapters key={index} chapter={chapter} />
+                <Chapters
+                  key={index}
+                  chapter={chapter}
+                  chapters={chapters}
+                  manga={manga}
+                  idx={index}
+                />
               ))}
           </div>
         </div>
