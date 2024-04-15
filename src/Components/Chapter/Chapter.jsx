@@ -54,62 +54,68 @@ const Chapter = () => {
       });
   };
 
-  return (
-    <div className='bg-dark row'>
-      <h6 className='text-white col-9 mx-auto text-center mt-2'>
-        All chapters in{' '}
-        <Link
-          to={`/MangaInfo`}
-          state={{
-            manga: manga,
-          }}
-        >
-          <span className='fw-semibold custom-text-secondary'>
-            {manga.info.attributes.title.en}
-          </span>
-        </Link>
-      </h6>
-      <div className='chapter-links row col-8 bg-dark mx-auto my-3'>
-        <select
-          id='chapter-select'
-          name='chapter-select'
-          className='chapter-select col-sm-12 col-md-12 col-lg-3 bg-secondary rounded-5'
-          value={chapters[index].attributes.chapter}
-          onChange={(e) => {
-            const selectedIndex = chapters.findIndex(
-              (chapter) => chapter.attributes.chapter === e.target.value
-            );
-            navigate(`/chapter/${chapters[selectedIndex].id}`, {
-              state: {
-                chapters: chapters,
-                manga: manga,
-                index: selectedIndex,
-              },
-            });
-          }}
-        >
-          {chapters.map((chapter, idx) => (
-            <option key={idx} value={chapter.attributes.chapter}>
-              Chapter {chapter.attributes.chapter}
-            </option>
-          ))}
-        </select>
+  const chapterLinks = (
+    <div className='chapter-links row col-8 mx-auto my-3'>
+      <select
+        id='chapter-select'
+        name='chapter-select'
+        className='chapter-select col-sm-12 col-md-12 col-lg-3 bg-dark text-white rounded-5'
+        value={chapters[index].attributes.chapter}
+        onChange={(e) => {
+          const selectedIndex = chapters.findIndex(
+            (chapter) => chapter.attributes.chapter === e.target.value
+          );
+          navigate(`/chapter/${chapters[selectedIndex].id}`, {
+            state: {
+              chapters: chapters,
+              manga: manga,
+              index: selectedIndex,
+            },
+          });
+        }}
+      >
+        {chapters.map((chapter, idx) => (
+          <option key={idx} value={chapter.attributes.chapter}>
+            Chapter {chapter.attributes.chapter}
+          </option>
+        ))}
+      </select>
 
-        <div className='chapter-next-prev row col-5 ms-auto'>
-          <div
-            className='btn btn-primary chapter-prev col-5 rounded-5 custom-bg-secondary text-centre'
-            onClick={handlePrevClick}
-          >
-            Prev
-          </div>
-          <div
-            className='btn btn-primary chapter-next col-5 text-centre rounded-5 custom-bg-secondary'
-            onClick={handleNextClick}
-          >
-            Next
-          </div>
+      <div className='chapter-next-prev row col-5 ms-auto'>
+        <div
+          className='btn btn-primary chapter-prev col-5 rounded-5 custom-bg-secondary text-centre'
+          onClick={handlePrevClick}
+        >
+          Prev
+        </div>
+        <div
+          className='btn btn-primary chapter-next col-5 text-centre rounded-5 custom-bg-secondary'
+          onClick={handleNextClick}
+        >
+          Next
         </div>
       </div>
+    </div>
+  );
+
+  return (
+    <div className='bg-secondary row'>
+      <div className='bg-dark'>
+        <h6 className='text-white col-9 mx-auto text-center mt-2'>
+          All chapters in{' '}
+          <Link
+            to={`/MangaInfo`}
+            state={{
+              manga: manga,
+            }}
+          >
+            <span className='fw-semibold custom-text-secondary'>
+              {manga.info.attributes.title.en}
+            </span>
+          </Link>
+        </h6>
+      </div>
+      {chapterLinks}
 
       <div className='chapter-img-container bg-secondary'>
         <div className='chapter-images row col-sm-12 col-md-8 col-lg-8 mx-auto'>
@@ -121,6 +127,7 @@ const Chapter = () => {
           ))}
         </div>
       </div>
+      {chapterLinks}
     </div>
   );
 };
