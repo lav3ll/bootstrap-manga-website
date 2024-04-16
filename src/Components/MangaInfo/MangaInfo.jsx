@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MdOutlineArrowRight } from 'react-icons/md';
 import './MangaInfo.css';
 import axios from 'axios';
@@ -7,8 +7,10 @@ import Chapters from './Chapters';
 
 const MangaInfo = () => {
   const [chapters, setChapters] = useState([]);
+  const [chapterImages, setChapterImages] = useState(null);
   const [firstLast, setFirstLast] = useState('');
   const location = useLocation();
+  const navigate = useNavigate();
   const { manga } = location.state;
 
   const saveBookmark = () => {
@@ -49,26 +51,29 @@ const MangaInfo = () => {
 
   const handleClick = (e) => {
     if (chapters.length > 0) {
-      const lastIndex = chapters.length - 1;
-      const isFirstChap = e.target.getAttribute('datatype') === 'firstChap';
-      const indexToFetch = isFirstChap ? 0 : lastIndex;
-
+      const isFirstChap = e.target.getAttribute('data-type') === 'firstChap';
+      const indexToFetch = isFirstChap ? 0 : chapters.length - 1;
       axios
         .get(
           `https://api.mangadex.org/at-home/server/${chapters[indexToFetch].id}`
         )
         .then((resp) => {
-          // console.log(resp.data);
-          // https://cmdxd98sb0x3yprd.mangadex.network/
-          // data OR data-saver /
-          // hash /
-          // 1-a7a414491dfd94d5031e1cbce0b11eb992f0df59ce111f1799f1024af460984c.jpg
+          setChapterImages((prevState) => resp.data);
+          navigate(`/chapter/${chapters[indexToFetch].id}`, {
+            state: {
+              chapterImages: resp.data,
+              chapters: chapters,
+              manga: manga,
+              index: indexToFetch,
+            },
+          });
         })
         .catch((error) => {
           console.error('Error fetching chapter:', error);
         });
     }
   };
+
   return (
     <div className='manga-info-wrapper'>
       <div className='col-lg-7 offset-lg-1 col-md-12 offset-md-0  manga-info-toplinks mt-4 mb-3 bg-secondary rounded px-2'>

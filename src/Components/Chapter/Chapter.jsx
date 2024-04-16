@@ -104,7 +104,7 @@ const Chapter = () => {
         <h6 className='text-white col-9 mx-auto text-center mt-2'>
           All chapters in{' '}
           <Link
-            to={`/MangaInfo`}
+            to={`/manga-info/${id}`}
             state={{
               manga: manga,
             }}

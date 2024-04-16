@@ -27,7 +27,7 @@ function App() {
             <Route path='/Login' element={<Login />} />
             <Route path='/Register' element={<Register />} />
             <Route path='/Bookmarks' element={<Bookmarks />} />
-            <Route path='/MangaInfo' element={<MangaInfo />} />
+            <Route path='/manga-info' element={<MangaInfo />} />
             <Route path='/chapter/:id' element={<Chapter />} />
           </Routes>
         </div>

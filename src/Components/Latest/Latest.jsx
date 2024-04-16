@@ -53,7 +53,7 @@ const Latest = ({ latestManga, coverImg, imageId, info }) => {
   return (
     // Link to MangaInfo page with manga cover image and info passed as state
     <Link
-      to='/MangaInfo'
+      to='/manga-info'
       state={{ manga: { coverImg: coverImages, info: imageId } }}
       className={`card row mx-lg-2 px-lg-0 mx-md-2 px-md-0 mx-sm-0 px-sm-0 bg-transparent border-0 popular-card-container col-md-5 col-lg-5 justify-content-cente text-decoration-none`}
       key={latestManga.id}
