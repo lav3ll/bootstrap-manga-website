@@ -51,7 +51,8 @@ const MangaInfo = () => {
 
   const handleClick = (e) => {
     if (chapters.length > 0) {
-      const isFirstChap = e.target.getAttribute('data-type') === 'firstChap';
+      const isFirstChap =
+        e.currentTarget.getAttribute('data-type') == 'firstChap';
       const indexToFetch = isFirstChap ? 0 : chapters.length - 1;
       axios
         .get(
@@ -146,7 +147,7 @@ const MangaInfo = () => {
           <div
             className='first-chapter col-5 btn custom-bg-secondary py-2 text-white mx-3 my-3'
             onClick={handleClick}
-            datatype={'firstChap'}
+            data-type={'firstChap'}
             // datatype={firstChap}
           >
             <p className='my-0 pt'>First Chapter</p>
