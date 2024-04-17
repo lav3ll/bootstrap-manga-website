@@ -22,7 +22,7 @@ const Slider = () => {
       {/* Container for the slider */}
       <div className='row mt-4 w-100 swiper-con'>
         {/* Column to control the width and position of the slider */}
-        <div className='col-md-12 col-lg-5 offset-lg-2 custom-sm-width ms-lg-6'>
+        <div className='col-md-12 col-lg-8 offset-lg-1 custom-sm-width ms-lg-6'>
           {/* Swiper component with configuration */}
           <Swiper
             slidesPerView={1}
