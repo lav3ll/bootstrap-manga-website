@@ -10,7 +10,6 @@ const Chapter = () => {
   const { state } = useLocation();
   const { chapters, index, manga } = state || {};
   const navigate = useNavigate();
-
   useEffect(() => {
     getChapter();
   }, [id, index]);
@@ -25,7 +24,7 @@ const Chapter = () => {
         },
       });
     } else {
-      alert('There is no previous chapter');
+      return;
     }
   };
 
@@ -39,7 +38,7 @@ const Chapter = () => {
         },
       });
     } else {
-      alert('There is no next chapter');
+      return;
     }
   };
 
@@ -104,7 +103,7 @@ const Chapter = () => {
         <h6 className='text-white col-9 mx-auto text-center mt-2'>
           All chapters in{' '}
           <Link
-            to={`/MangaInfo`}
+            to={`/manga-info/${id}`}
             state={{
               manga: manga,
             }}
