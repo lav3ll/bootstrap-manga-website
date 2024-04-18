@@ -1,21 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import './StaffPicks.css';
 
 const Pick = ({ staffManga, index }) => {
-  console.log(staffManga);
-  return (
-    <div className='card my-2'>
-      <div className='card-body row'>
-        <p className='col-2'>{index + 1}</p>
-        <img
-          className='card-img-top w-25 col-4'
-          src='...'
-          alt='Card image cap'
-        />
+  const [coverImage, setCoverImage] = useState('');
+  const [showGenres, setShowGenres] = useState([]);
 
-        <p className='card-text col-7'>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+  useEffect(() => {
+    const mangaId = staffManga.id;
+    const coverArtRelationship = staffManga.relationships.find(
+      (relationship) => relationship.type === 'cover_art'
+    );
+    const fileName = coverArtRelationship?.attributes.fileName;
+    const src = `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`;
+    setCoverImage(src);
+
+    const genreTags = staffManga.attributes.tags.filter(
+      (tag) => tag.attributes.group === 'genre'
+    );
+    const genres = genreTags.slice(0, 5);
+    setShowGenres(genres);
+  }, [staffManga]);
+
+  return (
+    <div className='card my-2 bg-secondary border-0'>
+      <div className='card-body row card-custom-border'>
+        <p className='col-2 my-auto border border-3 border-light rounded-1 fw-semibold  px-1 mx-2 text-center pick-custom-width'>
+          {index + 1}
         </p>
+        <img
+          className='card-img-top  col-4 px-0+'
+          src={coverImage}
+          alt={`Cover art for ${staffManga.attributes.title.en}`}
+        />
+        <div className='card-text col-6'>
+          <p>{staffManga.attributes.description.en.slice(0, 50) + '...'}</p>
+          <p>
+            Genres:
+            {showGenres.map((genre, idx) => (
+              <span key={idx}>{genre.attributes.name.en}, </span>
+            ))}
+          </p>
+        </div>
       </div>
     </div>
   );

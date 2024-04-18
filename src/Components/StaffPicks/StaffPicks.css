@@ -1,0 +1,11 @@
+.card-img-top {
+  width: 100px;
+}
+
+.pick-custom-width {
+  width: fit-content !important;
+}
+
+.card-custom-border {
+  border-top: 1px solid var(--black);
+}

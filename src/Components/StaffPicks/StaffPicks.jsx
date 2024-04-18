@@ -45,7 +45,7 @@ const StaffPicks = () => {
 
   return (
     <>
-      <div className='mt-4  bg-primary rounded-2'>
+      <div className='mt-4  bg-secondary rounded-2'>
         <h6 className='fw-semibold ms-2  text-white text-center'>
           Staff Picks
         </h6>
