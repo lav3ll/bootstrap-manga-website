@@ -22,13 +22,13 @@ const Pick = ({ staffManga, index }) => {
   }, [staffManga]);
 
   return (
-    <div className='card my-2'>
-      <div className='card-body row'>
-        <p className='col-2 my-auto border border-3 rounded-1 fw-semibold px-0 mx-2 text-center pick-custom-width'>
+    <div className='card my-2 bg-secondary border-0'>
+      <div className='card-body row card-custom-border'>
+        <p className='col-2 my-auto border border-3 border-light rounded-1 fw-semibold  px-1 mx-2 text-center pick-custom-width'>
           {index + 1}
         </p>
         <img
-          className='card-img-top  col-4 px-0'
+          className='card-img-top  col-4 px-0+'
           src={coverImage}
           alt={`Cover art for ${staffManga.attributes.title.en}`}
         />

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import API_KEY from '../../Data/config.json';
 // import trendingTestData from '../../Data/popularTest.json';
 const Trending = () => {
   // Initialize trendingManga state with useState
