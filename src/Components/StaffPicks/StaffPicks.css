@@ -1,0 +1,7 @@
+.card-img-top {
+  width: 100px;
+}
+
+.pick-custom-width {
+  width: fit-content !important;
+}
