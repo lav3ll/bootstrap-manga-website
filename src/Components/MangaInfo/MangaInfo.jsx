@@ -74,7 +74,7 @@ const MangaInfo = () => {
         });
     }
   };
-
+  console.log(manga);
   return (
     <div className='manga-info-wrapper'>
       <div className='col-lg-7 offset-lg-1 col-md-12 offset-md-0  manga-info-toplinks mt-4 mb-3 bg-secondary rounded px-2'>

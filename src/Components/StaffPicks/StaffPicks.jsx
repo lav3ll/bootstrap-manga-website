@@ -45,8 +45,8 @@ const StaffPicks = () => {
 
   return (
     <>
-      <div className='mt-4  bg-secondary rounded-2'>
-        <h6 className='fw-semibold ms-2  text-white text-center'>
+      <div className='mt-4 bg-secondary rounded-2 custom-test'>
+        <h6 className='fw-semibold ms-2  text-white text-center pt-2'>
           Staff Picks
         </h6>
         {staffMangas.map((manga, idx) => (
