@@ -1,5 +1,10 @@
 .card-img-top {
-  width: 100px;
+  width: 100px !important;
+  height: 150px !important;
+}
+
+.card-img-top:hover {
+  cursor: pointer;
 }
 
 .pick-custom-width {
@@ -8,4 +13,10 @@
 
 .card-custom-border {
   border-top: 1px solid var(--black);
+}
+
+.custom-test {
+  position: absolute;
+  width: 25% !important;
+  right: 50px;
 }
