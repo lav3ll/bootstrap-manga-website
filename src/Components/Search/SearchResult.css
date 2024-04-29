@@ -1,3 +1,16 @@
 .search-fs {
   font-size: 0.8rem !important;
 }
+
+.results-container {
+  position: absolute !important;
+  z-index: 3;
+  right: 10px;
+}
+
+.search-result {
+}
+
+.search-result:hover {
+  cursor: pointer;
+}

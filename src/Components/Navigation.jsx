@@ -75,7 +75,7 @@ const Navigation = () => {
           </form>
         </div>
       </nav>
-      <div className='ms-auto me-5 w-25 bg-primary'>
+      <div className='ms-auto me-5 w-25 bg-primary results-container'>
         {searchResults &&
           searchResults.map((result, idx) => (
             <SearchResult key={idx} sResult={result} />
