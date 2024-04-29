@@ -7,12 +7,12 @@ import StaffPicks from './StaffPicks/StaffPicks';
 const Home = () => {
   return (
     <div className='row'>
-      <div className='row col-9'>
+      <div className='row col-lg-9 col-md-12 mx-auto'>
         <Slider />
         <PopularContainer />
         <LatestContainer />
       </div>
-      <div className='row col-3'>
+      <div className='row col-lg-3 col-md-12 px-2'>
         <StaffPicks />
       </div>
     </div>

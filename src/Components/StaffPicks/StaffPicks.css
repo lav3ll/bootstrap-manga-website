@@ -21,6 +21,27 @@
   right: 50px;
 }
 
-.test3 {
-  margin-top: -200px !important;
+@media screen and (max-width: 1024px) {
+  .staff-pick-container p {
+    font-size: 0.7rem !important;
+  }
+  .card-img-top {
+    width: 75px !important;
+    height: 125px !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .staff-pick-container p {
+    font-size: 0.7rem !important;
+  }
+  .custom-test {
+    width: 100% !important;
+    left: 0;
+  }
+
+  .card-img-top {
+    width: 100px !important;
+    height: 150px !important;
+  }
 }
