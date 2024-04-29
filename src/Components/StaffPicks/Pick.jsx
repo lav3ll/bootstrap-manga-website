@@ -32,7 +32,7 @@ const Pick = ({ staffManga, index }) => {
 
   return (
     <div className='card my-2 bg-secondary border-0 staff-pick-container'>
-      <div className='card-body row card-custom-border py-2 pb-0'>
+      <div className='card-body row card-custom-border py-2 pb-0 mx-0'>
         <p className='col-2 my-auto border border-3 border-light rounded-1 fw-semibold  px-1 mx-2 text-center pick-custom-width'>
           {index + 1}
         </p>
