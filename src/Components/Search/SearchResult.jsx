@@ -3,8 +3,12 @@ import './SearchResult.css';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-const SearchResult = ({ sResult }) => {
+const SearchResult = ({ sResult, onClose }) => {
   const [coverImage, setCoverImage] = useState('');
+
+  const handleClick = () => {
+    onClose();
+  };
   useEffect(() => {
     setCoverImage(src);
   }, [sResult]);
@@ -21,6 +25,7 @@ const SearchResult = ({ sResult }) => {
       to={`/manga-info/${id}`}
       state={{ manga: { coverImg: coverImage, info: sResult } }}
       key={id}
+      onClick={handleClick} // Call handleClick when the search result is clicked
     >
       <div className='col-12 row search-result'>
         <img src={src} alt={`${title} thumbnail`} className='w-25 col-2' />

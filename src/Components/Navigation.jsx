@@ -9,6 +9,10 @@ const Navigation = () => {
   const [searchVal, setSearchVal] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
+  const handleCloseResults = () => {
+    setSearchResults([]);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -78,7 +82,11 @@ const Navigation = () => {
       <div className='ms-auto me-5 w-25 bg-primary results-container'>
         {searchResults &&
           searchResults.map((result, idx) => (
-            <SearchResult key={idx} sResult={result} />
+            <SearchResult
+              key={idx}
+              sResult={result}
+              onClose={handleCloseResults}
+            />
           ))}
       </div>
     </>
