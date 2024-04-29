@@ -2,8 +2,28 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
 
 const Navigation = () => {
+  const [searchVal, setSearchVal] = useState();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setTimeout(() => {
+      axios
+        .get(
+          `https://api.mangadex.org/manga?limit=10&title=${searchVal}&includedTagsMode=AND&excludedTagsMode=OR&availableTranslatedLanguage%5B%5D=en&contentRating%5B%5D=safe&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
+        )
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, 1500);
+  };
+
   return (
     <nav className='navbar navbar-dark navbar-expand-lg  nav-bg-primary bg-md-primary navbar-top custom-bg-secondary'>
       <div className='container-fluid'>
@@ -53,7 +73,14 @@ const Navigation = () => {
         {/* <!--Day/Night mode btn--> */}
 
         {/* <!--Search Bar--> */}
-        <form className='d-flex w-25 me-5' role='search' id='search'>
+        <form
+          className='d-flex w-25 me-5'
+          role='search'
+          id='search'
+          onSubmit={handleSubmit}
+          onChange={(e) => setSearchVal(e.target.value)}
+          value={searchVal}
+        >
           <input
             className='form-control me-2 fw-semibold'
             type='search'

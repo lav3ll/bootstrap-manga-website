@@ -9,8 +9,6 @@ const Popular = ({ popularManga, idx }) => {
   // set image source
   const [imageSrc, setImageSrc] = useState('');
 
-  console.log(popularManga);
-
   // Update image source once popularManga is available
   useEffect(() => {
     if (
