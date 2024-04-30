@@ -8,7 +8,6 @@ import SearchResult from './Search/SearchResult';
 const Navigation = () => {
   const [searchVal, setSearchVal] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [errorText, setErrorText] = useState('');
 
   const handleCloseResults = () => {
     setSearchResults([]);
@@ -28,11 +27,16 @@ const Navigation = () => {
     }, 1500);
   };
 
+  const handleMouseOut = () => {
+    mouseOut();
+  };
+
   const handleSubmit = (e) => {
+    const lowerCaseSearchVal = searchVal.toLowerCase();
     e.preventDefault();
     axios
       .get(
-        `https://api.mangadex.org/manga?limit=10&title=${searchVal}&includedTagsMode=AND&excludedTagsMode=OR&availableTranslatedLanguage%5B%5D=en&contentRating%5B%5D=safe&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
+        `https://api.mangadex.org/manga?limit=10&title=${lowerCaseSearchVal}&includedTagsMode=AND&excludedTagsMode=OR&availableTranslatedLanguage%5B%5D=en&contentRating%5B%5D=safe&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
       )
       .then((res) => {
         res.data.data.length > 0
@@ -96,14 +100,16 @@ const Navigation = () => {
           </form>
         </div>
       </nav>
-      <div className='ms-auto me-5 w-25 custom-bg-secondary results-container'>
+      <div
+        className='ms-auto me-5 w-25 custom-bg-secondary results-container'
+        onMouseLeave={handleCloseResults}
+      >
         {searchResults &&
           searchResults.map((result, idx) => (
             <SearchResult
               key={idx}
               sResult={result}
               onClose={handleCloseResults}
-              mouseOut={handleCloseResults}
             />
           ))}
       </div>

@@ -3,16 +3,13 @@ import './SearchResult.css';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-const SearchResult = ({ sResult, onClose, mouseOut }) => {
+const SearchResult = ({ sResult, onClose }) => {
   const [coverImage, setCoverImage] = useState('');
 
   const handleClick = () => {
     onClose();
   };
 
-  const handleMouseOut = () => {
-    mouseOut();
-  };
   useEffect(() => {
     setCoverImage(src);
   }, [sResult]);
@@ -34,7 +31,6 @@ const SearchResult = ({ sResult, onClose, mouseOut }) => {
       <div
         className='col-12 row search-result py-2 ps-1
        '
-        onMouseLeave={handleMouseOut}
       >
         <img src={src} alt={`${title} thumbnail`} className='w-25 col-2' />
         <p className='col-9 search-fs my-auto text-white '> {title}</p>
