@@ -3,18 +3,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
-import SearchResult from './Search/SearchResult';
+import SearchResult from '../Search/SearchResult';
+import 'bootstrap/js/dist/collapse';
+import './Navigation.css';
 
 const Navigation = () => {
   const [searchVal, setSearchVal] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCloseResults = () => {
     setSearchResults([]);
     setSearchVal('');
   };
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -25,10 +26,6 @@ const Navigation = () => {
     setTimeout(() => {
       setIsModalOpen(false);
     }, 1500);
-  };
-
-  const handleMouseOut = () => {
-    mouseOut();
   };
 
   const handleSubmit = (e) => {
@@ -50,23 +47,11 @@ const Navigation = () => {
 
   return (
     <>
-      <nav className='navbar navbar-dark navbar-expand-lg  nav-bg-primary bg-md-primary navbar-top custom-bg-secondary'>
+      <nav className='navbar navbar-dark navbar-expand-lg nav-bg-primary bg-md-primary navbar-top custom-bg-secondary'>
         <div className='container-fluid'>
-          <button
-            className='navbar-toggler bg-primary border-0'
-            type='button'
-            data-bs-toggle='collapse'
-            data-bs-target='#navbarSupportedContent'
-            aria-controls='navbarSupportedContent'
-            aria-expanded='false'
-            aria-label='Toggle navigation'
-          >
-            <span className='navbar-toggler-icon'></span>
-          </button>
-          {/* Moved the comment outside the JSX element */}
           <NavLink
             to='/Login'
-            className='btn btn-outline-dark btn-lg rounded-5 active'
+            className='btn btn-outline-dark btn-lg rounded-5 active d-none d-md-none  d-lg-block'
           >
             <FontAwesomeIcon icon={faUser} />
           </NavLink>
@@ -78,12 +63,12 @@ const Navigation = () => {
           </NavLink>
           <NavLink
             to='/Bookmarks'
-            className='btn border-0 text-white fw-semibold ms-auto d-none d-md-block'
+            className='btn border-0 text-white fw-semibold ms-auto d-none d-md-none'
           >
             Bookmarks
           </NavLink>
           <form
-            className='d-flex w-25 w-sm-25 w-md-25 me-5'
+            className='d-flex search-custom-width me-auto' // Changed w-50 to w-100
             role='search'
             id='search'
             onSubmit={handleSubmit}
@@ -97,6 +82,45 @@ const Navigation = () => {
               onChange={(e) => setSearchVal(e.target.value)}
             />
           </form>
+          <button
+            className='navbar-toggler custom-bg-secondary border-0'
+            type='button'
+            data-bs-toggle='collapse'
+            data-bs-target='#navbarSupportedContent'
+            aria-controls='navbarSupportedContent'
+            aria-expanded='false'
+            aria-label='Toggle navigation'
+          >
+            <span className='navbar-toggler-icon'></span>
+          </button>
+          <div className='collapse navbar-collapse' id='navbarSupportedContent'>
+            <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
+              <li className='nav-item'>
+                <NavLink
+                  to='/Login'
+                  className='nav-link d-sm-block d-md-block d-lg-none fw-semibold text-white'
+                >
+                  Login
+                </NavLink>
+              </li>
+              <li className='nav-item'>
+                <NavLink
+                  to='/Register'
+                  className='nav-link d-sm-block d-md-block d-lg-none fw-semibold text-white'
+                >
+                  Register
+                </NavLink>
+              </li>
+              <li className='nav-item'>
+                <NavLink
+                  to='/Bookmarks'
+                  className='nav-link d-sm-block d-md-block d-lg-block text-white fw-semibold'
+                >
+                  Bookmarks
+                </NavLink>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
       <div
@@ -112,7 +136,6 @@ const Navigation = () => {
             />
           ))}
       </div>
-      {/* Modal */}
       <div
         className={`modal ${isModalOpen ? 'show' : ''}`}
         tabIndex='-1'
@@ -126,8 +149,6 @@ const Navigation = () => {
           </div>
         </div>
       </div>
-
-      {/* Modal backdrop */}
       <div
         className={`modal-backdrop fade ${isModalOpen ? 'show' : ''}`}
         style={{ display: isModalOpen ? 'block' : 'none' }}
