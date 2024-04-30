@@ -8,7 +8,6 @@ import SearchResult from './Search/SearchResult';
 const Navigation = () => {
   const [searchVal, setSearchVal] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [errorText, setErrorText] = useState('');
 
   const handleCloseResults = () => {
     setSearchResults([]);
@@ -26,6 +25,10 @@ const Navigation = () => {
     setTimeout(() => {
       setIsModalOpen(false);
     }, 1500);
+  };
+
+  const handleMouseOut = () => {
+    mouseOut();
   };
 
   const handleSubmit = (e) => {
@@ -96,14 +99,16 @@ const Navigation = () => {
           </form>
         </div>
       </nav>
-      <div className='ms-auto me-5 w-25 custom-bg-secondary results-container'>
+      <div
+        className='ms-auto me-5 w-25 custom-bg-secondary results-container'
+        onMouseLeave={handleCloseResults}
+      >
         {searchResults &&
           searchResults.map((result, idx) => (
             <SearchResult
               key={idx}
               sResult={result}
               onClose={handleCloseResults}
-              mouseOut={handleCloseResults}
             />
           ))}
       </div>
