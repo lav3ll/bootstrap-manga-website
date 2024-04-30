@@ -6,3 +6,9 @@
 .custom-outline {
   border: 1px solid #fff !important;
 }
+
+.chapter-list {
+  height: 350px !important;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

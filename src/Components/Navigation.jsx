@@ -52,6 +52,18 @@ const Navigation = () => {
     <>
       <nav className='navbar navbar-dark navbar-expand-lg  nav-bg-primary bg-md-primary navbar-top custom-bg-secondary'>
         <div className='container-fluid'>
+          <button
+            className='navbar-toggler bg-primary border-0'
+            type='button'
+            data-bs-toggle='collapse'
+            data-bs-target='#navbarSupportedContent'
+            aria-controls='navbarSupportedContent'
+            aria-expanded='false'
+            aria-label='Toggle navigation'
+          >
+            <span className='navbar-toggler-icon'></span>
+          </button>
+          {/* Moved the comment outside the JSX element */}
           <NavLink
             to='/Login'
             className='btn btn-outline-dark btn-lg rounded-5 active'
@@ -60,31 +72,18 @@ const Navigation = () => {
           </NavLink>
           <NavLink
             to='/Home'
-            className='btn border-0 text-white fs-5 bold py-0'
+            className='btn border-0 text-white fs-5 bold py-0 d-none d-md-block'
           >
-            <h1 className='fst-italic'>EliteScans</h1>
+            <h1 className='fs-italic'>EliteScans</h1>
           </NavLink>
           <NavLink
             to='/Bookmarks'
-            className='btn border-0 text-white fw-semibold'
+            className='btn border-0 text-white fw-semibold ms-auto d-none d-md-block'
           >
             Bookmarks
           </NavLink>
-          <div className='form-check form-switch me-auto fs-5'>
-            <input
-              className='form-check-input'
-              type='checkbox'
-              role='switch'
-              id='flexSwitchCheckDefault'
-              onClick={() => console.log('test')}
-            />
-            <label
-              className='form-check-label fs-5'
-              htmlFor='flexSwitchCheckDefault'
-            ></label>
-          </div>
           <form
-            className='d-flex w-25 me-5'
+            className='d-flex w-25 w-sm-25 w-md-25 me-5'
             role='search'
             id='search'
             onSubmit={handleSubmit}

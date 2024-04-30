@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <>
       <div className='row'>
-        <div className='row col-9'>
+        <div className='row col-lg-9 col-md-12'>
           <Slider />
           <PopularContainer />
           <LatestContainer />

@@ -40,3 +40,32 @@
 .read-the-docs {
   color: #888;
 } */
+
+/* Target the entire scrollbar */
+::-webkit-scrollbar {
+  width: 5px; /* Width of the scrollbar */
+}
+
+/* Handle (thumb) */
+::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color); /* Color of the scrollbar handle */
+}
+
+/* Track (background) */
+::-webkit-scrollbar-track {
+  background-color: transparent; /* Color of the scrollbar track */
+}
+
+/* Corner */
+::-webkit-scrollbar-corner {
+  background-color: transparent; /* Color of the scrollbar corner */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the scrollbar handle on hover */
+}
+
+body {
+  overflow-x: hidden !important;
+}

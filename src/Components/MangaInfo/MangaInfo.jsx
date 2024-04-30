@@ -75,7 +75,6 @@ const MangaInfo = () => {
         });
     }
   };
-  console.log(manga);
   return (
     <>
       <div className='manga-info-wrapper row'>
@@ -94,7 +93,7 @@ const MangaInfo = () => {
             {manga.info.attributes.title.en}
           </Link>
         </div>
-        <div className='div col-1 custom-hide'>
+        <div className='div col-1 custom-hide custom-test2'>
           <StaffPicks />
         </div>
         <div className='row manga-info-container row col-lg-7 offset-lg-1 col-md-12 offset-md-0 col-sm-12'>
@@ -192,7 +191,7 @@ const MangaInfo = () => {
           </div>
         </div>
       </div>
-      <div className='div col-1 d-md-none'>
+      <div className='div col-1 d-md-block'>
         <StaffPicks />
       </div>
     </>
