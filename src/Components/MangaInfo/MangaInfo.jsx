@@ -94,7 +94,7 @@ const MangaInfo = () => {
             {manga.info.attributes.title.en}
           </Link>
         </div>
-        <div className='div col-1'>
+        <div className='div col-1 custom-hide'>
           <StaffPicks />
         </div>
         <div className='row manga-info-container row col-lg-7 offset-lg-1 col-md-12 offset-md-0 col-sm-12'>
@@ -191,6 +191,9 @@ const MangaInfo = () => {
               ))}
           </div>
         </div>
+      </div>
+      <div className='div col-1 d-md-none'>
+        <StaffPicks />
       </div>
     </>
   );

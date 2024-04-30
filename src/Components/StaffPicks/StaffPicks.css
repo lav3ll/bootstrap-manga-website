@@ -13,6 +13,7 @@
 
 .card-custom-border {
   border-top: 1px solid var(--black);
+  padding: 0;
 }
 
 .custom-test {
@@ -43,5 +44,11 @@
   .card-img-top {
     width: 100px !important;
     height: 150px !important;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .custom-hide {
+    display: none;
   }
 }

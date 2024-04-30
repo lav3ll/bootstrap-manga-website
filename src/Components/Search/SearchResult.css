@@ -1,0 +1,24 @@
+.search-fs {
+  font-size: 0.8rem !important;
+  text-decoration: underline 1px solid #000;
+}
+
+.results-container {
+  position: absolute !important;
+  z-index: 3;
+  right: 10px;
+  border-radius: 0 0 5px 5px;
+}
+
+.search-result {
+  margin: 0 auto;
+  border-top: 1px solid var(--white) !important;
+}
+
+.search-result p {
+  text-decoration: underline;
+}
+
+.search-result:hover {
+  cursor: pointer;
+}

@@ -3,19 +3,22 @@ import Slider from './Slider/Slider';
 import PopularContainer from './Popular/PopularContainer';
 import LatestContainer from './Latest/LatestContainer';
 import StaffPicks from './StaffPicks/StaffPicks';
+import { useState } from 'react';
 
 const Home = () => {
   return (
-    <div className='row'>
-      <div className='row col-lg-9 col-md-12 mx-auto'>
-        <Slider />
-        <PopularContainer />
-        <LatestContainer />
+    <>
+      <div className='row'>
+        <div className='row col-9'>
+          <Slider />
+          <PopularContainer />
+          <LatestContainer />
+        </div>
+        <div className='row col-3'>
+          <StaffPicks />
+        </div>
       </div>
-      <div className='row col-lg-3 col-md-12 px-2'>
-        <StaffPicks />
-      </div>
-    </div>
+    </>
   );
 };
 
