@@ -11,6 +11,7 @@ const Navigation = () => {
 
   const handleCloseResults = () => {
     setSearchResults([]);
+    setSearchVal('');
   };
 
   const handleSubmit = (e) => {
