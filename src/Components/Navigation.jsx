@@ -8,10 +8,24 @@ import SearchResult from './Search/SearchResult';
 const Navigation = () => {
   const [searchVal, setSearchVal] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [errorText, setErrorText] = useState('');
 
   const handleCloseResults = () => {
     setSearchResults([]);
     setSearchVal('');
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+    closeModal();
+  };
+
+  const closeModal = () => {
+    setTimeout(() => {
+      setIsModalOpen(false);
+    }, 1500);
   };
 
   const handleSubmit = (e) => {
@@ -21,7 +35,9 @@ const Navigation = () => {
         `https://api.mangadex.org/manga?limit=10&title=${searchVal}&includedTagsMode=AND&excludedTagsMode=OR&availableTranslatedLanguage%5B%5D=en&contentRating%5B%5D=safe&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
       )
       .then((res) => {
-        setSearchResults(res.data.data);
+        res.data.data.length > 0
+          ? setSearchResults(res.data.data)
+          : openModal();
       })
       .catch((error) => {
         console.log(error);
@@ -90,6 +106,26 @@ const Navigation = () => {
             />
           ))}
       </div>
+      {/* Modal */}
+      <div
+        className={`modal ${isModalOpen ? 'show' : ''}`}
+        tabIndex='-1'
+        style={{ display: isModalOpen ? 'block' : 'none' }}
+      >
+        <div className='modal-dialog'>
+          <div className='modal-content'>
+            <div className='modal-body text-center'>
+              <p>No results found</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Modal backdrop */}
+      <div
+        className={`modal-backdrop fade ${isModalOpen ? 'show' : ''}`}
+        style={{ display: isModalOpen ? 'block' : 'none' }}
+      ></div>
     </>
   );
 };

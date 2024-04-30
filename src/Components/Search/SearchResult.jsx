@@ -19,6 +19,8 @@ const SearchResult = ({ sResult, onClose }) => {
     (relationship) => relationship.type === 'cover_art'
   ).attributes.fileName;
 
+  console.log(sResult);
+
   const src = `https://uploads.mangadex.org/covers/${id}/${fileName}.256.jpg`;
   return (
     <Link
