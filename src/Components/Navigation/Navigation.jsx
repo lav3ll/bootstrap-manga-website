@@ -124,7 +124,7 @@ const Navigation = () => {
         </div>
       </nav>
       <div
-        className='ms-auto me-5 w-25 custom-bg-secondary results-container'
+        className='ms-auto custom-bg-secondary results-container'
         onMouseLeave={handleCloseResults}
       >
         {searchResults &&

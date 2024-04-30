@@ -32,7 +32,11 @@ const SearchResult = ({ sResult, onClose }) => {
         className='col-12 row search-result py-2 ps-1
        '
       >
-        <img src={src} alt={`${title} thumbnail`} className='w-25 col-2' />
+        <img
+          src={src}
+          alt={`${title} thumbnail`}
+          className='w-25 col-2 search-img'
+        />
         <p className='col-9 search-fs my-auto text-white '> {title}</p>
       </div>
     </Link>

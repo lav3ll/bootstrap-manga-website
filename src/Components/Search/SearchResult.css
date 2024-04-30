@@ -6,7 +6,9 @@
 .results-container {
   position: absolute !important;
   z-index: 3;
-  right: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
   border-radius: 0 0 5px 5px;
 }
 
@@ -21,4 +23,13 @@
 
 .search-result:hover {
   cursor: pointer;
+}
+
+@media screen and (max-width: 576px) {
+  .results-container {
+    width: 40% !important;
+  }
+  .search-img {
+    padding: 0;
+  }
 }
