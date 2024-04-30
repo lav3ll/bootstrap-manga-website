@@ -32,10 +32,11 @@ const Navigation = () => {
   };
 
   const handleSubmit = (e) => {
+    const lowerCaseSearchVal = searchVal.toLowerCase();
     e.preventDefault();
     axios
       .get(
-        `https://api.mangadex.org/manga?limit=10&title=${searchVal}&includedTagsMode=AND&excludedTagsMode=OR&availableTranslatedLanguage%5B%5D=en&contentRating%5B%5D=safe&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
+        `https://api.mangadex.org/manga?limit=10&title=${lowerCaseSearchVal}&includedTagsMode=AND&excludedTagsMode=OR&availableTranslatedLanguage%5B%5D=en&contentRating%5B%5D=safe&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
       )
       .then((res) => {
         res.data.data.length > 0
