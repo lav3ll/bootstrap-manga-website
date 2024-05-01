@@ -82,13 +82,13 @@ const Chapter = () => {
 
       <div className='chapter-next-prev row col-5 ms-lg-auto ms-auto ms-md-auto'>
         <div
-          className='btn btn-primary chapter-prev col-lg-5 col-md-5 col-6 rounded-5 custom-bg-secondary text-centre'
+          className='btn btn-primary chapter-prev col-lg-5 col-md-5 col-6 rounded-5 custom-custom-secondary-bg-color text-centre'
           onClick={handlePrevClick}
         >
           Prev
         </div>
         <div
-          className='btn btn-primary chapter-next col-lg-5 col-md-5 col-6  text-centre rounded-5 custom-bg-secondary'
+          className='btn btn-primary chapter-next col-lg-5 col-md-5 col-6  text-centre rounded-5 custom-custom-secondary-bg-color'
           onClick={handleNextClick}
         >
           Next
@@ -98,7 +98,7 @@ const Chapter = () => {
   );
 
   return (
-    <div className='bg-secondary row'>
+    <div className='custom-secondary-bg-color row'>
       <div className='bg-dark'>
         <h6 className='text-white col-9 mx-auto text-center mt-2'>
           All chapters in{' '}
@@ -116,7 +116,7 @@ const Chapter = () => {
       </div>
       {chapterLinks}
 
-      <div className='chapter-img-container bg-secondary'>
+      <div className='chapter-img-container custom-secondary-bg-color'>
         <div className='chapter-images row col-sm-12 col-md-8 col-lg-8 mx-auto'>
           {chapterImagesNew?.chapter?.data?.map((image, idx) => (
             <img

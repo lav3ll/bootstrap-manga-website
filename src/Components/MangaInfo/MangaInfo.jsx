@@ -78,7 +78,7 @@ const MangaInfo = () => {
   return (
     <>
       <div className='manga-info-wrapper row'>
-        <div className='col-lg-7 offset-lg-1 col-md-12 offset-md-0  manga-info-toplinks mt-4 mb-3 bg-secondary rounded px-2 goooooooooop'>
+        <div className='col-lg-7 offset-lg-1 col-md-12 offset-md-0  manga-info-toplinks mt-4 mb-3 custom-secondary-bg-color rounded px-2 goooooooooop'>
           <Link
             to={{ pathname: '/' }}
             style={{ color: 'white', textDecoration: 'none' }}
@@ -100,24 +100,24 @@ const MangaInfo = () => {
           <div className='col-lg-5 col-md-5 col-6 mx-auto mx-sm-0 mx-md-0 mx-lg-0 bg-light rounded row text-center'>
             <img src={manga.coverImg} alt='test' />
             <button
-              className='btn custom-bg-secondary mt-2 text-white fw-semibold'
+              className='btn custom-custom-secondary-bg-color mt-2 text-white fw-semibold'
               onClick={saveBookmark}
             >
               {' '}
               Bookmark
             </button>
-            <p className='status my-1 fw-semibold bg-secondary rounded py-1'>
+            <p className='status my-1 fw-semibold custom-secondary-bg-color rounded py-1'>
               {manga.info.attributes.status === ''
                 ? 'Unknown'
                 : manga.info.attributes.status}
             </p>
-            <p className='type my-1 fw-semibold bg-secondary rounded py-1'>
+            <p className='type my-1 fw-semibold custom-secondary-bg-color rounded py-1'>
               {manga.info.attributes.type
                 ? manga.info.attributes.type
                 : 'Unknown'}
             </p>
           </div>
-          <div className='bg-secondary rounded ms-4 col-lg-7 col-md-7 col-sm-6 ms-auto'>
+          <div className='custom-secondary-bg-color rounded ms-4 col-lg-7 col-md-7 col-sm-6 ms-auto'>
             <div className='info-mid-topcol'>
               <h2 className='text-white mx-2 my-3'>
                 {manga.info.attributes.title.en}
@@ -145,13 +145,13 @@ const MangaInfo = () => {
         </div>
       </div>
 
-      <div className='chapter-list-container bg-secondary rounded col-lg-7 offset-lg-1 col-md-12 offset-md-0 mt-4 '>
+      <div className='chapter-list-container custom-secondary-bg-color rounded col-lg-7 offset-lg-1 col-md-12 offset-md-0 mt-4 '>
         <h6 className='text-white fs-5 ms-2 pt-2 mb-0'>
           Chapter {manga.info.attributes.title.en}{' '}
         </h6>
         <div className='chapter-list-btns d-flex justify-content-around '>
           <div
-            className='first-chapter col-5 btn custom-bg-secondary py-2 text-white mx-3 my-3'
+            className='first-chapter col-5 btn custom-custom-secondary-bg-color py-2 text-white mx-3 my-3'
             onClick={handleClick}
             data-type={'firstChap'}
             // datatype={firstChap}
@@ -163,7 +163,7 @@ const MangaInfo = () => {
             </p>
           </div>
           <div
-            className='last-chapter col-5 btn custom-bg-secondary py-2 text-white mx-3 my-3'
+            className='last-chapter col-5 btn custom-custom-secondary-bg-color py-2 text-white mx-3 my-3'
             onClick={handleClick}
             datatype={'lastChap'}
           >
@@ -176,7 +176,7 @@ const MangaInfo = () => {
             </p>
           </div>
         </div>
-        <div className='chapter-list bg-secondary rounded mt-2 mx-5'>
+        <div className='chapter-list custom-secondary-bg-color rounded mt-2 mx-5'>
           <div className='row'>
             {Array.isArray(chapters) &&
               chapters.map((chapter, index) => (

@@ -47,7 +47,7 @@ const Navigation = () => {
 
   return (
     <>
-      <nav className='navbar navbar-dark navbar-expand-lg nav-bg-primary bg-md-primary navbar-top custom-bg-secondary'>
+      <nav className='navbar navbar-dark navbar-expand-lg nav-bg-primary bg-md-primary navbar-top custom-custom-secondary-bg-color'>
         <div className='container-fluid'>
           <NavLink
             to='/Login'
@@ -83,7 +83,7 @@ const Navigation = () => {
             />
           </form>
           <button
-            className='navbar-toggler custom-bg-secondary border-0'
+            className='navbar-toggler custom-custom-secondary-bg-color border-0'
             type='button'
             data-bs-toggle='collapse'
             data-bs-target='#navbarSupportedContent'
@@ -124,7 +124,7 @@ const Navigation = () => {
         </div>
       </nav>
       <div
-        className='ms-auto custom-bg-secondary results-container'
+        className='ms-auto custom-custom-secondary-bg-color results-container'
         onMouseLeave={handleCloseResults}
       >
         {searchResults &&

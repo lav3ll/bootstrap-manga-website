@@ -1,14 +1,18 @@
 :root {
-  --primary-color: #16151d;
-  --background-color: #312f40;
-  --secondary-bg-color: #23222e;
+  --primary-color: #4b0082;
+  --background-color: #9575cd;
+  --secondary-bg-color: #b19cd9;
   --black: #000;
-  --secondary-color: #9b51e0;
+  --secondary-color: #4b0082;
   --white: #fff;
 }
 
-.custom-bg-secondary {
+.custom-custom-secondary-bg-color {
   background-color: var(--secondary-color) !important;
+}
+
+.custom-secondary-bg-color {
+  background-color: var(--secondary-bg-color);
 }
 
 .custom-text-secondary {
