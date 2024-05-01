@@ -35,7 +35,6 @@ const Trending = () => {
     fetchTrending();
   }, []);
 
-  console.log(trendingManga);
   return (
     <div className='text-center trending d-none d-sm-none md-d-none d-lg-block'>
       {/* Conditionally render the JSX content */}
