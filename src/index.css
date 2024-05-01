@@ -18,3 +18,7 @@
 .custom-text-secondary {
   color: var(--secondary-color) !important;
 }
+
+.custom-primary {
+  color: var(--secondary-color) !important;
+}

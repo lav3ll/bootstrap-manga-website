@@ -59,7 +59,7 @@ const Trending = () => {
             <p className='fw-semibold lg-fs-1 md-fw-4 md-fs-4 text-white d-flex align-items-center justify-content-center pt-5 md-px-2 lg-px-2 trending-week'>
               ELITE SCANS TRENDING THIS WEEK!
             </p>
-            <p className='text-white pt-2 mt-2 px-4 fw-bold lg-fs-1 md-fw-4 md-fs-4'>
+            <p className='custom-primary pt-2 mt-2 px-4 fw-bold lg-fs-1 md-fw-4 md-fs-4'>
               {trendingManga.attributes.title.en}
             </p>
           </div>
