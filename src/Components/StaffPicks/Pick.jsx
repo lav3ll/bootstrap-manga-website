@@ -49,7 +49,7 @@ const Pick = ({ staffManga, index }) => {
             onClick={handleClick}
           />
         </Link>
-        <div className='card-text col-6 fs-0'>
+        <div className='card-text col-6 fs-0 text-white'>
           <p>{staffManga.attributes.description.en.slice(0, 50) + '...'}</p>
           <p>
             Genres:
