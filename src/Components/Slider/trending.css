@@ -1,0 +1,7 @@
+.trending:hover {
+  cursor: pointer;
+}
+
+.trending-link {
+  text-decoration: none !important;
+}
