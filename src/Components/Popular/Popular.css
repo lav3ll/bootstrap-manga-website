@@ -19,3 +19,12 @@
     display: none !important;
   }
 }
+
+.link-reset {
+  color: inherit; /* Make the link color the same as the parent text color */
+  text-decoration: none; /* Removes underline */
+  background-color: transparent; /* Ensures no background color */
+  outline: none; /* Removes focus outline */
+  cursor: pointer; /* Ensures it looks clickable */
+  border: none; /* Removes any borders */
+}
