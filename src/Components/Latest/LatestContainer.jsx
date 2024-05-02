@@ -68,7 +68,7 @@ const LatestContainer = () => {
       }
     };
 
-    // Call the fetchLatest function when component mounts
+    // Call the fetchLatest function
     fetchLatest();
   }, []);
 

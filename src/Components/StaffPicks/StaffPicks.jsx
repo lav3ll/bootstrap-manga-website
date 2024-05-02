@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import Pick from './Pick';
 import axios from 'axios';
+import Pick from './Pick';
 
 const StaffPicks = () => {
   const [staffPickIds, setStaffPickIds] = useState([]);
   const [staffMangas, setStaffMangas] = useState([]);
+  const baseUrl = 'http://localhost:5000/api/mangadex';
 
   useEffect(() => {
     const getStaffPicks = async () => {
       try {
-        const resp = await axios.get(
-          'https://api.mangadex.org/list/805ba886-dd99-4aa4-b460-4bd7c7b71352?includes[]=user'
-        );
-        const pickIds = resp.data.data.relationships.map((pick) => pick.id);
+        const resp = await axios.get(`${baseUrl}/staffpicks`);
+        const pickIds = resp.data.picks;
         setStaffPickIds(pickIds);
         await showStaffPicks(pickIds);
       } catch (error) {
-        console.error('Error fetching staff picks:', error);
+        console.error(
+          'Error fetching staff picks:',
+          error.response ? error.response.data : error.message
+        );
       }
     };
 
@@ -24,36 +26,34 @@ const StaffPicks = () => {
   }, []);
 
   const showStaffPicks = async (returnedPicks) => {
-    const baseUrl = 'https://api.mangadex.org';
+    const mangaIdParams = returnedPicks
+      .map((id) => `ids%5B%5D=${encodeURIComponent(id)}`)
+      .join('&');
+    if (mangaIdParams) {
+      const url = `${baseUrl}/staffmanga?limit=${100}&${mangaIdParams}`;
+      console.log('Fetching manga with URL:', url);
 
-    try {
-      if (returnedPicks.length > 0) {
-        const mangaIdParams = returnedPicks
-          .map((id) => `ids%5B%5D=${id}`)
-          .join('&');
-
-        const resp = await axios.get(
-          `${baseUrl}/manga?limit=${returnedPicks.length}&includedTagsMode=AND&excludedTagsMode=OR&${mangaIdParams}&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
+      try {
+        const resp = await axios.get(url);
+        setStaffMangas(resp.data.manga);
+      } catch (error) {
+        console.error(
+          'Error fetching manga data:',
+          error.response ? error.response.data : error.message
         );
-
-        setStaffMangas(resp.data.data.slice(0, 10));
       }
-    } catch (error) {
-      console.error('Error fetching manga data:', error);
     }
   };
 
   return (
-    <>
-      <div className='mt-4 custom-secondary-bg-color rounded-2 custom-test d-none d-md-block'>
-        <h6 className='fw-semibold ms-2  text-white text-center pt-2'>
-          Staff Picks
-        </h6>
-        {staffMangas.map((manga, idx) => (
-          <Pick key={idx} staffManga={manga} index={idx} />
-        ))}
-      </div>
-    </>
+    <div className='mt-4 custom-secondary-bg-color rounded-2 custom-test d-none d-md-block'>
+      <h6 className='fw-semibold ms-2 text-white text-center pt-2'>
+        Staff Picks
+      </h6>
+      {staffMangas.map((manga, idx) => (
+        <Pick key={idx} staffManga={manga} index={idx} />
+      ))}
+    </div>
   );
 };
 
