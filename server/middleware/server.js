@@ -19,7 +19,7 @@ app.get('/api/mangadex/latest', async (req, res) => {
         includes: ['scanlation_group'],
         contentRating: ['safe', 'suggestive', 'erotica'],
         order: { readableAt: 'desc' },
-        limit: 20,
+        limit: 10,
       },
       headers: {
         'User-Agent': 'MyServer/1.0',
@@ -71,6 +71,44 @@ app.get('/api/mangadex/latest', async (req, res) => {
 });
 
 ////////////////////////////////////////////////////////////////////////////////////
+
+// Helper function to compute the timestamp for one month ago at midnight
+const getMidnightTimestampOneMonthAgo = () => {
+  const date = new Date();
+  date.setMonth(date.getMonth() - 1);
+  date.setHours(0, 0, 0, 0); // Set time to midnight
+  return date.toISOString();
+};
+
+// Route to fetch popular manga from MangaDex
+app.get('/api/mangadex/popular', async (req, res) => {
+  const baseUrl = 'https://api.mangadex.org';
+
+  try {
+    // Fetch popular manga details
+    const mangaResponse = await axios.get(`${baseUrl}/manga`, {
+      params: {
+        limit: 10,
+        order: { followedCount: 'desc' },
+        includes: ['cover_art', 'artist', 'author'],
+        contentRating: ['safe', 'suggestive'],
+        hasAvailableChapters: true,
+      },
+      headers: {
+        'User-Agent': 'MyServer/1.0',
+      },
+    });
+
+    res.json(mangaResponse.data);
+  } catch (error) {
+    console.error('Error fetching popular manga:', error);
+    res
+      .status(error.response?.status || 500)
+      .send(error.response?.statusText || 'Internal Server Error');
+  }
+});
+////////////////////////////////////////////////////////////////////////////////////
+
 // Define a route to proxy requests for cover images
 app.get('/api/mangadex/cover/:mangaId/:fileName', async (req, res) => {
   const { mangaId, fileName } = req.params;

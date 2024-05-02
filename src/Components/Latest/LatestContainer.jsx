@@ -40,7 +40,8 @@ const LatestContainer = () => {
           );
 
           coverImages.forEach((manga) => {
-            filteredImageId.push(manga.id); // Assuming you need IDs separately
+            filteredCoverImages.push(manga);
+            filteredImageId.push(manga);
           });
 
           // Set the filtered data into state

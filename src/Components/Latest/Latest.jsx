@@ -1,66 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const Latest = ({ latestManga, coverImg, imageId, info }) => {
-  // State variables to manage hover color and cover image source
+const Latest = ({ latestManga, coverImg, imageId }) => {
   const [hoverColour, setHoverColour] = useState('text-white');
   const [coverImages, setCoverImages] = useState('');
+  // Extract manga title safely
+  let title =
+    (imageId &&
+      imageId.attributes &&
+      imageId.attributes.title &&
+      imageId.attributes.title.en) ||
+    'No Title';
 
-  // Initialize title variable
-  let title = '';
+  // Safely extract manga ID and file name of cover image
+  const mangaId =
+    (latestManga &&
+      latestManga.relationships.find(
+        (relationship) => relationship.type === 'manga'
+      )?.id) ||
+    '';
 
-  // Extract manga title if imageId exists
-  if (imageId) {
-    title = title + imageId.attributes.title.en;
-  }
+  const fileName =
+    (coverImg &&
+      coverImg.relationships.find(
+        (relationship) => relationship.type === 'cover_art'
+      )?.attributes.fileName) ||
+    '';
 
-  // Extract manga ID and file name of cover image
-  const mangaId = latestManga.relationships.find(
-    (relationship) => relationship.type === 'manga'
-  ).id;
-
-  // Fetch cover image source on component mount or when latestManga or coverImg changes
   useEffect(() => {
-    const fetchLatest = async () => {
-      try {
-        // Check if latestManga and coverImg are available
-        if (!latestManga || !coverImg || !coverImg.relationships) return;
+    if (mangaId && fileName) {
+      // Construct source URL for cover image
+      const src = `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`;
+      setCoverImages(src);
+    }
+  }, [mangaId, fileName]);
 
-        const fileName = coverImg.relationships.find(
-          (relationship) => relationship.type === 'cover_art'
-        ).attributes.fileName;
-
-        // Construct source URL for cover image
-        const src = `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`;
-        setCoverImages(src);
-      } catch (error) {
-        console.error('Error fetching manga data:', error);
-      }
-    };
-
-    fetchLatest();
-  }, [latestManga, coverImg]);
-
-  // Handle mouse hover over image
-  const handleHoverOver = () => {
-    setHoverColour('custom-text-purple');
-  };
-
-  // Handle mouse hover out from image
-  const handleHoverOut = () => {
-    setHoverColour('text-white');
-  };
+  const handleHoverOver = () => setHoverColour('custom-text-purple');
+  const handleHoverOut = () => setHoverColour('text-white');
 
   return (
-    // Link to MangaInfo page with manga cover image and info passed as state
     <Link
       to={`/manga-info/${mangaId}`}
       state={{ manga: { coverImg: coverImages, info: imageId } }}
-      className={`card row mx-lg-2 px-lg-0 mx-md-2 px-md-0 mx-sm-0 px-sm-0 bg-transparent border-0 popular-card-container col-md-5 col-lg-5 justify-content-cente text-decoration-none`}
+      className={`card row mx-lg-2 px-lg-0 mx-md-2 px-md-0 mx-sm-0 px-sm-0 bg-transparent border-0 popular-card-container col-md-5 col-lg-5 justify-content-center text-decoration-none`}
       key={latestManga.id}
     >
       <div className='row w-100 py-3'>
-        {/* Display cover image */}
         <img
           src={coverImages}
           alt={`thumbnail image of ${title}`}
@@ -69,7 +54,6 @@ const Latest = ({ latestManga, coverImg, imageId, info }) => {
           onMouseOver={handleHoverOver}
           onMouseOut={handleHoverOut}
         />
-        {/* Display manga title and chapter number */}
         <div
           className={`latestTxt pt-2 fw-semibold ${hoverColour} row col-7`}
           onMouseOver={handleHoverOver}

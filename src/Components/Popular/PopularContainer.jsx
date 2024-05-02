@@ -17,20 +17,11 @@ const PopularContainer = () => {
 
   useEffect(() => {
     const fetchPopular = async () => {
-      const baseUrl = 'https://api.mangadex.org';
+      const baseUrl = 'http://localhost:5000/api/mangadex';
 
       try {
-        const resp = await axios.get(`${baseUrl}/manga`, {
-          params: {
-            includes: ['cover_art', 'artist', 'author'],
-            order: { followedCount: 'desc' },
-            'contentRating[]': ['safe', 'suggestive'],
-            hasAvailableChapters: true,
-            createdAtSince: getMidnightTimestampOneMonthAgo(),
-          },
-        });
+        const resp = await axios.get(`${baseUrl}/popular`);
 
-        // Store the fetched data in component state
         setReducedPopularData(resp.data.data.slice(0, 5));
       } catch (error) {
         console.error('Error fetching manga data:', error);
@@ -39,7 +30,7 @@ const PopularContainer = () => {
 
     fetchPopular();
   }, []);
-
+  console.log(reducedPopularData);
   return (
     <div className='row col-lg-10 offset-lg-1 col-sm-1 col-md-12 col-12 my-4 custom-secondary-bg-color rounded gx-3 justify-content-center'>
       <p className='fw-semibold ms-2 my-3 text-white'>Popular</p>
