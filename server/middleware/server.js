@@ -1,29 +1,3 @@
-// // server.js
-
-// import express from 'express';
-// import { createProxyMiddleware } from 'http-proxy-middleware';
-
-// const app = express();
-
-// // Define proxy middleware for routing
-// app.use(
-//   '/api',
-//   createProxyMiddleware({
-//     target: 'https://api.mangadex.org',
-//     changeOrigin: true,
-//     pathRewrite: {
-//       '^/api': '', // Rewrite /api to / (optional)
-//     },
-//   })
-// );
-
-// // Define other routes or middleware as needed
-
-// // Start the server
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}`);
-// });
 import express from 'express';
 import axios from 'axios';
 import cors from 'cors';
@@ -32,6 +6,71 @@ import cors from 'cors';
 const app = express();
 app.use(cors());
 
+////////////////////////////////////////////////////////////////////////////////////
+
+// Define a route to handle fetching the latest manga chapters and their details
+app.get('/api/mangadex/latest', async (req, res) => {
+  const baseUrl = 'https://api.mangadex.org';
+
+  try {
+    // Fetch latest manga chapters
+    const chapterResponse = await axios.get(`${baseUrl}/chapter`, {
+      params: {
+        includes: ['scanlation_group'],
+        contentRating: ['safe', 'suggestive', 'erotica'],
+        order: { readableAt: 'desc' },
+        limit: 20,
+      },
+      headers: {
+        'User-Agent': 'MyServer/1.0',
+      },
+    });
+
+    // Extract unique manga IDs
+    const uniqueMangaIds = [
+      ...new Set(
+        chapterResponse.data.data.map((chapter) => {
+          return chapter.relationships.find(
+            (relationship) => relationship.type === 'manga'
+          ).id;
+        })
+      ),
+    ];
+
+    // Fetch manga data based on unique manga IDs
+    const mangaResponse = await axios.get(`${baseUrl}/manga`, {
+      params: {
+        limit: 64,
+        includedTagsMode: 'AND',
+        excludedTagsMode: 'OR',
+        ids: uniqueMangaIds,
+        contentRating: ['safe', 'suggestive', 'erotica'],
+        order: { latestUploadedChapter: 'desc' },
+        includes: ['cover_art'],
+        hasAvailableChapters: true,
+      },
+      headers: {
+        'User-Agent': 'MyServer/1.0',
+      },
+    });
+
+    // Prepare the response object with chapter and manga data
+    const response = {
+      latestData: chapterResponse.data.data,
+      coverImages: mangaResponse.data.data,
+    };
+
+    // Send the combined data back to the client
+    res.json(response);
+  } catch (error) {
+    console.error('Error fetching manga data:', error);
+    res
+      .status(error.response?.status || 500)
+      .send(error.response?.statusText || 'Internal Server Error');
+  }
+});
+
+////////////////////////////////////////////////////////////////////////////////////
 // Define a route to proxy requests for cover images
 app.get('/api/mangadex/cover/:mangaId/:fileName', async (req, res) => {
   const { mangaId, fileName } = req.params;
@@ -62,6 +101,8 @@ app.get('/api/mangadex/cover/:mangaId/:fileName', async (req, res) => {
   }
 });
 
+////////////////////////////////////////////////////////////////////////////////////
+
 // Define a route to handle requests for staff picks
 app.get('/api/mangadex/staffpicks', async (req, res) => {
   const baseUrl = 'https://api.mangadex.org';
@@ -83,6 +124,8 @@ app.get('/api/mangadex/staffpicks', async (req, res) => {
       .send(error.response?.statusText || 'Internal Server Error');
   }
 });
+
+////////////////////////////////////////////////////////////////////////////////////
 
 // Define a route to handle requests for staff manga
 app.get('/api/mangadex/staffmanga', async (req, res) => {
@@ -116,24 +159,10 @@ app.get('/api/mangadex/staffmanga', async (req, res) => {
       .send(error.response?.statusText || 'Internal Server Error');
   }
 });
+////////////////////////////////////////////////////////////////////////////////////
+
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-// is this:
-// https://api.mangadex.org/manga?limit=24&includedTagsMode=AND&excludedTagsMode=OR&undefined&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&con
-// tentRating%5B%5D=erotica&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true;
-
-// the same as this?
-// const baseUrl = 'https://api.mangadex.org';
-
-//     try {
-//       if (returnedPicks.length > 0) {
-//         const mangaIdParams = returnedPicks
-//           .map((id) => `ids%5B%5D=${id}`)
-//           .join('&');
-
-//         const resp = await axios.get(
-//           `${baseUrl}/manga?limit=${returnedPicks.length}&includedTagsMode=AND&excludedTagsMode=OR&${mangaIdParams}&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
-//         );

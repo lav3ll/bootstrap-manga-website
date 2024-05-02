@@ -30,12 +30,12 @@ const StaffPicks = () => {
       .map((id) => `ids%5B%5D=${encodeURIComponent(id)}`)
       .join('&');
     if (mangaIdParams) {
-      const url = `${baseUrl}/staffmanga?limit=${100}&${mangaIdParams}`;
-      console.log('Fetching manga with URL:', url);
+      const url = `${baseUrl}/staffmanga?limit=${10}&${mangaIdParams}`;
+      // console.log('Fetching manga with URL:', url);
 
       try {
         const resp = await axios.get(url);
-        setStaffMangas(resp.data.manga);
+        setStaffMangas(resp.data.manga.data);
       } catch (error) {
         console.error(
           'Error fetching manga data:',

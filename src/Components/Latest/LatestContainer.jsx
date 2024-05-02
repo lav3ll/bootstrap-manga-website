@@ -11,57 +11,42 @@ const LatestContainer = () => {
   useEffect(() => {
     // Function to fetch the latest manga data
     const fetchLatest = async () => {
-      const baseUrl = 'https://api.mangadex.org';
+      const baseUrl = 'http://localhost:5000/api/mangadex';
 
       try {
         // Fetch latest manga chapters
-        const resp = await axios.get(
-          `${baseUrl}/chapter?includes[]=scanlation_group&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&order[readableAt]=desc&limit=20`
-        );
+        const resp = await axios.get(`${baseUrl}/latest`);
 
-        if (resp && resp.data && resp.data.data) {
+        if (resp && resp.data) {
           // Arrays to store unique manga IDs and filtered data
           const uniqueMangaIds = [];
-          const filteredLatestData = [];
-          const filteredCoverImages = [];
+          const filteredLatestData = resp.data.latestData;
+          const filteredCoverImages = resp.data.coverImages;
           const filteredImageId = [];
 
           // Filter chapters to include only those with unique manga IDs
-          resp.data.data.forEach((chapter) => {
+          filteredLatestData.forEach((chapter) => {
             const mangaId = chapter.relationships.find(
               (relationship) => relationship.type === 'manga'
             ).id;
             if (!uniqueMangaIds.includes(mangaId)) {
               uniqueMangaIds.push(mangaId);
-              filteredLatestData.push(chapter);
             }
           });
 
-          // Prepare parameters for the next request based on unique manga IDs
-          const mangaIdParams = uniqueMangaIds
-            .map((id) => `ids%5B%5D=${id}`)
-            .join('&');
-
-          // Fetch manga data based on unique manga IDs
-          const resp2 = await axios.get(
-            `${baseUrl}/manga?limit=64&includedTagsMode=AND&excludedTagsMode=OR&${mangaIdParams}&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
+          // Filter manga data to include only those corresponding to unique manga IDs
+          const coverImages = filteredCoverImages.filter((manga) =>
+            uniqueMangaIds.includes(manga.id)
           );
 
-          if (resp2 && resp2.data && resp2.data.data) {
-            // Filter manga data to include only those corresponding to unique manga IDs
-            resp2.data.data.forEach((manga) => {
-              const mangaId = manga.id;
-              if (uniqueMangaIds.includes(mangaId)) {
-                filteredCoverImages.push(manga);
-                filteredImageId.push(manga);
-              }
-            });
+          coverImages.forEach((manga) => {
+            filteredImageId.push(manga.id); // Assuming you need IDs separately
+          });
 
-            // Set the filtered data into state
-            setLatestData(filteredLatestData);
-            setCoverImages(filteredCoverImages);
-            setImageId(filteredImageId);
-          }
+          // Set the filtered data into state
+          setLatestData(filteredLatestData);
+          setCoverImages(coverImages);
+          setImageId(filteredImageId);
         }
       } catch (error) {
         console.error('Error fetching manga data:', error);
