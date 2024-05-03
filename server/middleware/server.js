@@ -19,7 +19,7 @@ app.get('/api/mangadex/latest', async (req, res) => {
         includes: ['scanlation_group'],
         contentRating: ['safe', 'suggestive', 'erotica'],
         order: { readableAt: 'desc' },
-        limit: 10,
+        limit: 5,
       },
       headers: {
         'User-Agent': 'MyServer/1.0',
@@ -112,7 +112,7 @@ app.get('/api/mangadex/popular', async (req, res) => {
 // Define a route to proxy requests for cover images
 app.get('/api/mangadex/cover/:mangaId/:fileName', async (req, res) => {
   const { mangaId, fileName } = req.params;
-  const coverUrl = `https://uploads.mangadex.org/covers/${mangaId}/${fileName}.256.jpg`;
+  const coverUrl = `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`;
 
   try {
     // Forward the request to the MangaDex cover image URL with appropriate User-Agent

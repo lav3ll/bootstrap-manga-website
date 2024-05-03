@@ -21,19 +21,23 @@ const Latest = ({ latestManga, coverImg, imageId }) => {
     '';
 
   const fileName =
-    (coverImg &&
-      coverImg.relationships.find(
+    (imageId &&
+      imageId.relationships.find(
         (relationship) => relationship.type === 'cover_art'
       )?.attributes.fileName) ||
     '';
 
-  useEffect(() => {
-    if (mangaId && fileName) {
+  if (mangaId) {
+    useEffect(() => {
       // Construct source URL for cover image
       const src = `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`;
+      console.log(src, `id: ${mangaId}`, `fileName: ${fileName}`);
+
       setCoverImages(src);
-    }
-  }, [mangaId, fileName]);
+    }, [mangaId, fileName]);
+  } else {
+    console.log('src not available');
+  }
 
   const handleHoverOver = () => setHoverColour('custom-text-purple');
   const handleHoverOut = () => setHoverColour('text-white');

@@ -30,7 +30,7 @@ const PopularContainer = () => {
 
     fetchPopular();
   }, []);
-  console.log(reducedPopularData);
+
   return (
     <div className='row col-lg-10 offset-lg-1 col-sm-1 col-md-12 col-12 my-4 custom-secondary-bg-color rounded gx-3 justify-content-center'>
       <p className='fw-semibold ms-2 my-3 text-white'>Popular</p>

@@ -20,7 +20,7 @@ const SearchResult = ({ sResult, onClose }) => {
     (relationship) => relationship.type === 'cover_art'
   ).attributes.fileName;
 
-  const src = `https://uploads.mangadex.org/covers/${id}/${fileName}.256.jpg`;
+  const src = `https://uploads.mangadex.org/covers/${id}/${fileName}`;
   return (
     <Link
       to={`/manga-info/${id}`}
