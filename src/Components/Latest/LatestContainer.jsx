@@ -36,7 +36,7 @@ const LatestContainer = () => {
           );
 
           // Set the filtered data into state
-          setLatestData(filteredLatestData);
+          setLatestData(filteredLatestData.slice(0, 10));
           setCoverImages(filteredCoverImages);
           setImageId(filteredCoverImages); // Assuming each cover image correlates to an imageId
         }

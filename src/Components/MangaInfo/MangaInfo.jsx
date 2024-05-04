@@ -25,28 +25,15 @@ const MangaInfo = () => {
   useEffect(() => {
     const fetchChapter = async () => {
       const mangaID = manga.info.id;
-      const languages = ['en'];
-      const contentRatings = ['safe', 'suggestive', 'erotica'];
-      const baseUrl = 'https://api.mangadex.org';
-
-      const resp = await axios.get(`${baseUrl}/manga/${mangaID}/feed`, {
-        params: {
-          translatedLanguage: languages,
-          order: {
-            createdAt: 'asc',
-            updatedAt: 'asc',
-            publishAt: 'asc',
-            readableAt: 'asc',
-            volume: 'asc',
-            chapter: 'asc',
-          },
-          contentRating: contentRatings,
-          includeFutureUpdates: '1',
-        },
-      });
-      setChapters(resp.data.data);
+      try {
+        const resp = await axios.get(
+          `http://localhost:5000/api/mangadex/chapters/${mangaID}`
+        );
+        setChapters(resp.data.data);
+      } catch (error) {
+        console.error('Error fetching manga chapters:', error);
+      }
     };
-
     fetchChapter();
   }, []);
 
@@ -57,7 +44,7 @@ const MangaInfo = () => {
       const indexToFetch = isFirstChap ? 0 : chapters.length - 1;
       axios
         .get(
-          `https://api.mangadex.org/at-home/server/${chapters[indexToFetch].id}`
+          `http://localhost:5000/api/mangadex/chapter/${chapters[indexToFetch].id}`
         )
         .then((resp) => {
           setChapterImages((prevState) => resp.data);

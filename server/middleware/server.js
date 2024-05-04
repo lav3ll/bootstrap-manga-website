@@ -19,7 +19,7 @@ app.get('/api/mangadex/latest', async (req, res) => {
         includes: ['scanlation_group'],
         contentRating: ['safe', 'suggestive', 'erotica'],
         order: { readableAt: 'desc' },
-        limit: 5,
+        limit: 30,
       },
       headers: {
         'User-Agent': 'MyServer/1.0',
@@ -107,6 +107,54 @@ app.get('/api/mangadex/popular', async (req, res) => {
       .send(error.response?.statusText || 'Internal Server Error');
   }
 });
+
+////////////////////////////////////////////////////////////////////////////////////
+app.get('/api/mangadex/chapters/:mangaID', async (req, res) => {
+  const { mangaID } = req.params;
+  const baseUrl = 'https://api.mangadex.org';
+  const languages = ['en'];
+  const contentRatings = ['safe', 'suggestive', 'erotica'];
+
+  try {
+    const response = await axios.get(`${baseUrl}/manga/${mangaID}/feed`, {
+      params: {
+        translatedLanguage: languages,
+        order: {
+          createdAt: 'asc',
+          updatedAt: 'asc',
+          publishAt: 'asc',
+          readableAt: 'asc',
+          volume: 'asc',
+          chapter: 'asc',
+        },
+        contentRating: contentRatings,
+        includeFutureUpdates: '1',
+      },
+    });
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error fetching manga chapters:', error);
+    res
+      .status(error.response?.status || 500)
+      .send(error.response?.statusText || 'Internal Server Error');
+  }
+});
+////////////////////////////////////////////////////////////////////////////////////
+app.get('/api/mangadex/chapter/:chapterID', async (req, res) => {
+  const { chapterID } = req.params;
+  const baseUrl = 'https://api.mangadex.org';
+
+  try {
+    const response = await axios.get(`${baseUrl}/at-home/server/${chapterID}`);
+    res.json(response.data);
+  } catch (error) {
+    console.error('Error fetching chapter data:', error);
+    res
+      .status(error.response?.status || 500)
+      .send(error.response?.statusText || 'Internal Server Error');
+  }
+});
+
 ////////////////////////////////////////////////////////////////////////////////////
 
 // Define a route to proxy requests for cover images
