@@ -3,11 +3,13 @@ import Trending from './Trending';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SliderItem from './SliderItem';
+import axios from 'axios';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import { useEffect, useState } from 'react';
 
 import './Slider.css';
 
@@ -17,6 +19,41 @@ import { Pagination, Navigation } from 'swiper/modules';
 import latestTestData from '../../Data/latestTestData.json';
 
 const Slider = () => {
+  const [sliderData, setSliderData] = useState([]);
+
+  useEffect(() => {
+    const baseUrl = 'https://api.mangadex.org';
+
+    axios
+      .get(`${baseUrl}/manga`, {
+        params: {
+          limit: '4',
+          includedTagsMode: 'AND',
+          excludedTagsMode: 'OR',
+          status: ['ongoing'],
+          availableTranslatedLanguage: ['en'],
+          ids: [
+            'f0f62b75-5989-4f32-9b59-ab56abe35fc1',
+            '1f635177-dea1-4738-bfc2-f56cff912410',
+            '00296c8d-a815-4fdd-b4b8-c79c550ee875',
+            '26c8f00a-3925-4f22-ac21-83145be2b733',
+          ],
+          contentRating: ['safe'],
+          order: {
+            latestUploadedChapter: 'desc',
+          },
+          includes: ['cover_art'],
+        },
+      })
+      .then((response) => {
+        setSliderData(response.data.data);
+        console.log(response.data.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
   return (
     <>
       {/* Container for the slider */}
@@ -36,18 +73,12 @@ const Slider = () => {
             className='mySwiper rounded'
           >
             {/* Slides inside the Swiper */}
-            <SwiperSlide>
-              <SliderItem imageData={latestTestData.data[5]} />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SliderItem imageData={latestTestData.data[16]} />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SliderItem imageData={latestTestData.data[10]} />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SliderItem imageData={latestTestData.data[12]} />
-            </SwiperSlide>
+
+            {sliderData.map((slide, idx) => (
+              <SwiperSlide key={idx}>
+                <SliderItem imageData={slide} />
+              </SwiperSlide>
+            ))}
           </Swiper>
         </div>
         <div className='trending col-md-2'>

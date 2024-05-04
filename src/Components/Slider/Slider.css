@@ -41,6 +41,9 @@ body {
   filter: blur (8px);
   -webkit-filter: blur(5px);
 }
+.slide-img-sm {
+  width: 20% !important;
+}
 
 .swiper {
   margin-left: auto;
