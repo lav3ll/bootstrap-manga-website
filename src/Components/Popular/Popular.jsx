@@ -30,10 +30,6 @@ const Popular = ({ popularManga, idx }) => {
     setOverlay(false);
   };
 
-  const handleClick = () => {
-    alert('test');
-  };
-
   return (
     <div
       className={`card ${
