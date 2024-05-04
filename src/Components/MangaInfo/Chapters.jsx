@@ -21,9 +21,9 @@ const Chapters = ({ chapter, chapters, idx, manga }) => {
   };
   const handleClick = () => {
     axios
-      .get(`https://api.mangadex.org/at-home/server/${chapter.id}`)
+      .get(`http://localhost:5000/api/chapter/${chapter.id}`)
       .then((resp) => {
-        setChapterImages((prevState) => resp.data);
+        setChapterImages(resp.data);
         navigate(`/chapter/${chapter.id}`, {
           state: {
             chapterImages: resp.data,
@@ -33,7 +33,6 @@ const Chapters = ({ chapter, chapters, idx, manga }) => {
           },
         });
       })
-
       .catch((error) => {
         console.error('Error fetching chapter:', error);
       });
