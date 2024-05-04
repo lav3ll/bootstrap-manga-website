@@ -16,6 +16,10 @@
   padding: 0;
 }
 
+.border-custom {
+  border-color: var(--secondary-color) !important;
+}
+
 .custom-test {
   position: absolute;
   width: 25% !important;

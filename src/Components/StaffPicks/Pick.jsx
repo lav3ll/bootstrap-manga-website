@@ -8,15 +8,18 @@ const Pick = ({ staffManga, index }) => {
   const [imageId, setImageId] = useState(staffManga);
   const [hoverColour, setHoverColour] = useState('text-white');
   const [overlay, setOverlay] = useState(false);
+  const [borderColor, setBorderColor] = useState('border-light');
 
   const handleHoverOver = () => {
     setHoverColour('custom-text-purple');
     setOverlay('img-overlay');
+    setBorderColor('border-custom');
   };
 
   const handleHoverOut = () => {
     setHoverColour('text-white');
     setOverlay(false);
+    setBorderColor(false);
   };
 
   const handleClick = (e) => {
@@ -45,7 +48,9 @@ const Pick = ({ staffManga, index }) => {
   return (
     <div className='card my-2 custom-secondary-bg-color border-0 staff-pick-container'>
       <div className='card-body row card-custom-border py-2 pb-0 mx-0'>
-        <p className='col-2 my-auto border border-3 border-light rounded-1 fw-semibold  px-1 mx-2 text-center pick-custom-width'>
+        <p
+          className={`col-2 my-auto border border-3 ${borderColor} rounded-1 fw-semibold  px-1 mx-2 text-center pick-custom-width`}
+        >
           {index + 1}
         </p>
         <Link
@@ -64,13 +69,13 @@ const Pick = ({ staffManga, index }) => {
           />
         </Link>
         <div
-          className={`card-text col-6 fs-0 ${hoverColour}`}
+          className={`card-text col-6 fs-0 fw-semibold ${hoverColour}`}
           onMouseOver={handleHoverOver}
           onMouseOut={handleHoverOut}
         >
           <p>{staffManga.attributes.description.en.slice(0, 50) + '...'}</p>
           <p>
-            Genres:
+            Genres :
             {showGenres.map((genre, idx) => (
               <span className='staff-genre' key={idx} onClick={handleClick}>
                 {genre.attributes.name.en},{' '}
