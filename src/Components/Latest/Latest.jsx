@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 const Latest = ({ latestManga, coverImg, imageId }) => {
   const [hoverColour, setHoverColour] = useState('text-white');
   const [coverImages, setCoverImages] = useState('');
+  const [overlay, setOverlay] = useState(false);
+
   // Extract manga title safely
   let title =
     (imageId &&
@@ -39,8 +41,14 @@ const Latest = ({ latestManga, coverImg, imageId }) => {
     console.log('src not available');
   }
 
-  const handleHoverOver = () => setHoverColour('custom-text-purple');
-  const handleHoverOut = () => setHoverColour('text-white');
+  const handleHoverOver = () => {
+    setHoverColour('custom-text-purple');
+    setOverlay('img-overlay');
+  };
+  const handleHoverOut = () => {
+    setHoverColour('text-white');
+    setOverlay(false);
+  };
 
   return (
     <Link
@@ -53,7 +61,7 @@ const Latest = ({ latestManga, coverImg, imageId }) => {
         <img
           src={coverImages}
           alt={`thumbnail image of ${title}`}
-          className={`latestImg ms-3 col-5 rounded-4`}
+          className={`latestImg ms-3 col-5 rounded-4 ${overlay}`}
           style={{ height: '150px', objectFit: 'cover' }}
           onMouseOver={handleHoverOver}
           onMouseOut={handleHoverOut}
