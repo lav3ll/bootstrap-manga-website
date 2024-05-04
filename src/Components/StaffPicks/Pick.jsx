@@ -6,6 +6,18 @@ const Pick = ({ staffManga, index }) => {
   const [coverImage, setCoverImage] = useState('');
   const [showGenres, setShowGenres] = useState([]);
   const [imageId, setImageId] = useState(staffManga);
+  const [hoverColour, setHoverColour] = useState('text-white');
+  const [overlay, setOverlay] = useState(false);
+
+  const handleHoverOver = () => {
+    setHoverColour('custom-text-purple');
+    setOverlay('img-overlay');
+  };
+
+  const handleHoverOut = () => {
+    setHoverColour('text-white');
+    setOverlay(false);
+  };
 
   const handleClick = (e) => {
     if (e.currentTarget.className === 'staff-genre') {
@@ -43,13 +55,19 @@ const Pick = ({ staffManga, index }) => {
           className='col-4 px-0'
         >
           <img
-            className='card-img-top'
+            className={`card-img-top ${overlay}`}
             src={coverImage}
             alt={`Cover art for ${staffManga.attributes.title.en}`}
             onClick={handleClick}
+            onMouseOver={handleHoverOver}
+            onMouseOut={handleHoverOut}
           />
         </Link>
-        <div className='card-text col-6 fs-0 text-white'>
+        <div
+          className={`card-text col-6 fs-0 ${hoverColour}`}
+          onMouseOver={handleHoverOver}
+          onMouseOut={handleHoverOut}
+        >
           <p>{staffManga.attributes.description.en.slice(0, 50) + '...'}</p>
           <p>
             Genres:

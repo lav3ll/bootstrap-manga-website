@@ -22,7 +22,7 @@ const Popular = ({ popularManga, idx }) => {
 
   const handleHoverOver = () => {
     setHoverColour('custom-text-purple');
-    setOverlay('popularImg-overlay');
+    setOverlay('img-overlay');
   };
 
   const handleHoverOut = () => {
