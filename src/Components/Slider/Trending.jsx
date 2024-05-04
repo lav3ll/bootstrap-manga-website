@@ -21,12 +21,15 @@ const Trending = () => {
           },
         });
 
+        const fileName = resp.data.data.relationships.find(
+          (relationship) => relationship.type === 'cover_art'
+        ).attributes.fileName;
+        const randomManga = resp.data.data.id;
         // Store the fetched data in component state
         setTrendingManga(resp.data.data);
         setCoverImage(
-          `https://uploads.mangadex.org/covers/${resp.data.data.id}/${resp.data.data.relationships[2].attributes.fileName}.256.jpg`
+          `https://uploads.mangadex.org/covers/${randomManga}/${fileName}.256.jpg`
         );
-        resp.data.data;
       } catch (error) {
         console.error('Error fetching manga data:', error);
       }

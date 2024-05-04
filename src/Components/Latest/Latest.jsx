@@ -33,7 +33,6 @@ const Latest = ({ latestManga, coverImg, imageId }) => {
     useEffect(() => {
       // Construct source URL for cover image
       const src = `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`;
-      console.log(src, `id: ${mangaId}`, `fileName: ${fileName}`);
 
       setCoverImages(src);
     }, [mangaId, fileName]);
