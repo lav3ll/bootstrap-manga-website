@@ -7,6 +7,39 @@ const app = express();
 app.use(cors());
 
 ////////////////////////////////////////////////////////////////////////////////////
+app.get('/api/search/manga', async (req, res) => {
+  const { title, limit = 10 } = req.query; // Set a default limit to 10 if none provided
+  const baseUrl = 'https://api.mangadex.org';
+
+  try {
+    const response = await axios.get(`${baseUrl}/manga`, {
+      params: {
+        title: title.toLowerCase(), // Ensure the title is in lower case
+        limit,
+        includedTagsMode: 'AND',
+        excludedTagsMode: 'OR',
+        availableTranslatedLanguage: ['en'],
+        contentRating: ['safe'],
+        order: { latestUploadedChapter: 'desc' },
+        includes: ['cover_art'],
+        hasAvailableChapters: true,
+      },
+    });
+    // Check if there are results
+    if (response.data.data.length > 0) {
+      res.json(response.data.data);
+    } else {
+      res.status(404).json({ message: 'No results found' });
+    }
+  } catch (error) {
+    console.error('Error fetching manga search results:', error);
+    res.status(error.response?.status || 500).json({
+      error: error.response?.statusText || 'Internal Server Error',
+    });
+  }
+});
+
+////////////////////////////////////////////////////////////////////////////////////
 
 // Define a route to handle fetching the latest manga chapters and their details
 app.get('/api/mangadex/latest', async (req, res) => {
