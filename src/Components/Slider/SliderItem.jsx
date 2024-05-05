@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const SliderItem = ({ imageData }) => {
   const [showGenres, setShowGenres] = useState('');
@@ -7,6 +8,8 @@ const SliderItem = ({ imageData }) => {
   const [title, setTitle] = useState('');
   const [status, setStatus] = useState('');
   const [summary, setSummary] = useState('');
+  const [coverImage, setCoverImage] = useState('');
+  const [imageId, setImageId] = useState(imageData);
 
   const mangaId = imageData.id;
   useEffect(() => {
@@ -27,7 +30,7 @@ const SliderItem = ({ imageData }) => {
       ? imageData.attributes.description.en
       : 'No Summary available';
     setShowGenres(genresTags.slice(0, 3));
-    setSrc(src);
+    setCoverImage(src);
     setTitle(title);
     setStatus(status);
     setSummary(description.slice(0, 177) + '...');
@@ -37,7 +40,7 @@ const SliderItem = ({ imageData }) => {
       <div
         className='background-image'
         style={{
-          backgroundImage: `url("${src}")`,
+          backgroundImage: `url("${coverImage}")`,
           backgroundSize: 'cover',
           height: '100%',
           backgroundPosition: 'center',
@@ -50,7 +53,7 @@ const SliderItem = ({ imageData }) => {
       <div
         className='background-image'
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${src}")`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${coverImage}")`,
           backgroundSize: 'cover',
           height: '100%',
           backgroundPosition: 'center',
@@ -80,13 +83,18 @@ const SliderItem = ({ imageData }) => {
           </p>
         </div>
 
-        <div className='position-absolute top-50 end-0 translate-middle-y row'>
+        <Link
+          to={`/manga-info/${imageData.id}`}
+          state={{ manga: { coverImg: coverImage, info: imageId } }}
+          key={imageData.id}
+          className='col-4 px-0 position-absolute top-50 end-0 translate-middle-y row slide-img-sm ms-auto me-5'
+        >
           <img
-            className=' rounded rounded-4 slide-img-sm ms-auto me-5'
-            src={src}
+            className=' rounded rounded-4   '
+            src={coverImage}
             alt={`${imageData.title} slider image`}
           />
-        </div>
+        </Link>
       </div>
     </div>
   );
