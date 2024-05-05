@@ -1,17 +1,39 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 
 const SliderItem = ({ imageData }) => {
-  const mangaId = imageData.id;
-  const fileName = imageData.relationships.find(
-    (relationship) => relationship.type === 'cover_art'
-  ).attributes.fileName;
+  const [showGenres, setShowGenres] = useState('');
+  const [src, setSrc] = useState('');
+  const [title, setTitle] = useState('');
+  const [status, setStatus] = useState('');
+  const [summary, setSummary] = useState('');
 
-  const src = `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`;
-  const title = imageData.attributes.title.en
-    ? imageData.attributes.title.en
-    : imageData.attributes.title[0];
+  const mangaId = imageData.id;
+  useEffect(() => {
+    const fileName = imageData.relationships.find(
+      (relationship) => relationship.type === 'cover_art'
+    ).attributes.fileName;
+
+    const src = `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`;
+    const title = imageData.attributes.title.en
+      ? imageData.attributes.title.en
+      : imageData.attributes.title[0];
+
+    const status = imageData.attributes.status;
+    const genresTags = imageData.attributes.tags.filter(
+      (tag) => tag.attributes.group === 'genre'
+    );
+    const description = imageData.attributes.description.en
+      ? imageData.attributes.description.en
+      : 'No Summary available';
+    setShowGenres(genresTags.slice(0, 3));
+    setSrc(src);
+    setTitle(title);
+    setStatus(status);
+    setSummary(description.slice(0, 177) + '...');
+  }, []);
   return (
-    <div className='slide-container w-100'>
+    <div className='slide-container w-100 '>
       <div
         className='background-image'
         style={{
@@ -28,7 +50,7 @@ const SliderItem = ({ imageData }) => {
       <div
         className='background-image'
         style={{
-          backgroundImage: `url("${src}")`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${src}")`,
           backgroundSize: 'cover',
           height: '100%',
           backgroundPosition: 'center',
@@ -39,13 +61,23 @@ const SliderItem = ({ imageData }) => {
         }}
       ></div>
 
-      <div>
-        <div className='mangaSlideInfo'>
-          <p className=''>title</p>
-          <p className=''>genre</p>
-          <p className=''>summary</p>
-          <p className=''>status</p>
-          <p className=''>author</p>
+      <div className='row ms-5'>
+        <div className='mangaSlideInfo col-7  text-start'>
+          <h4 className='text-white'>{title}</h4>
+          <p className='text-white'>
+            Genres :
+            {showGenres &&
+              showGenres.map((genre, idx) => (
+                <span className='slider-genre' key={idx}>
+                  {genre.attributes.name.en},{' '}
+                </span>
+              ))}
+          </p>
+          <p className='fw-bold text-white slider-summary-heading'>SUMMARY</p>
+          <p className='slider-summary-txt text-white '>{summary}</p>
+          <p className='slider-status-txt  text-white fw-semibold'>
+            status:{status}
+          </p>
         </div>
 
         <div className='position-absolute top-50 end-0 translate-middle-y row'>
