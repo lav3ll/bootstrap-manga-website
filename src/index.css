@@ -20,5 +20,5 @@
 }
 
 .custom-primary {
-  color: var(--secondary-color) !important;
+  color: var(--primary-color) !important;
 }
