@@ -113,7 +113,8 @@ const MangaInfo = () => {
                 Synopsis {manga.info.attributes.title.en}
               </p>
               <p className='text-white mx-2'>
-                {manga.info.attributes.description.en.slice(0, 282)}
+                {manga.info.attributes.description.en.slice(0, 282) ||
+                  'Loading'}
               </p>
             </div>
             <div className='info-mid-botcol'>

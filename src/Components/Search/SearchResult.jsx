@@ -23,9 +23,9 @@ const SearchResult = ({ sResult, onClose }) => {
   const src = `https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex/cover/${mangaId}/${fileName}`;
   return (
     <Link
-      to={`/manga-info/${id}`}
+      to={`/manga-info/${mangaId}`}
       state={{ manga: { coverImg: coverImage, info: sResult } }}
-      key={id}
+      key={mangaId}
       onClick={handleClick} // Call handleClick when the search result is clicked
     >
       <div
