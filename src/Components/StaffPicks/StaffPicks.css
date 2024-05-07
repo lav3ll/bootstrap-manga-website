@@ -12,7 +12,7 @@
 }
 
 .card-custom-border {
-  border-top: 1px solid var(--black);
+  border-top: 1px solid var(--primary-color);
   padding: 0;
 }
 

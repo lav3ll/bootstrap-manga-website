@@ -67,7 +67,7 @@ const Popular = ({ popularManga, idx }) => {
           style={{ height: '60px', overflow: 'hidden' }}
         >
           {popularManga && popularManga.attributes
-            ? popularManga.attributes.title.en
+            ? popularManga.attributes.title.en || 'Loading...'
             : 'Loading...'}
         </p>
       </div>
