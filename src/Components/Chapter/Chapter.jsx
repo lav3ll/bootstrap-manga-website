@@ -43,13 +43,12 @@ const Chapter = () => {
   };
 
   const getChapter = () => {
-    const mangaID = id;
     axios
       .get(
-        `https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex/chapter/${mangaID}`
+        `https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex/chapter/${id}`
       )
-      .then((resp) => {
-        setChapterImagesNew(resp.data);
+      .then((response) => {
+        setChapterImagesNew(response.data);
       })
       .catch((error) => {
         console.error('Error fetching chapter:', error);
