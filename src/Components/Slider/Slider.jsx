@@ -20,31 +20,13 @@ const Slider = () => {
   const [sliderData, setSliderData] = useState([]);
 
   useEffect(() => {
-    const baseUrl = 'https://api.mangadex.org';
+    const baseUrl =
+      'https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex';
 
     axios
-      .get(`${baseUrl}/manga`, {
-        params: {
-          limit: '4',
-          includedTagsMode: 'AND',
-          excludedTagsMode: 'OR',
-          status: ['ongoing'],
-          availableTranslatedLanguage: ['en'],
-          ids: [
-            'f0f62b75-5989-4f32-9b59-ab56abe35fc1',
-            '1f635177-dea1-4738-bfc2-f56cff912410',
-            '00296c8d-a815-4fdd-b4b8-c79c550ee875',
-            '26c8f00a-3925-4f22-ac21-83145be2b733',
-          ],
-          contentRating: ['safe'],
-          order: {
-            latestUploadedChapter: 'desc',
-          },
-          includes: ['cover_art'],
-        },
-      })
+      .get(`${baseUrl}/featured`)
       .then((response) => {
-        setSliderData(response.data.data);
+        setSliderData(response.data);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
