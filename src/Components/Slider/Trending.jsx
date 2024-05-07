@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './trending.css';
-// import trendingTestData from '../../Data/popularTest.json';
+
 const Trending = () => {
   // Initialize trendingManga state with useState
   const [trendingManga, setTrendingManga] = useState(null);
@@ -11,22 +10,12 @@ const Trending = () => {
 
   useEffect(() => {
     const fetchTrending = async () => {
-      const baseUrl = 'https://api.mangadex.org';
-
+      const baseUrl =
+        'https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex';
       try {
-        const resp = await axios.get(`${baseUrl}/manga/random`, {
-          params: {
-            includes: ['cover_art', 'artist', 'author'],
-            'contentRating[]': ['safe'],
-          },
-        });
-
-        // Store the fetched data in component state
-        setTrendingManga(resp.data.data);
-        setCoverImage(
-          `https://uploads.mangadex.org/covers/${resp.data.data.id}/${resp.data.data.relationships[2].attributes.fileName}.256.jpg`
-        );
-        resp.data.data;
+        const response = await axios.get(`${baseUrl}/random`);
+        setTrendingManga(response.data.manga);
+        setCoverImage(response.data.coverImageUrl);
       } catch (error) {
         console.error('Error fetching manga data:', error);
       }
@@ -35,7 +24,6 @@ const Trending = () => {
     fetchTrending();
   }, []);
 
-  console.log(trendingManga);
   return (
     <div className='text-center trending d-none d-sm-none md-d-none d-lg-block'>
       {/* Conditionally render the JSX content */}
@@ -49,17 +37,17 @@ const Trending = () => {
           <div
             className='mx-2 rounded'
             style={{
-              backgroundImage: `url(${coverImage})`,
+              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("${coverImage}")`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               width: '100%',
               height: '250px',
             }}
           >
-            <p className='fw-semibold lg-fs-1 md-fw-4 md-fs-4 text-white d-flex align-items-center justify-content-center pt-5 md-px-2 lg-px-2 trending-week'>
+            <p className='px-2 fw-semibold lg-fs-1 md-fw-4 md-fs-4 text-white d-flex align-items-center justify-content-center pt-5 md-px-2 lg-px-2 trending-week'>
               ELITE SCANS TRENDING THIS WEEK!
             </p>
-            <p className='custom-primary pt-2 mt-2 px-4 fw-bold lg-fs-1 md-fw-4 md-fs-4'>
+            <p className='text-white pt-2 mt-2 px-4 fw-bold lg-fs-1 md-fw-4 md-fs-4'>
               {trendingManga.attributes.title.en}
             </p>
           </div>

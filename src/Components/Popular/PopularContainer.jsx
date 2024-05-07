@@ -17,20 +17,11 @@ const PopularContainer = () => {
 
   useEffect(() => {
     const fetchPopular = async () => {
-      const baseUrl = 'https://api.mangadex.org';
+      const baseUrl = 'https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex';
 
       try {
-        const resp = await axios.get(`${baseUrl}/manga`, {
-          params: {
-            includes: ['cover_art', 'artist', 'author'],
-            order: { followedCount: 'desc' },
-            'contentRating[]': ['safe', 'suggestive'],
-            hasAvailableChapters: true,
-            createdAtSince: getMidnightTimestampOneMonthAgo(),
-          },
-        });
+        const resp = await axios.get(`${baseUrl}/popular`);
 
-        // Store the fetched data in component state
         setReducedPopularData(resp.data.data.slice(0, 5));
       } catch (error) {
         console.error('Error fetching manga data:', error);

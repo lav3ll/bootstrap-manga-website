@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import './Account.css';
 
 const AccountModal = ({ ModalType }) => {
   const form = useRef();
@@ -59,9 +60,9 @@ const AccountModal = ({ ModalType }) => {
       <form
         ref={form}
         onSubmit={handleSubmit}
-        className='d-flex flex-column gap-3 justify-content-center align-items-center bg-dark p-2 mt-5 rounded-1 col-lg-4 offset-lg-4 col-md-8 offset-md-2 col-10 offset-1'
+        className='d-flex flex-column gap-3 justify-content-center align-items-center custom-custom-secondary-bg-color p-2 mt-5 rounded-1 col-lg-4 offset-lg-4 col-md-8 offset-md-2 col-10 offset-1'
       >
-        <h1 className='mb-0 text-white fst-italic'>EliteScans</h1>
+        <h1 className='mb-0 text-white'>EliteScans</h1>
         <h2 className='mt-0 text-white fw-semibold'>{ModalType}</h2>
         {ModalType === 'Register' && (
           <input

@@ -32,16 +32,17 @@ const Navigation = () => {
     const lowerCaseSearchVal = searchVal.toLowerCase();
     e.preventDefault();
     axios
-      .get(
-        `https://api.mangadex.org/manga?limit=10&title=${lowerCaseSearchVal}&includedTagsMode=AND&excludedTagsMode=OR&availableTranslatedLanguage%5B%5D=en&contentRating%5B%5D=safe&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
-      )
+      .get(`http://localhost:5000/api/search/manga`, {
+        params: {
+          title: lowerCaseSearchVal, // Pass the search value as a parameter
+          limit: 10,
+        },
+      })
       .then((res) => {
-        res.data.data.length > 0
-          ? setSearchResults(res.data.data)
-          : openModal();
+        res.data.length > 0 ? setSearchResults(res.data) : openModal();
       })
       .catch((error) => {
-        console.log(error);
+        console.error('Error fetching search results:', error);
       });
   };
 

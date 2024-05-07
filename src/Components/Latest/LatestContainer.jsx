@@ -9,69 +9,46 @@ const LatestContainer = () => {
   const [imageId, setImageId] = useState([]);
 
   useEffect(() => {
-    // Function to fetch the latest manga data
     const fetchLatest = async () => {
-      const baseUrl = 'https://api.mangadex.org';
+      const baseUrl =
+        'https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex';
 
       try {
-        // Fetch latest manga chapters
-        const resp = await axios.get(
-          `${baseUrl}/chapter?includes[]=scanlation_group&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&order[readableAt]=desc&limit=20`
-        );
+        const resp = await axios.get(`${baseUrl}/latest`);
+        if (resp && resp.data) {
+          // Use Set to ensure all manga IDs are unique
+          const uniqueMangaIds = new Set();
 
-        if (resp && resp.data && resp.data.data) {
-          // Arrays to store unique manga IDs and filtered data
-          const uniqueMangaIds = [];
-          const filteredLatestData = [];
-          const filteredCoverImages = [];
-          const filteredImageId = [];
-
-          // Filter chapters to include only those with unique manga IDs
-          resp.data.data.forEach((chapter) => {
+          // Extract IDs from the latest data
+          const filteredLatestData = resp.data.latestData.filter((chapter) => {
             const mangaId = chapter.relationships.find(
               (relationship) => relationship.type === 'manga'
-            ).id;
-            if (!uniqueMangaIds.includes(mangaId)) {
-              uniqueMangaIds.push(mangaId);
-              filteredLatestData.push(chapter);
+            )?.id;
+            if (mangaId && !uniqueMangaIds.has(mangaId)) {
+              uniqueMangaIds.add(mangaId);
+              return true; // Keep this chapter as it's associated with a unique mangaId
             }
+            return false; // Exclude this chapter
           });
 
-          // Prepare parameters for the next request based on unique manga IDs
-          const mangaIdParams = uniqueMangaIds
-            .map((id) => `ids%5B%5D=${id}`)
-            .join('&');
-
-          // Fetch manga data based on unique manga IDs
-          const resp2 = await axios.get(
-            `${baseUrl}/manga?limit=64&includedTagsMode=AND&excludedTagsMode=OR&${mangaIdParams}&contentRating%5B%5D=safe&contentRating%5B%5D=suggestive&contentRating%5B%5D=erotica&order%5BlatestUploadedChapter%5D=desc&includes%5B%5D=cover_art&hasAvailableChapters=true`
+          // Filter cover images based on unique manga IDs
+          const filteredCoverImages = resp.data.coverImages.filter((manga) =>
+            uniqueMangaIds.has(manga.id)
           );
 
-          if (resp2 && resp2.data && resp2.data.data) {
-            // Filter manga data to include only those corresponding to unique manga IDs
-            resp2.data.data.forEach((manga) => {
-              const mangaId = manga.id;
-              if (uniqueMangaIds.includes(mangaId)) {
-                filteredCoverImages.push(manga);
-                filteredImageId.push(manga);
-              }
-            });
-
-            // Set the filtered data into state
-            setLatestData(filteredLatestData);
-            setCoverImages(filteredCoverImages);
-            setImageId(filteredImageId);
-          }
+          // Set the filtered data into state
+          setLatestData(filteredLatestData.slice(0, 10));
+          console.log(filteredLatestData);
+          setCoverImages(filteredCoverImages);
+          setImageId(filteredCoverImages); // Assuming each cover image correlates to an imageId
         }
       } catch (error) {
         console.error('Error fetching manga data:', error);
       }
     };
 
-    // Call the fetchLatest function when component mounts
     fetchLatest();
   }, []);
-
   return (
     // Render the latest manga container
     <div className='row col-lg-10 offset-lg-1 col-sm-1 col-md-12 col-12 my-4 custom-secondary-bg-color rounded gx-3 w-sm-100 justify-content-center'>
