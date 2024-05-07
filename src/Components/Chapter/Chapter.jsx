@@ -44,7 +44,9 @@ const Chapter = () => {
 
   const getChapter = () => {
     axios
-      .get(`https://api.mangadex.org/at-home/server/${id}`)
+      .get(
+        `https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex/chapter/${id}`
+      )
       .then((resp) => {
         setChapterImagesNew(resp.data);
       })
