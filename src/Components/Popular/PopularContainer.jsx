@@ -17,7 +17,7 @@ const PopularContainer = () => {
 
   useEffect(() => {
     const fetchPopular = async () => {
-      const baseUrl = 'http://localhost:5000/api/mangadex';
+      const baseUrl = 'https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex';
 
       try {
         const resp = await axios.get(`${baseUrl}/popular`);

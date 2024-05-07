@@ -5,7 +5,8 @@ import Pick from './Pick';
 const StaffPicks = () => {
   const [staffPickIds, setStaffPickIds] = useState([]);
   const [staffMangas, setStaffMangas] = useState([]);
-  const baseUrl = 'http://localhost:5000/api/mangadex';
+  const baseUrl =
+    'https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex';
 
   useEffect(() => {
     const getStaffPicks = async () => {

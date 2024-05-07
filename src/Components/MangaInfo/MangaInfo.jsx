@@ -27,7 +27,7 @@ const MangaInfo = () => {
       const mangaID = manga.info.id;
       try {
         const resp = await axios.get(
-          `http://localhost:5000/api/mangadex/chapters/${mangaID}`
+          `https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex/chapters/${mangaID}`
         );
         setChapters(resp.data.data);
       } catch (error) {
@@ -44,7 +44,7 @@ const MangaInfo = () => {
       const indexToFetch = isFirstChap ? 0 : chapters.length - 1;
       axios
         .get(
-          `http://localhost:5000/api/mangadex/chapter/${chapters[indexToFetch].id}`
+          `https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex/chapter/${chapters[indexToFetch].id}`
         )
         .then((resp) => {
           setChapterImages((prevState) => resp.data);

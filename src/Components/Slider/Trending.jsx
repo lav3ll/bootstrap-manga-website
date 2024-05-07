@@ -11,7 +11,8 @@ const Trending = () => {
 
   useEffect(() => {
     const fetchTrending = async () => {
-      const baseUrl = 'https://api.mangadex.org';
+      const baseUrl =
+        'https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex';
 
       try {
         const resp = await axios.get(`${baseUrl}/manga/random`, {
