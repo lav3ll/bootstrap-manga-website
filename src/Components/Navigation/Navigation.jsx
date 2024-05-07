@@ -32,14 +32,19 @@ const Navigation = () => {
     const lowerCaseSearchVal = searchVal.toLowerCase();
     e.preventDefault();
     axios
-      .get(`http://localhost:5000/api/search/manga`, {
-        params: {
-          title: lowerCaseSearchVal, // Pass the search value as a parameter
-          limit: 10,
-        },
-      })
-      .then((res) => {
-        res.data.length > 0 ? setSearchResults(res.data) : openModal();
+      .get(
+        `https://elitescans-data-a61945b29883.herokuapp.com/api/search/manga`,
+        {
+          // Updated URL
+          params: {
+            title: lowerCaseSearchVal, // Pass the search value as a parameter
+            limit: 10, // This matches the backend default if not provided
+          },
+        }
+      )
+      .then((response) => {
+        const data = response.data; // Storing response data
+        data.length > 0 ? setSearchResults(data) : openModal();
       })
       .catch((error) => {
         console.error('Error fetching search results:', error);
