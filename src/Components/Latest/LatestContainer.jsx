@@ -38,7 +38,6 @@ const LatestContainer = () => {
 
           // Set the filtered data into state
           setLatestData(filteredLatestData.slice(0, 10));
-          console.log(filteredLatestData);
           setCoverImages(filteredCoverImages);
           setImageId(filteredCoverImages); // Assuming each cover image correlates to an imageId
         }
