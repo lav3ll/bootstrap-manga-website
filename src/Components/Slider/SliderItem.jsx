@@ -17,7 +17,7 @@ const SliderItem = ({ imageData }) => {
       (relationship) => relationship.type === 'cover_art'
     ).attributes.fileName;
 
-    const src = `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`;
+    const src = `https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex/cover/${mangaId}/${fileName}`;
     const title = imageData.attributes.title.en
       ? imageData.attributes.title.en
       : imageData.attributes.title[0];

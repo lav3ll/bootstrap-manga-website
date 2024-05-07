@@ -14,7 +14,8 @@ const Popular = ({ popularManga, idx }) => {
       );
       if (coverArt && coverArt.attributes && coverArt.attributes.fileName) {
         const fileName = coverArt.attributes.fileName;
-        const src = `https://uploads.mangadex.org/covers/${popularManga.id}/${fileName}.256.jpg`;
+
+        const src = `https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex/cover/${popularManga.id}/${fileName}`;
         setImageSrc(src);
       }
     }

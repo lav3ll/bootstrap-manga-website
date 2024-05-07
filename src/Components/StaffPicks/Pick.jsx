@@ -35,7 +35,7 @@ const Pick = ({ staffManga, index }) => {
       (relationship) => relationship.type === 'cover_art'
     );
     const fileName = coverArtRelationship?.attributes.fileName;
-    const src = `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`;
+    const src = `https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex/cover/${mangaId}/${fileName}`;
     setCoverImage(src);
 
     const genreTags = staffManga.attributes.tags.filter(

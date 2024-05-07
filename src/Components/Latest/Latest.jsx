@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -31,8 +32,10 @@ const Latest = ({ latestManga, coverImg, imageId }) => {
 
   if (mangaId) {
     useEffect(() => {
+      const baseUrl = `https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex`;
+
       // Construct source URL for cover image
-      const src = `https://uploads.mangadex.org/covers/${mangaId}/${fileName}`;
+      const src = `${baseUrl}/cover/${mangaId}/${fileName}`;
 
       setCoverImages(src);
     }, [mangaId, fileName]);
