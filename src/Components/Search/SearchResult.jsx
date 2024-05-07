@@ -15,12 +15,12 @@ const SearchResult = ({ sResult, onClose }) => {
   }, [sResult]);
 
   const title = sResult.attributes.title.en;
-  const id = sResult.id;
+  const mangaId = sResult.id;
   const fileName = sResult.relationships.find(
     (relationship) => relationship.type === 'cover_art'
   ).attributes.fileName;
 
-  const src = `https://uploads.mangadex.org/covers/${id}/${fileName}`;
+  const src = `https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex/cover/${mangaId}/${fileName}`;
   return (
     <Link
       to={`/manga-info/${id}`}
