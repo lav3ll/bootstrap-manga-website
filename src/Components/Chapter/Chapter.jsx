@@ -43,9 +43,10 @@ const Chapter = () => {
   };
 
   const getChapter = () => {
+    const mangaID = id;
     axios
       .get(
-        `https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex/chapter/${id}`
+        `https://elitescans-data-a61945b29883.herokuapp.com/api/mangadex/chapter/${mangaID}`
       )
       .then((resp) => {
         setChapterImagesNew(resp.data);
