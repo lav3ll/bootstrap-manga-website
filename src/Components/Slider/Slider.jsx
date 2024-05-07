@@ -16,8 +16,6 @@ import './Slider.css';
 // import required modules
 import { Pagination, Navigation } from 'swiper/modules';
 
-import latestTestData from '../../Data/latestTestData.json';
-
 const Slider = () => {
   const [sliderData, setSliderData] = useState([]);
 
